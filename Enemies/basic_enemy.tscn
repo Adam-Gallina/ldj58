@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://cwfvqjmp56yhj"]
+
+[ext_resource type="Script" uid="uid://crimeyfewjrif" path="res://Enemies/basic_enemy.gd" id="1_221se"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dvx36"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_gie15"]
+size = Vector3(1, 2, 1)
+
+[node name="BasicEnemy" type="CharacterBody3D" groups=["Enemy"]]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("1_221se")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_dvx36")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("PrismMesh_gie15")

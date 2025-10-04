@@ -1,0 +1,116 @@
+[gd_scene load_steps=12 format=3 uid="uid://nrdiloo1crmq"]
+
+[ext_resource type="Script" uid="uid://bovngm7dmxbfw" path="res://Magic/basic_projectile.gd" id="1_et3tk"]
+[ext_resource type="Texture2D" uid="uid://u02k306ghlpg" path="res://Magic/Bolt.png" id="2_ffnpu"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_sdb44"]
+radius = 0.25
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ffnpu"]
+albedo_color = Color(0, 0.521181, 0.547521, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_sdb44"]
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5ba0i"]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("2_ffnpu")
+emission = Color(0, 1, 0.934247, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_22tdr"]
+material = SubResource("StandardMaterial3D_5ba0i")
+size = Vector2(1.5, 1.5)
+
+[sub_resource type="Curve" id="Curve_efmlq"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.352273, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.21348, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_yfgse"]
+colors = PackedColorArray(0.60183, 0.60183, 0.60183, 1, 1, 1, 1, 1)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ffnpu"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ffnpu"]
+height = 1.0
+radius = 1.0
+
+[node name="Node3D" type="RigidBody3D"]
+collision_layer = 2
+collision_mask = 4
+gravity_scale = 0.0
+script = ExtResource("1_et3tk")
+Speed = 30
+TurnSpeed = 180
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_sdb44")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_ffnpu")
+mesh = SubResource("SphereMesh_sdb44")
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00344539, 0, 0)
+emitting = false
+amount = 12
+lifetime = 0.75
+randomness = 0.54
+mesh = SubResource("QuadMesh_22tdr")
+emission_shape = 1
+emission_sphere_radius = 0.25
+direction = Vector3(0, 0, 0)
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 0.1
+initial_velocity_max = 0.1
+scale_amount_min = 0.75
+scale_amount_max = 1.25
+scale_amount_curve = SubResource("Curve_efmlq")
+color = Color(0.48027, 0.986468, 1, 1)
+color_initial_ramp = SubResource("Gradient_yfgse")
+
+[node name="CPUParticles3D2" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00344539, 0, 0)
+emitting = false
+amount = 12
+lifetime = 3.0
+one_shot = true
+explosiveness = 1.0
+randomness = 0.54
+mesh = SubResource("QuadMesh_22tdr")
+emission_shape = 1
+emission_sphere_radius = 0.5
+direction = Vector3(0, 0, 0)
+spread = 180.0
+gravity = Vector3(0, -2, 0)
+initial_velocity_min = 1.5
+initial_velocity_max = 2.0
+scale_amount_min = 0.75
+scale_amount_max = 1.25
+scale_amount_curve = SubResource("Curve_efmlq")
+color = Color(0.48027, 0.986468, 1, 1)
+color_initial_ramp = SubResource("Gradient_yfgse")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_ffnpu")
+
+[node name="ShapeCast3D" type="ShapeCast3D" parent="."]
+enabled = false
+shape = SubResource("CylinderShape3D_ffnpu")
+target_position = Vector3(0, 0, 0)
+collision_mask = 4
+
+[connection signal="finished" from="CPUParticles3D2" to="." method="_on_cpu_particles_3d_2_finished"]
+[connection signal="timeout" from="Timer" to="." method="explode"]
+[connection signal="body_entered" from="Area3D" to="." method="_on_body_entered"]
