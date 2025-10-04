@@ -1,0 +1,121 @@
+[gd_scene load_steps=12 format=3 uid="uid://bxej2bc2doxmq"]
+
+[ext_resource type="Script" uid="uid://vclglu2xmcfo" path="res://compound_effect_3d.gd" id="1_ikvys"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y5dhb"]
+transparency = 1
+vertex_color_use_as_albedo = true
+emission = Color(0, 0.378688, 0.39817, 1)
+emission_energy_multiplier = 3.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_x53y4"]
+material = SubResource("StandardMaterial3D_y5dhb")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="Curve" id="Curve_nu1uk"]
+_data = [Vector2(0, 0.202247), 0.0, 0.0, 0, 0, Vector2(0.102273, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -0.0659176, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_6nmvm"]
+offsets = PackedFloat32Array(0, 0.333333, 1)
+colors = PackedColorArray(0, 0, 0, 0.235294, 0.372549, 0.372549, 0.372549, 0.909804, 1, 1, 1, 0.0156863)
+
+[sub_resource type="Gradient" id="Gradient_3ybwx"]
+colors = PackedColorArray(0.60183, 0.60183, 0.60183, 1, 0, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6qx58"]
+emission_enabled = true
+emission = Color(0, 0.951072, 1, 1)
+emission_energy_multiplier = 3.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_35x7l"]
+material = SubResource("StandardMaterial3D_6qx58")
+top_radius = 0.01
+bottom_radius = 0.05
+height = 0.5
+
+[sub_resource type="Curve" id="Curve_f0a1f"]
+_data = [Vector2(0, 0.775281), 0.0, 0.0, 0, 0, Vector2(0.761364, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.21348, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cwqjt"]
+vertex_color_use_as_albedo = true
+emission_enabled = true
+emission = Color(0, 0.378688, 0.39817, 1)
+emission_energy_multiplier = 3.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_dscop"]
+material = SubResource("StandardMaterial3D_cwqjt")
+radius = 0.25
+height = 0.5
+
+[node name="TealSplosion" type="Node3D"]
+script = ExtResource("1_ikvys")
+
+[node name="CPUParticles3D4" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00344539, 0, 0)
+emitting = false
+amount = 6
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+randomness = 0.54
+mesh = SubResource("SphereMesh_x53y4")
+emission_shape = 1
+emission_sphere_radius = 0.5
+direction = Vector3(0, -1, 0)
+spread = 20.0
+gravity = Vector3(0, 2, 0)
+initial_velocity_min = 0.5
+initial_velocity_max = 1.5
+scale_amount_min = 2.0
+scale_amount_max = 3.0
+scale_amount_curve = SubResource("Curve_nu1uk")
+color = Color(0, 0.394415, 0.404959, 1)
+color_ramp = SubResource("Gradient_6nmvm")
+color_initial_ramp = SubResource("Gradient_3ybwx")
+
+[node name="CPUParticles3D2" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00344539, 0, 0)
+emitting = false
+amount = 12
+one_shot = true
+explosiveness = 1.0
+randomness = 0.54
+mesh = SubResource("CylinderMesh_35x7l")
+emission_shape = 1
+emission_sphere_radius = 0.5
+particle_flag_align_y = true
+direction = Vector3(0, 0, 0)
+spread = 180.0
+gravity = Vector3(0, -2, 0)
+initial_velocity_min = 1.5
+initial_velocity_max = 2.5
+scale_amount_min = 1.25
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_f0a1f")
+color = Color(0.48027, 0.986468, 1, 1)
+color_initial_ramp = SubResource("Gradient_3ybwx")
+
+[node name="CPUParticles3D3" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00344539, 0, 0)
+emitting = false
+amount = 16
+one_shot = true
+explosiveness = 1.0
+randomness = 0.54
+mesh = SubResource("SphereMesh_dscop")
+emission_shape = 1
+emission_sphere_radius = 0.5
+particle_flag_align_y = true
+direction = Vector3(0, 5, 0)
+spread = 180.0
+gravity = Vector3(0, 2, 0)
+initial_velocity_min = 0.5
+initial_velocity_max = 1.5
+scale_amount_min = 0.75
+scale_amount_max = 1.25
+scale_amount_curve = SubResource("Curve_nu1uk")
+color = Color(0, 0.394415, 0.404959, 1)
+color_initial_ramp = SubResource("Gradient_3ybwx")

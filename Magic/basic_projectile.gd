@@ -5,6 +5,9 @@ extends RigidBody3D
 @onready var _rad_turn_speed = deg_to_rad(TurnSpeed)
 @export var Damage = 1
 
+@export var TrackingEffect : Node3D
+@export var EndEffect : Node3D
+
 var _target_pos : Vector3
 var _moving = false
 
@@ -15,7 +18,7 @@ func set_target_pos(pos:Vector3):
 func launch(dir:Vector3, target_pos:Vector3):
 	linear_velocity = dir.normalized() * Speed
 	set_target_pos(target_pos)
-	$CPUParticles3D.emitting = true
+	TrackingEffect.emitting = true
 	_moving = true
 
 
@@ -41,8 +44,8 @@ func explode():
 	_moving = false
 	linear_velocity = Vector3.ZERO
 	
-	$CPUParticles3D2.emitting = true
-	$CPUParticles3D.emitting = false
+	EndEffect.emitting = true
+	TrackingEffect.emitting = false
 	$MeshInstance3D.hide()
 
 	var s : ShapeCast3D = $ShapeCast3D

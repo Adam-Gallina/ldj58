@@ -1,6 +1,7 @@
 extends CharacterBody3D
 
-enum PlayerState { None, Dash, Attack }
+enum PlayerState { None, Dash, Attack, AttackReturn }
+enum AttackDir { Forward, Backward }
 
 @onready var cam_pivot : Node3D = $CameraPivot
 @onready var cam: Camera3D = $CameraPivot/Camera3D
@@ -10,6 +11,8 @@ enum PlayerState { None, Dash, Attack }
 @export var ProjectileScene : PackedScene
 var _curr_state : PlayerState = PlayerState.None
 @onready var raycast : RayCast3D = $CameraPivot/Camera3D/RayCast3D
+var _curr_attack_dir = AttackDir.Forward
+var _buffered_state : PlayerState = PlayerState.None
 
 @export_category('Movement')
 @export var MoveSpeed = 10
@@ -26,15 +29,9 @@ var _dash_dir : Vector3 = Vector3.ZERO
 
 
 func _process(delta):
-	var m = get_viewport().get_mouse_position()
-
-	raycast.global_position = cam.project_ray_origin(m)
-	raycast.target_position = cam.project_local_ray_normal(m) * 100
-	raycast.force_raycast_update()
-
-	if raycast.is_colliding():
-		$MeshInstance3D.global_position = raycast.get_collision_point()
-
+	# Hacky fs
+	if _arm_anims.current_animation == '':
+		_curr_state = PlayerState.None
 
 	_handle_input(delta)
 	var dir = _handle_movement(delta)
@@ -58,10 +55,11 @@ func _handle_movement(_delta):
 
 
 	if Input.is_action_just_pressed('Dodge'):
-		if _curr_state == PlayerState.None:
+		#if _curr_state == PlayerState.None:
 			_curr_state = PlayerState.Dash
 			_dash_dir = dir
 			_leg_anims.play('dash')
+			_arm_anims.play('dash')
 
 	return dir
 
@@ -76,19 +74,19 @@ func _handle_anims(move_dir, delta):
 	
 	if move_dir.length() == 0: 
 		_keep_leg_anim('idle')
-		_keep_arm_anim('idle')
+		_keep_arm_anim('Idle')
 	else: 
 		_keep_leg_anim('run')
-		_keep_arm_anim('run')
+		_keep_arm_anim('Run')
 
 
 func _handle_input(_delta):
 	if Input.is_action_just_pressed('Fire'):
-		#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-
 		if _curr_state == PlayerState.None:
 			_arm_anims.play('ForwardSlash')
 			_curr_state = PlayerState.Attack
+		else:
+			_buffered_state = PlayerState.Attack
 
 
 func launch_projectile(target_pos:Vector3):
@@ -103,18 +101,34 @@ func launch_projectile(target_pos:Vector3):
 func _keep_leg_anim(anim_name):
 	if _leg_anims.current_animation == anim_name: return
 
-	if _curr_state == PlayerState.None:
+	if _curr_state == PlayerState.Dash:
+		return
+	else:
 		_leg_anims.play(anim_name)
 
 func _keep_arm_anim(anim_name):
 	if _arm_anims.current_animation == anim_name: return
+
+	if _arm_anims.current_animation == "UnForwardSlash": return
 
 	if _curr_state == PlayerState.None:
 		_arm_anims.play(anim_name)
 
 
 func _attack_anim_complete():
-	_curr_state = PlayerState.None
+	if _buffered_state == PlayerState.Attack:
+		if _curr_attack_dir == AttackDir.Forward:
+			_arm_anims.play('BackSlash')
+			_curr_attack_dir = AttackDir.Backward
+		else:
+			_arm_anims.play('ForwardSlash')
+			_curr_attack_dir = AttackDir.Forward
+
+		_buffered_state = PlayerState.None
+	else:
+		if _curr_attack_dir == AttackDir.Forward:
+			_arm_anims.play('UnForwardSlash')
+		_curr_state = PlayerState.None
 
 func _do_attack():
 	var m = get_viewport().get_mouse_position()
