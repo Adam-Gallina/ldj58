@@ -1,0 +1,128 @@
+[gd_scene load_steps=13 format=3 uid="uid://c6qq0he46k3wg"]
+
+[ext_resource type="Script" uid="uid://vclglu2xmcfo" path="res://compound_effect_3d.gd" id="1_vx8qi"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vx8qi"]
+vertex_color_use_as_albedo = true
+emission = Color(0, 0.378688, 0.39817, 1)
+emission_energy_multiplier = 3.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_rjdx4"]
+material = SubResource("StandardMaterial3D_vx8qi")
+radius = 0.05
+height = 0.1
+radial_segments = 4
+rings = 2
+
+[sub_resource type="Curve" id="Curve_nu1uk"]
+_data = [Vector2(0, 0.202247), 0.0, 0.0, 0, 0, Vector2(0.102273, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -0.0659176, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_bpddi"]
+colors = PackedColorArray(0.29634, 0.29634, 0.29634, 1, 0.771546, 0.771546, 0.771546, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fm8eb"]
+vertex_color_use_as_albedo = true
+metallic = 1.0
+emission = Color(0, 0.951072, 1, 1)
+emission_energy_multiplier = 3.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ysc1d"]
+material = SubResource("StandardMaterial3D_fm8eb")
+top_radius = 0.01
+bottom_radius = 0.1
+height = 0.65
+
+[sub_resource type="Curve" id="Curve_f0a1f"]
+_data = [Vector2(0, 0.775281), 0.0, 0.0, 0, 0, Vector2(0.761364, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.21348, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_466lo"]
+colors = PackedColorArray(0.337072, 0.337072, 0.337072, 1, 0.710448, 0.710448, 0.710448, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_icif5"]
+vertex_color_use_as_albedo = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_0q682"]
+material = SubResource("StandardMaterial3D_icif5")
+radius = 0.3
+height = 0.6
+radial_segments = 4
+rings = 2
+
+[sub_resource type="Gradient" id="Gradient_b38ly"]
+colors = PackedColorArray(0.289552, 0.289552, 0.289552, 1, 0.255608, 0.197658, 0, 1)
+
+[node name="RockSplosion" type="Node3D"]
+script = ExtResource("1_vx8qi")
+
+[node name="CPUParticles3D4" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00344539, 0, 0)
+emitting = false
+amount = 18
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+randomness = 0.54
+mesh = SubResource("SphereMesh_rjdx4")
+emission_shape = 1
+emission_sphere_radius = 0.5
+direction = Vector3(0, 1, 0)
+spread = 90.0
+gravity = Vector3(0, -4, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 3.0
+scale_amount_min = 2.0
+scale_amount_max = 3.0
+scale_amount_curve = SubResource("Curve_nu1uk")
+color_initial_ramp = SubResource("Gradient_bpddi")
+
+[node name="CPUParticles3D2" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00344539, 0, 0)
+emitting = false
+amount = 12
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+randomness = 0.54
+mesh = SubResource("CylinderMesh_ysc1d")
+emission_shape = 1
+emission_sphere_radius = 0.5
+particle_flag_align_y = true
+direction = Vector3(0, 0, 0)
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 4.0
+initial_velocity_max = 5.0
+damping_min = 14.0
+damping_max = 14.0
+scale_amount_min = 1.25
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_f0a1f")
+color = Color(0.846222, 0.846222, 0.846222, 1)
+color_initial_ramp = SubResource("Gradient_466lo")
+
+[node name="CPUParticles3D5" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00344539, 0, 0)
+emitting = false
+amount = 6
+lifetime = 0.65
+one_shot = true
+explosiveness = 1.0
+randomness = 0.54
+mesh = SubResource("SphereMesh_0q682")
+emission_shape = 1
+emission_sphere_radius = 0.5
+particle_flag_align_y = true
+direction = Vector3(0, 0, 0)
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 2.0
+initial_velocity_max = 3.0
+damping_min = 14.0
+damping_max = 14.0
+scale_amount_min = 1.25
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_f0a1f")
+color = Color(0.452479, 0.452479, 0.452479, 1)
+color_initial_ramp = SubResource("Gradient_b38ly")

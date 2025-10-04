@@ -1,8 +1,7 @@
 extends RigidBody3D
+class_name BasicProjectile
 
 @export var Speed = 20
-@export var TurnSpeed = 360
-@onready var _rad_turn_speed = deg_to_rad(TurnSpeed)
 @export var Damage = 1
 
 @export var TrackingEffect : Node3D
@@ -25,18 +24,7 @@ func launch(dir:Vector3, target_pos:Vector3):
 func _process(delta: float) -> void:
 	if not _moving: return
 
-	var p = global_position
-	p.y = 0
-	var ang = linear_velocity.signed_angle_to(_target_pos - p, Vector3.UP)
-
-	if abs(ang) > _rad_turn_speed * delta:
-		ang = sign(ang) * _rad_turn_speed * delta
-	
-	linear_velocity = linear_velocity.rotated(Vector3.UP, ang)
-
-	#model.rotation.y += ang
-
-	if p.distance_to(_target_pos) <= linear_velocity.length() * delta:
+	if global_position.distance_to(_target_pos) <= linear_velocity.length() * delta:
 		explode()
 
 
@@ -60,6 +48,7 @@ func _on_explosion_finished() -> void:
 	queue_free()
 
 
-func _on_body_entered(body) -> void:
-	if body is EnemyBase:
-		explode()
+func _on_body_entered(_body) -> void:
+	if not _moving: return
+
+	explode()

@@ -15,6 +15,10 @@ run/main_scene="uid://ccs8sgiuwumgy"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Constants="*res://Autoloaded/constants.gd"
+
 [global_group]
 
 Enemy=""
@@ -57,6 +61,7 @@ Dodge={
 3d_physics/layer_1="Player"
 3d_physics/layer_2="Projectiles"
 3d_physics/layer_3="Enemies"
+3d_physics/layer_4="Environment"
 
 [rendering]
 

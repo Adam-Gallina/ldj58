@@ -1,14 +1,14 @@
-[gd_scene load_steps=13 format=3 uid="uid://nrdiloo1crmq"]
+[gd_scene load_steps=13 format=3 uid="uid://ll45adg5o07p"]
 
-[ext_resource type="Script" uid="uid://ca5peklc651xa" path="res://Magic/tracking_projectile.gd" id="1_5ba0i"]
-[ext_resource type="Texture2D" uid="uid://u02k306ghlpg" path="res://Magic/Bolt.png" id="2_ffnpu"]
-[ext_resource type="PackedScene" uid="uid://bxej2bc2doxmq" path="res://Magic/teal_splosion.tscn" id="3_5ba0i"]
+[ext_resource type="Script" uid="uid://bovngm7dmxbfw" path="res://Magic/basic_projectile.gd" id="1_7om8r"]
+[ext_resource type="Texture2D" uid="uid://u02k306ghlpg" path="res://Magic/Bolt.png" id="2_kbw43"]
+[ext_resource type="PackedScene" uid="uid://c6qq0he46k3wg" path="res://Magic/rock_splosion.tscn" id="3_7om8r"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_sdb44"]
 radius = 0.25
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ffnpu"]
-albedo_color = Color(0, 0.521181, 0.547521, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7om8r"]
+albedo_color = Color(0.153778, 0.153778, 0.153778, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_sdb44"]
 radius = 0.25
@@ -17,7 +17,7 @@ height = 0.5
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_22tdr"]
 transparency = 1
 vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("2_ffnpu")
+albedo_texture = ExtResource("2_kbw43")
 emission = Color(0, 1, 0.934247, 1)
 
 [sub_resource type="QuadMesh" id="QuadMesh_22tdr"]
@@ -39,18 +39,18 @@ radius = 1.0
 
 [node name="Node3D" type="RigidBody3D" node_paths=PackedStringArray("TrackingEffect", "EndEffect")]
 collision_layer = 2
-collision_mask = 14
+collision_mask = 9
 gravity_scale = 0.0
-script = ExtResource("1_5ba0i")
-Speed = 30
+script = ExtResource("1_7om8r")
+Speed = 10
 TrackingEffect = NodePath("CPUParticles3D")
-EndEffect = NodePath("TealSplosion")
+EndEffect = NodePath("RockSplosion")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_sdb44")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-material_override = SubResource("StandardMaterial3D_ffnpu")
+material_override = SubResource("StandardMaterial3D_7om8r")
 mesh = SubResource("SphereMesh_sdb44")
 
 [node name="CPUParticles3D" type="CPUParticles3D" parent="."]
@@ -70,19 +70,18 @@ initial_velocity_max = 0.1
 scale_amount_min = 0.75
 scale_amount_max = 1.25
 scale_amount_curve = SubResource("Curve_efmlq")
-color = Color(0.48027, 0.986468, 1, 1)
+color = Color(0.445691, 0.445691, 0.445691, 1)
 color_initial_ramp = SubResource("Gradient_yfgse")
 
-[node name="TealSplosion" parent="." instance=ExtResource("3_5ba0i")]
+[node name="RockSplosion" parent="." instance=ExtResource("3_7om8r")]
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 5.0
 one_shot = true
 autostart = true
 
 [node name="Area3D" type="Area3D" parent="."]
 collision_layer = 2
-collision_mask = 12
+collision_mask = 9
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("SphereShape3D_ffnpu")
@@ -93,6 +92,6 @@ shape = SubResource("CylinderShape3D_ffnpu")
 target_position = Vector3(0, 0, 0)
 collision_mask = 4
 
-[connection signal="finished" from="TealSplosion" to="." method="_on_explosion_finished"]
+[connection signal="finished" from="RockSplosion" to="." method="_on_explosion_finished"]
 [connection signal="timeout" from="Timer" to="." method="explode"]
 [connection signal="body_entered" from="Area3D" to="." method="_on_body_entered"]

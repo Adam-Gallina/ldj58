@@ -1,21 +1,39 @@
-[gd_scene load_steps=4 format=3 uid="uid://cwfvqjmp56yhj"]
+[gd_scene load_steps=5 format=3 uid="uid://cwfvqjmp56yhj"]
 
 [ext_resource type="Script" uid="uid://crimeyfewjrif" path="res://Enemies/basic_enemy.gd" id="1_221se"]
+[ext_resource type="PackedScene" uid="uid://cauk0s0ladyms" path="res://Enemies/Models/RockElemental.glb" id="2_dvx36"]
+[ext_resource type="PackedScene" uid="uid://ll45adg5o07p" path="res://Magic/rock_projectile.tscn" id="2_gie15"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dvx36"]
-
-[sub_resource type="PrismMesh" id="PrismMesh_gie15"]
-size = Vector3(1, 2, 1)
 
 [node name="BasicEnemy" type="CharacterBody3D" groups=["Enemy"]]
 collision_layer = 4
 collision_mask = 3
 script = ExtResource("1_221se")
+AttackProjectile = ExtResource("2_gie15")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+avoidance_enabled = true
+debug_enabled = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_dvx36")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("PrismMesh_gie15")
+[node name="Model" parent="." instance=ExtResource("2_dvx36")]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
+
+[node name="Skeleton3D" parent="Model/Armature" index="0"]
+bones/0/position = Vector3(0, 0.729683, -0.0404523)
+bones/0/rotation = Quaternion(0.0368652, -0.0500256, -0.0115429, 0.998001)
+bones/1/position = Vector3(0.557191, 0.684268, -0.0822343)
+bones/1/rotation = Quaternion(0.035014, 0.0706992, 0.994681, -0.0662165)
+bones/2/position = Vector3(-0.367233, 0.747983, 0.139585)
+bones/2/rotation = Quaternion(0.130935, 0.162611, 0.974489, 0.0823742)
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
+
+[editable path="Model"]

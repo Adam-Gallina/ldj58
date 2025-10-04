@@ -28,6 +28,9 @@ var _dash_dir : Vector3 = Vector3.ZERO
 @onready var _arm_anims : AnimationPlayer = $Model/ArmAnimationPlayer
 
 
+func _ready() -> void:
+	Constants.set_player(self)
+
 func _process(delta):
 	# Hacky fs
 	if _arm_anims.current_animation == '':
