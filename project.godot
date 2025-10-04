@@ -18,6 +18,12 @@ config/icon="res://icon.svg"
 [autoload]
 
 Constants="*res://Autoloaded/constants.gd"
+PlayerStats="*res://Autoloaded/player_stats.gd"
+
+[display]
+
+window/stretch/mode="viewport"
+window/stretch/aspect="keep_width"
 
 [global_group]
 
@@ -62,6 +68,7 @@ Dodge={
 3d_physics/layer_2="Projectiles"
 3d_physics/layer_3="Enemies"
 3d_physics/layer_4="Environment"
+3d_physics/layer_5="Loot"
 
 [rendering]
 

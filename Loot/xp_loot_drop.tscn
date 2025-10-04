@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://x4v3qexmwpf2"]
+
+[ext_resource type="Script" uid="uid://b871ftqywvq57" path="res://Loot/xp_loot_drop.gd" id="1_1kekm"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_yc5h1"]
+bounce = 0.5
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_yc5h1"]
+radius = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1kekm"]
+transparency = 1
+albedo_color = Color(0.0666667, 1, 0, 0.6)
+
+[sub_resource type="SphereMesh" id="SphereMesh_hmnju"]
+radius = 0.1
+height = 0.2
+
+[node name="XpLootDrop" type="RigidBody3D"]
+collision_layer = 16
+collision_mask = 25
+physics_material_override = SubResource("PhysicsMaterial_yc5h1")
+linear_damp = 1.0
+script = ExtResource("1_1kekm")
+CollectAccel = 20
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_yc5h1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_1kekm")
+mesh = SubResource("SphereMesh_hmnju")

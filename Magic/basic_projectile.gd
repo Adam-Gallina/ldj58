@@ -40,7 +40,7 @@ func explode():
 
 	s.force_shapecast_update()
 	for e in range(s.get_collision_count()):
-		if s.get_collider(e) is EnemyBase:
+		if s.get_collider(e):
 			s.get_collider(e).damage(Damage)
 
 

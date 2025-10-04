@@ -1,0 +1,70 @@
+[gd_scene load_steps=7 format=3 uid="uid://bs3u5x6oth4af"]
+
+[ext_resource type="Script" uid="uid://d0gi6g3v45hv4" path="res://cauldron.gd" id="1_5qdwy"]
+[ext_resource type="PackedScene" uid="uid://cvdpqtamgjvqd" path="res://upgrade_option.tscn" id="2_0t22i"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_7dadi"]
+height = 1.0
+radius = 1.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_5qdwy"]
+top_radius = 1.0
+bottom_radius = 0.9
+height = 1.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_0t22i"]
+height = 1.0
+radius = 2.0
+
+[sub_resource type="Curve3D" id="Curve3D_0t22i"]
+_data = {
+"points": PackedVector3Array(0, 5, 0, 0, 5, 0, 3, 0, 0, 0, 3, 0, 0, 3, 0, 0, 1, 0),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[node name="Cauldron" type="StaticBody3D"]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("1_5qdwy")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("CylinderShape3D_7dadi")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("CylinderMesh_5qdwy")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("CylinderShape3D_0t22i")
+
+[node name="UpgradeOption" parent="." instance=ExtResource("2_0t22i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.33414, 0, -2.12084)
+visible = false
+
+[node name="UpgradeOption2" parent="." instance=ExtResource("2_0t22i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.03473, 0, 3.38782)
+visible = false
+
+[node name="UpgradeOption3" parent="." instance=ExtResource("2_0t22i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.83168, 0, -1.75943)
+visible = false
+
+[node name="CollectPath3D" type="Path3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00481963, 0, 0)
+curve = SubResource("Curve3D_0t22i")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="CollectPath3D"]
+transform = Transform3D(-4.37114e-08, 0.999997, -4.37113e-08, 0, -4.37113e-08, -0.999997, -1, -4.37113e-08, 1.91068e-15, 3, 0, 0)
+loop = false
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]
+[connection signal="selected" from="UpgradeOption" to="." method="_option_selected" binds= [0]]
+[connection signal="selected" from="UpgradeOption2" to="." method="_option_selected" binds= [1]]
+[connection signal="selected" from="UpgradeOption3" to="." method="_option_selected" binds= [2]]

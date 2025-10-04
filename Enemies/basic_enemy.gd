@@ -6,7 +6,6 @@ enum EnemyState { None, Following, Attacking, Dying }
 @export_category('Health')
 @export var MaxHealth = 2
 @onready var _curr_health : float = MaxHealth
-var _dead = false
 
 @export_category('Combat')
 @export var Damge = 1
@@ -26,6 +25,14 @@ var _dead = false
 @onready var _nav_agent : NavigationAgent3D = $NavigationAgent3D
 
 var _curr_state : EnemyState = EnemyState.None
+
+@export_category('Loot')
+@export var LootSpawnAng = 90
+@export var LootSpawnForce = 20
+@export var PossibleLoot : Array[PackedScene]
+## Chance out of 1.
+@export var LootChance : Array[float]
+
 
 @onready var model = $Model
 @onready var _anim = $Model/AnimationPlayer
@@ -123,10 +130,20 @@ func damage(amount):
 	if _curr_state == EnemyState.Dying: return
 
 	_curr_health -= amount
+	if _curr_state == EnemyState.None:
+		_curr_state = EnemyState.Following
 
 	if _curr_health <= 0:
 		death()
 
 func death():
 	_curr_state = EnemyState.Dying
+
+	for i in range(PossibleLoot.size()):
+		if LootChance[i] == 1. or randf() < LootChance[i]:
+			var l = PossibleLoot[i].instantiate()
+			get_parent().add_child(l)
+			l.global_position = global_position
+			l.launch(LootSpawnAng, LootSpawnForce)
+
 	queue_free()

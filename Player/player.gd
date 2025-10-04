@@ -12,10 +12,10 @@ enum AttackDir { Forward, Backward }
 var _curr_state : PlayerState = PlayerState.None
 @onready var raycast : RayCast3D = $CameraPivot/Camera3D/RayCast3D
 var _curr_attack_dir = AttackDir.Forward
-var _buffered_state : PlayerState = PlayerState.None
+var _attacking = false
+var _next_attack : float
 
 @export_category('Movement')
-@export var MoveSpeed = 10
 @export var TurnSpeed = 720
 @onready var _rad_turn_speed = deg_to_rad(TurnSpeed)
 var _disable_movement = false
@@ -28,10 +28,17 @@ var _dash_dir : Vector3 = Vector3.ZERO
 @onready var _arm_anims : AnimationPlayer = $Model/ArmAnimationPlayer
 
 
+var _last_coll_radius = -1
+
 func _ready() -> void:
 	Constants.set_player(self)
+	Constants.set_cam(cam)
 
 func _process(delta):
+	if _last_coll_radius != PlayerStats.calc_collect_radius():
+		_last_coll_radius = PlayerStats.calc_collect_radius()
+		$CollectionArea3D/CollisionShape3D.shape.radius = _last_coll_radius
+
 	# Hacky fs
 	if _arm_anims.current_animation == '':
 		_curr_state = PlayerState.None
@@ -41,9 +48,9 @@ func _process(delta):
 
 	if not _disable_movement:
 		if _curr_state == PlayerState.Dash:
-			velocity = _dash_dir * MoveSpeed * DashModifier
+			velocity = _dash_dir * PlayerStats.calc_speed() * DashModifier
 		else:
-			velocity = dir * MoveSpeed
+			velocity = dir * PlayerStats.calc_speed()
 		_handle_anims(dir, delta)
 
 		move_and_slide()
@@ -83,22 +90,31 @@ func _handle_anims(move_dir, delta):
 		_keep_arm_anim('Run')
 
 
-func _handle_input(_delta):
+func _handle_input(delta):
+
 	if Input.is_action_just_pressed('Fire'):
+		_attacking = true
+	elif Input.is_action_just_released('Fire'):
+		_attacking = false
+		
+	if _next_attack > 0: _next_attack -= delta
+	if _attacking and _next_attack <= 0:
 		if _curr_state == PlayerState.None:
-			_arm_anims.play('ForwardSlash')
+			_keep_arm_anim('ForwardSlash')
 			_curr_state = PlayerState.Attack
-		else:
-			_buffered_state = PlayerState.Attack
+		_do_attack()
+		_next_attack = PlayerStats.calc_attack_speed()
+
 
 
 func launch_projectile(target_pos:Vector3):
 	var p = ProjectileScene.instantiate()
+	p.Damage = PlayerStats.calc_damage()
 	get_parent().add_child(p)
 	p.global_position = global_position + Vector3.UP
 
-	p.launch(model.basis.z, target_pos)
-	#p.launch(target_pos - global_position, target_pos)
+	#p.launch(model.basis.z, target_pos)
+	p.launch(target_pos - global_position, target_pos)
 
 
 func _keep_leg_anim(anim_name):
@@ -119,15 +135,13 @@ func _keep_arm_anim(anim_name):
 
 
 func _attack_anim_complete():
-	if _buffered_state == PlayerState.Attack:
+	if _attacking:
 		if _curr_attack_dir == AttackDir.Forward:
 			_arm_anims.play('BackSlash')
 			_curr_attack_dir = AttackDir.Backward
 		else:
 			_arm_anims.play('ForwardSlash')
 			_curr_attack_dir = AttackDir.Forward
-
-		_buffered_state = PlayerState.None
 	else:
 		if _curr_attack_dir == AttackDir.Forward:
 			_arm_anims.play('UnForwardSlash')
@@ -144,4 +158,13 @@ func _do_attack():
 		launch_projectile(raycast.get_collision_point())
 
 func _dash_anim_complete():
-	_curr_state = PlayerState.None
+	if _attacking:
+		_arm_anims.play('ForwardSlash')
+		_curr_state = PlayerState.Attack
+	else:
+		_curr_state = PlayerState.None
+
+
+func _on_collection_area_3d_body_entered(body:Node3D) -> void:
+	if body is LootDrop:
+		body.collect(self)
