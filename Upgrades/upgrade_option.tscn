@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cvdpqtamgjvqd"]
 
-[ext_resource type="Script" uid="uid://cniqvgkkyd0xm" path="res://upgrade_option.gd" id="1_m3xfy"]
+[ext_resource type="Script" uid="uid://cniqvgkkyd0xm" path="res://Upgrades/upgrade_option.gd" id="1_m3xfy"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_4tygq"]
 

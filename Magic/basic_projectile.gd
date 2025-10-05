@@ -4,11 +4,20 @@ class_name BasicProjectile
 @export var Speed = 20
 @export var Damage = 1
 
+@export var Pierce : int = 0
+@onready var _remaining_pierce = Pierce
+func set_pierce(amount):
+	_remaining_pierce += amount - Pierce
+	Pierce = amount
+
 @export var TrackingEffect : Node3D
 @export var EndEffect : Node3D
 
 var _target_pos : Vector3
 var _moving = false
+
+func set_radius(amount):
+	$ShapeCast3D.shape.radius = amount
 
 func set_target_pos(pos:Vector3):
 	pos.y = 0
@@ -39,6 +48,7 @@ func explode():
 	var s : ShapeCast3D = $ShapeCast3D
 
 	s.force_shapecast_update()
+
 	for e in range(s.get_collision_count()):
 		if s.get_collider(e):
 			s.get_collider(e).damage(Damage)
@@ -48,7 +58,13 @@ func _on_explosion_finished() -> void:
 	queue_free()
 
 
-func _on_body_entered(_body) -> void:
+func _on_body_entered(body) -> void:
 	if not _moving: return
 
-	explode()
+	_remaining_pierce -= 1
+	if body is EnemyBase:
+		body.damage(Damage)
+
+	if body.is_in_group('Environment') or _remaining_pierce < 0:
+		explode()
+	

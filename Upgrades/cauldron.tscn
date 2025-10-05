@@ -1,0 +1,153 @@
+[gd_scene load_steps=14 format=3 uid="uid://bs3u5x6oth4af"]
+
+[ext_resource type="Script" uid="uid://d0gi6g3v45hv4" path="res://Upgrades/cauldron.gd" id="1_5qdwy"]
+[ext_resource type="PackedScene" uid="uid://cvdpqtamgjvqd" path="res://Upgrades/upgrade_option.tscn" id="2_0t22i"]
+[ext_resource type="PackedScene" uid="uid://pp4kdy83w2e7" path="res://Upgrades/Cauldron.glb" id="2_pu0do"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_7dadi"]
+height = 1.0
+radius = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pu0do"]
+albedo_color = Color(0.208088, 0.0588836, 0.166308, 1)
+emission = Color(0.350649, 0.053104, 0.316581, 1)
+emission_energy_multiplier = 3.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_nnldw"]
+material = SubResource("StandardMaterial3D_pu0do")
+top_radius = 1.0
+bottom_radius = 1.0
+height = 0.1
+radial_segments = 8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_agbvw"]
+transparency = 1
+vertex_color_use_as_albedo = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_5vwxg"]
+material = SubResource("StandardMaterial3D_agbvw")
+radial_segments = 6
+rings = 2
+
+[sub_resource type="Curve" id="Curve_0r82n"]
+_data = [Vector2(0, 0.280899), 0.0, 0.0, 0, 0, Vector2(0.272727, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -4.2593, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_mkitd"]
+offsets = PackedFloat32Array(0, 0.273333, 0.653333, 1)
+colors = PackedColorArray(1, 1, 1, 0.333333, 1, 1, 1, 0.854902, 1, 1, 1, 0.803922, 1, 1, 1, 0)
+
+[sub_resource type="Gradient" id="Gradient_5n4cl"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_0t22i"]
+height = 1.0
+radius = 4.0
+
+[sub_resource type="Curve3D" id="Curve3D_0t22i"]
+_data = {
+"points": PackedVector3Array(0, 5, 0, 0, 6, 0, 4, 0, 0, 0, 3, 0, 0, 3, 0, 0, 3, 0),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[node name="Cauldron" type="StaticBody3D" groups=["Environment"]]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("1_5qdwy")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("CylinderShape3D_7dadi")
+
+[node name="Cauldron" parent="." instance=ExtResource("2_pu0do")]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Cauldron"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0837, 0)
+mesh = SubResource("CylinderMesh_nnldw")
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="Cauldron/MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0950709, 0)
+emitting = false
+amount = 20
+lifetime = 3.0
+mesh = SubResource("SphereMesh_5vwxg")
+emission_shape = 6
+emission_ring_axis = Vector3(0, 1, 0)
+emission_ring_height = 0.25
+emission_ring_radius = 0.8
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
+gravity = Vector3(0, 3, 0)
+tangential_accel_min = -3.0
+tangential_accel_max = 3.0
+damping_min = 3.0
+damping_max = 3.0
+scale_amount_min = 0.5
+scale_amount_curve = SubResource("Curve_0r82n")
+color = Color(0.425325, 0, 0.321341, 1)
+color_ramp = SubResource("Gradient_mkitd")
+color_initial_ramp = SubResource("Gradient_5n4cl")
+
+[node name="CPUParticles3D2" type="CPUParticles3D" parent="Cauldron/MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.03508, 0)
+emitting = false
+amount = 60
+lifetime = 3.0
+mesh = SubResource("SphereMesh_5vwxg")
+emission_shape = 6
+emission_ring_axis = Vector3(0, 1, 0)
+emission_ring_height = 0.25
+emission_ring_radius = 0.8
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
+gravity = Vector3(0, 0, 0)
+tangential_accel_min = -3.0
+tangential_accel_max = 3.0
+damping_min = 3.0
+damping_max = 3.0
+scale_amount_min = 0.5
+scale_amount_curve = SubResource("Curve_0r82n")
+color = Color(0.425325, 0, 0.321341, 1)
+color_initial_ramp = SubResource("Gradient_5n4cl")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Cauldron"]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 1.10577, 0)
+light_color = Color(1, 0, 0.829394, 1)
+light_energy = 5.0
+omni_range = 2.62534
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("CylinderShape3D_0t22i")
+
+[node name="UpgradeOption" parent="." instance=ExtResource("2_0t22i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.28362, 0, 3.44266)
+visible = false
+
+[node name="UpgradeOption2" parent="." instance=ExtResource("2_0t22i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.03473, 0, 3.38782)
+visible = false
+
+[node name="UpgradeOption3" parent="." instance=ExtResource("2_0t22i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.33296, 0, 3.4023)
+visible = false
+
+[node name="CollectPath3D" type="Path3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00481963, 0, 0)
+curve = SubResource("Curve3D_0t22i")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="CollectPath3D"]
+transform = Transform3D(-4.37114e-08, 0.999997, -4.37113e-08, 0, -4.37113e-08, -0.999997, -1, -4.37113e-08, 1.91068e-15, 4, 0, 0)
+loop = false
+
+[connection signal="ready" from="Cauldron/MeshInstance3D/CPUParticles3D" to="Cauldron/MeshInstance3D/CPUParticles3D" method="set_emitting" binds= [true]]
+[connection signal="ready" from="Cauldron/MeshInstance3D/CPUParticles3D2" to="Cauldron/MeshInstance3D/CPUParticles3D2" method="set_emitting" binds= [true]]
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]
+[connection signal="selected" from="UpgradeOption" to="." method="_option_selected" binds= [0]]
+[connection signal="selected" from="UpgradeOption2" to="." method="_option_selected" binds= [1]]
+[connection signal="selected" from="UpgradeOption3" to="." method="_option_selected" binds= [2]]

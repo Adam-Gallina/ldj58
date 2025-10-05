@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://1rujcm3jwhyh" path="res://Player/player.tscn" id="1_4qc02"]
 [ext_resource type="Script" uid="uid://gb1uwpbc8f32" path="res://test_map.gd" id="1_4wuf8"]
 [ext_resource type="Script" uid="uid://ddf70ps066hih" path="res://Enemies/enemy_spawner.gd" id="2_gqtbx"]
-[ext_resource type="PackedScene" uid="uid://bs3u5x6oth4af" path="res://cauldron.tscn" id="3_qgarv"]
+[ext_resource type="PackedScene" uid="uid://bs3u5x6oth4af" path="res://Upgrades/cauldron.tscn" id="3_qgarv"]
 [ext_resource type="PackedScene" uid="uid://cwfvqjmp56yhj" path="res://Enemies/basic_enemy.tscn" id="3_s02eq"]
 [ext_resource type="Script" uid="uid://cefu7k1la5jw2" path="res://Upgrades/upgrade_pool.gd" id="4_ssfg1"]
 [ext_resource type="PackedScene" uid="uid://biavgvl34a6jr" path="res://Environment/tree.tscn" id="4_t8dge"]

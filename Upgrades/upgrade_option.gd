@@ -13,4 +13,3 @@ func set_upgrade(upgrade:UpgradeBase):
 
 func damage(_amount):
 	selected.emit(self)
-	print('blam')

@@ -1,4 +1,5 @@
 extends CharacterBody3D
+class_name PlayerController
 
 enum PlayerState { None, Dash, Attack, AttackReturn }
 enum AttackDir { Forward, Backward }
@@ -7,13 +8,7 @@ enum AttackDir { Forward, Backward }
 @onready var cam: Camera3D = $CameraPivot/Camera3D
 @onready var model : Node3D = $Model
 
-@export_category('Combat')
-@export var ProjectileScene : PackedScene
 var _curr_state : PlayerState = PlayerState.None
-@onready var raycast : RayCast3D = $CameraPivot/Camera3D/RayCast3D
-var _curr_attack_dir = AttackDir.Forward
-var _attacking = false
-var _next_attack : float
 
 @export_category('Movement')
 @export var TurnSpeed = 720
@@ -90,31 +85,10 @@ func _handle_anims(move_dir, delta):
 		_keep_arm_anim('Run')
 
 
-func _handle_input(delta):
-
-	if Input.is_action_just_pressed('Fire'):
-		_attacking = true
-	elif Input.is_action_just_released('Fire'):
-		_attacking = false
-		
-	if _next_attack > 0: _next_attack -= delta
-	if _attacking and _next_attack <= 0:
-		if _curr_state == PlayerState.None:
-			_keep_arm_anim('ForwardSlash')
-			_curr_state = PlayerState.Attack
-		_do_attack()
-		_next_attack = PlayerStats.calc_attack_speed()
+func _handle_input(_delta):
+	pass
 
 
-
-func launch_projectile(target_pos:Vector3):
-	var p = ProjectileScene.instantiate()
-	p.Damage = PlayerStats.calc_damage()
-	get_parent().add_child(p)
-	p.global_position = global_position + Vector3.UP
-
-	#p.launch(model.basis.z, target_pos)
-	p.launch(target_pos - global_position, target_pos)
 
 
 func _keep_leg_anim(anim_name):
@@ -144,36 +118,8 @@ func death():
 	print('Player ded sad')
 
 
-func _attack_anim_complete():
-	if _attacking:
-		if _curr_attack_dir == AttackDir.Forward:
-			_arm_anims.play('BackSlash')
-			_curr_attack_dir = AttackDir.Backward
-		else:
-			_arm_anims.play('ForwardSlash')
-			_curr_attack_dir = AttackDir.Forward
-	else:
-		if _curr_attack_dir == AttackDir.Forward:
-			_arm_anims.play('UnForwardSlash')
-		_curr_state = PlayerState.None
-
-func _do_attack():
-	var m = get_viewport().get_mouse_position()
-	
-	raycast.global_position = cam.project_ray_origin(m)
-	raycast.target_position = cam.project_local_ray_normal(m) * 100
-	raycast.force_raycast_update()
-
-	if raycast.is_colliding():
-		launch_projectile(raycast.get_collision_point())
-
 func _dash_anim_complete():
-	if _attacking:
-		_arm_anims.play('ForwardSlash')
-		_curr_state = PlayerState.Attack
-	else:
-		_curr_state = PlayerState.None
-
+	_curr_state = PlayerState.None
 
 func _on_collection_area_3d_body_entered(body:Node3D) -> void:
 	if body is LootDrop:

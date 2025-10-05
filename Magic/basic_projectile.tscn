@@ -35,11 +35,11 @@ colors = PackedColorArray(0.60183, 0.60183, 0.60183, 1, 1, 1, 1, 1)
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_ffnpu"]
 height = 1.0
-radius = 1.0
+radius = 0.35
 
 [node name="Node3D" type="RigidBody3D" node_paths=PackedStringArray("TrackingEffect", "EndEffect")]
 collision_layer = 2
-collision_mask = 14
+collision_mask = 10
 gravity_scale = 0.0
 script = ExtResource("1_et3tk")
 Speed = 30
@@ -88,7 +88,6 @@ collision_mask = 12
 shape = SubResource("SphereShape3D_ffnpu")
 
 [node name="ShapeCast3D" type="ShapeCast3D" parent="."]
-enabled = false
 shape = SubResource("CylinderShape3D_ffnpu")
 target_position = Vector3(0, 0, 0)
 collision_mask = 36

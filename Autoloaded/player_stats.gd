@@ -1,5 +1,7 @@
 extends Node
 
+var Level = 0
+
 var Health = 3
 @onready var _curr_health = Health
 func change_max_health(amount:int):
@@ -26,6 +28,13 @@ func calc_speed() -> float:
 var CollectRadius = 4.0
 func calc_collect_radius() -> float:
 	return CollectRadius
+
+
+var CastAmount = 2
+
+var CastRadius = .35
+
+var CastPierce = 1
 
 
 var _stored_xp : Array[XpDrop] = []
