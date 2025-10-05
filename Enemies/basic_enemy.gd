@@ -144,6 +144,7 @@ func damage(amount):
 
 func death():
 	_curr_state = EnemyState.Dying
+	GameStats.EnemiesDefeated += 10
 
 	var amount = randi_range(MinXpDrop, MaxXpDrop)
 

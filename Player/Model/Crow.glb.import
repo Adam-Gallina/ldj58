@@ -12627,6 +12627,24 @@ _subresources={
 "slice_99/start_frame": 0,
 "slices/amount": 0
 }
+},
+"materials": {
+"Crow": {
+"use_external/enabled": true,
+"use_external/path": "res://Player/Model/Crow.tres"
+},
+"Material.001": {
+"use_external/enabled": true,
+"use_external/path": "res://Player/Model/Material.001.tres"
+},
+"Material.002": {
+"use_external/enabled": true,
+"use_external/path": "res://Player/Model/Material.002.tres"
+},
+"Material.003": {
+"use_external/enabled": true,
+"use_external/path": "res://Player/Model/Material.003.tres"
+}
 }
 }
 gltf/naming_version=1

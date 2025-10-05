@@ -1,0 +1,30 @@
+[gd_scene load_steps=7 format=3 uid="uid://d4bge30cwyl4p"]
+
+[ext_resource type="ArrayMesh" uid="uid://fclpeddggiku" path="res://Environment/Rocks/Meteors_ML_1.res" id="1_48mny"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_3e3wt"]
+radius = 1.50869
+
+[sub_resource type="Gradient" id="Gradient_atugl"]
+colors = PackedColorArray(0, 0, 0, 1, 0.812278, 0.713702, 0.609134, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_jne5r"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_xfwr7"]
+color_ramp = SubResource("Gradient_atugl")
+noise = SubResource("FastNoiseLite_jne5r")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_22xcu"]
+albedo_color = Color(0.588253, 0.588253, 0.588253, 1)
+albedo_texture = SubResource("NoiseTexture2D_xfwr7")
+
+[node name="Stone1" type="StaticBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.0451014, -0.998982, 0, 0.998982, -0.0451014, -0.0332615, 0.782826, 0.38254)
+shape = SubResource("SphereShape3D_3e3wt")
+
+[node name="Stone1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.0451014, -0.998982, 0, 0.998982, -0.0451014, -0.353933, 0.7765, 0.522664)
+mesh = ExtResource("1_48mny")
+surface_material_override/0 = SubResource("StandardMaterial3D_22xcu")

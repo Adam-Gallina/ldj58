@@ -109,6 +109,7 @@ func _option_selected(_option, num):
 	_curr_upgrades = []
 
 	PlayerStats.Level += 1
+	GameStats.Upgrades += 1
 
 	if _player_in_range: 
 		_collect_xp()

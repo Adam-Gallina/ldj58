@@ -1,0 +1,75 @@
+[gd_scene load_steps=5 format=3 uid="uid://forl038y0toi"]
+
+[ext_resource type="Script" uid="uid://b238ektehrubw" path="res://UI/game_ui.gd" id="1_mp46i"]
+[ext_resource type="PackedScene" uid="uid://c88qy63b1dcl0" path="res://UI/heart_panel.tscn" id="2_kfjql"]
+[ext_resource type="Texture2D" uid="uid://das32m6crc6f0" path="res://UI/Scroll.png" id="3_h0rig"]
+[ext_resource type="FontFile" uid="uid://b4umd18bapdsr" path="res://UI/Fonts/Lobster/Lobster-Regular.ttf" id="4_2oifk"]
+
+[node name="GameUI" type="CanvasLayer"]
+script = ExtResource("1_mp46i")
+HeartScene = ExtResource("2_kfjql")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(0, 60)
+offset_left = 15.0
+offset_top = 15.0
+offset_right = 75.0
+offset_bottom = 75.0
+
+[node name="DeathScreen" type="NinePatchRect" parent="."]
+self_modulate = Color(0.80549, 0.80549, 0.80549, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -335.5
+offset_top = -231.0
+offset_right = 335.5
+offset_bottom = 231.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_h0rig")
+patch_margin_left = 200
+patch_margin_top = 75
+patch_margin_right = 200
+patch_margin_bottom = 75
+
+[node name="Label" type="Label" parent="DeathScreen"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 64.0
+offset_bottom = 87.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_2oifk")
+theme_override_font_sizes/font_size = 51
+text = "Tiko was defeated..."
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="DeathScreen"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -11.0
+offset_top = -121.0
+offset_right = 11.0
+offset_bottom = -90.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/font_hover_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/font_outline_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/font_color = Color(0.757969, 0.757969, 0.757969, 1)
+theme_override_colors/font_focus_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/font_pressed_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_fonts/font = ExtResource("4_2oifk")
+theme_override_font_sizes/font_size = 31
+text = " Play  again "
+
+[connection signal="pressed" from="DeathScreen/Button" to="." method="_on_restart_pressed"]

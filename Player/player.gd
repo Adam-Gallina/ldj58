@@ -10,6 +10,8 @@ enum AttackDir { Forward, Backward }
 
 var _curr_state : PlayerState = PlayerState.None
 
+var _iframe_timer = 0
+
 @export_category('Movement')
 @export var TurnSpeed = 720
 @onready var _rad_turn_speed = deg_to_rad(TurnSpeed)
@@ -30,6 +32,8 @@ func _ready() -> void:
 	Constants.set_cam(cam)
 
 func _process(delta):
+	if _iframe_timer > 0: _iframe_timer -= delta
+
 	if _last_coll_radius != PlayerStats.calc_collect_radius():
 		_last_coll_radius = PlayerStats.calc_collect_radius()
 		$CollectionArea3D/CollisionShape3D.shape.radius = _last_coll_radius
@@ -109,10 +113,14 @@ func _keep_arm_anim(anim_name):
 
 
 func damage(amount:int):
+	if _iframe_timer > 0: return
+
 	PlayerStats._curr_health -= amount
 
 	if PlayerStats._curr_health <= 0:
 		death()
+	else:
+		_iframe_timer = PlayerStats.calc_iframes()
 
 func death():
 	print('Player ded sad')

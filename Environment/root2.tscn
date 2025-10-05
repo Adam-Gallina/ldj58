@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://cu3w718llcrgm"]
+
+[ext_resource type="PackedScene" uid="uid://cduuf7yygtm78" path="res://Environment/Root2.glb" id="2_w41yq"]
+[ext_resource type="Texture2D" uid="uid://e07gtuoq8vuj" path="res://Environment/Tree_Grid.png" id="3_03s01"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1fmff"]
+albedo_color = Color(0.764758, 0.764758, 0.764758, 1)
+albedo_texture = ExtResource("3_03s01")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_iam0d"]
+size = Vector3(6.04021, 0.743042, 1.26831)
+
+[node name="Root2" type="StaticBody3D" groups=["Environment"]]
+collision_layer = 8
+collision_mask = 0
+
+[node name="Root2" parent="." instance=ExtResource("2_w41yq")]
+transform = Transform3D(-3, 0, -2.62268e-07, 0, 2.45514, 0, 2.62268e-07, 0, -3, -4.10425, 0, 0)
+
+[node name="Cube" parent="Root2" index="0"]
+material_override = SubResource("StandardMaterial3D_1fmff")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.37106, 0.261414, -0.0237881)
+shape = SubResource("BoxShape3D_iam0d")
+
+[editable path="Root2"]

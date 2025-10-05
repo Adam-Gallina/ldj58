@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=4 uid="uid://1rujcm3jwhyh"]
+[gd_scene load_steps=37 format=4 uid="uid://1rujcm3jwhyh"]
 
 [ext_resource type="Script" uid="uid://0703l7qi6lrk" path="res://Player/player_combat.gd" id="1_apopc"]
 [ext_resource type="PackedScene" uid="uid://nrdiloo1crmq" path="res://Magic/basic_projectile.tscn" id="2_od3ui"]
@@ -11,6 +11,7 @@
 [ext_resource type="Animation" uid="uid://bnxmpoltd8yv6" path="res://Player/Model/Run.res" id="6_apopc"]
 [ext_resource type="Animation" uid="uid://sg384s2jndg" path="res://Player/Model/TPose.res" id="7_5htga"]
 [ext_resource type="Animation" uid="uid://obrtqg6yi331" path="res://Player/Model/UnForwardSlash.res" id="7_p5o4e"]
+[ext_resource type="PackedScene" uid="uid://bmryfw45n7sbd" path="res://Environment/leaf_particles.tscn" id="12_5htga"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sh265"]
 
@@ -859,5 +860,8 @@ collision_mask = 16
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CollectionArea3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CylinderShape3D_apopc")
+
+[node name="LeafParticles" parent="." instance=ExtResource("12_5htga")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.21235, -17)
 
 [connection signal="body_entered" from="CollectionArea3D" to="." method="_on_collection_area_3d_body_entered"]

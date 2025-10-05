@@ -1,5 +1,17 @@
 extends Node
 
+func reset():
+	Level = 0
+	Health = 3
+	_curr_health = Health
+
+	CastAmount = 1
+	CastPierce = 0
+	
+	_stored_xp = []
+	_stored_resources = {}
+
+
 var Level = 0
 
 var Health = 3
@@ -12,6 +24,10 @@ func change_max_health(amount:int):
 		Health += amount
 		if Health < _curr_health:
 			_curr_health = Health
+
+var Invincibility = .5
+func calc_iframes() -> float: return Invincibility
+
 
 var Damage = .5
 func calc_damage() -> float:
@@ -42,6 +58,7 @@ var CastPierce = 0
 var _stored_xp : Array[XpDrop] = []
 
 func collect_xp(xp:XpDrop):
+	GameStats.XpCollected += xp.XpValue
 	_stored_xp.append(xp)
 	xp.get_parent().remove_child(xp)
 
@@ -60,6 +77,7 @@ var _stored_resources : Dictionary = {}
 var CurrResource : Constants.ResourceType
 
 func collect_resource(resource:ResourceDrop):
+	GameStats.ResourcesCollected += 1
 	if not _stored_resources.get(resource.ResourceType):
 		_stored_resources[resource.ResourceType] = [resource]
 	else:

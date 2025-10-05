@@ -55,6 +55,7 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_ejogh")
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_y0c1f"]
+height = 5.29688
 radius = 3.22656
 
 [node name="Tree" type="StaticBody3D" node_paths=PackedStringArray("TargetFade") groups=["Environment"]]
@@ -84,7 +85,7 @@ mesh = SubResource("ArrayMesh_dcd4x")
 skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.64844, 0)
 shape = SubResource("CylinderShape3D_y0c1f")
 
 [editable path="Tree"]

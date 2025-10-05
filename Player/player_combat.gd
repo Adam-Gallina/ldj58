@@ -64,6 +64,7 @@ func _do_attack():
 	raycast.force_raycast_update()
 
 	if raycast.is_colliding():
+		GameStats.SpellsCast += PlayerStats.CastAmount
 		for i in range(PlayerStats.CastAmount):
 			launch_projectile(raycast.get_collision_point(), i)
 

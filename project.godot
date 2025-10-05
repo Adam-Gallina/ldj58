@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 Constants="*res://Autoloaded/constants.gd"
 PlayerStats="*res://Autoloaded/player_stats.gd"
+GameStats="*res://Autoloaded/game_stats.gd"
 
 [display]
 

@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://bmryfw45n7sbd"]
+
+[ext_resource type="Texture2D" uid="uid://ceywf0hw6k5ga" path="res://Environment/Leaf.png" id="1_2th71"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yobqo"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_2th71")
+disable_receive_shadows = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_dj26u"]
+material = SubResource("StandardMaterial3D_yobqo")
+size = Vector2(0.5, 0.5)
+
+[sub_resource type="Curve" id="Curve_5354r"]
+_data = [Vector2(0, 0.157303), 0.0, 0.0, 0, 0, Vector2(0.0965909, 1), 0.0, 0.0, 0, 0, Vector2(0.8125, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Gradient" id="Gradient_yobqo"]
+colors = PackedColorArray(0.24972, 0.622196, 0.278485, 1, 0.710448, 0.395628, 0.238417, 1)
+
+[node name="LeafParticles" type="CPUParticles3D"]
+layers = 4
+amount = 100
+lifetime = 6.0
+preprocess = 4.0
+mesh = SubResource("QuadMesh_dj26u")
+emission_shape = 3
+emission_box_extents = Vector3(30, 1, 40)
+particle_flag_rotate_y = true
+gravity = Vector3(0, -0.5, 0)
+radial_accel_min = -1.0
+radial_accel_max = 1.0
+tangential_accel_min = -0.5
+tangential_accel_max = 0.5
+damping_min = 0.1
+damping_max = 0.1
+angle_min = -180.0
+angle_max = 180.0
+scale_amount_min = 0.75
+scale_amount_max = 1.25
+scale_amount_curve = SubResource("Curve_5354r")
+color_initial_ramp = SubResource("Gradient_yobqo")

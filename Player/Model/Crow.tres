@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://b542noki857pj"]
+
+[ext_resource type="Texture2D" uid="uid://dtqylcl2vdxwd" path="res://Player/Model/Crow_Crow_Crow.png" id="1_k0de1"]
+
+[resource]
+resource_name = "Crow"
+cull_mode = 2
+albedo_texture = ExtResource("1_k0de1")
+roughness = 0.5
+disable_receive_shadows = true
