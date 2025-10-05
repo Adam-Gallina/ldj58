@@ -23,7 +23,7 @@ colors = PackedColorArray(0.24972, 0.622196, 0.278485, 1, 0.710448, 0.395628, 0.
 
 [node name="LeafParticles" type="CPUParticles3D"]
 layers = 4
-amount = 100
+amount = 150
 lifetime = 6.0
 preprocess = 4.0
 mesh = SubResource("QuadMesh_dj26u")

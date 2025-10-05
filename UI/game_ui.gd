@@ -6,11 +6,25 @@ var _hearts = []
 var _last_health = -1
 var _curr_pumping = null
 
+@onready var ResourceLabel = $ResourceInventory/ResourceCount
+
+@onready var EssenceLabel = $EssenceInventory/EssenceCount
+
 func _ready() -> void:
 	$DeathScreen.hide()
 
 func _process(_delta: float) -> void:
 	_update_health()
+
+	var xp = 0
+	for x in PlayerStats._stored_xp:
+		xp += x.XpValue
+	EssenceLabel.text = str(xp) 
+
+	var c = 0
+	if PlayerStats._stored_resources.get(PlayerStats.CurrResource):
+		c = PlayerStats._stored_resources[PlayerStats.CurrResource].size()
+	ResourceLabel.text = '{0}/{1}'.format([c, PlayerStats.CurrResourceTarget])
 
 
 func _update_health():

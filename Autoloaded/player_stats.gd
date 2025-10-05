@@ -75,6 +75,7 @@ func deposit_xp(amount_needed):
 ## { Constants.ResourceType : Array[LootDrop] }
 var _stored_resources : Dictionary = {}
 var CurrResource : Constants.ResourceType
+var CurrResourceTarget : int = 0
 
 func collect_resource(resource:ResourceDrop):
 	GameStats.ResourcesCollected += 1
@@ -88,7 +89,7 @@ func collect_resource(resource:ResourceDrop):
 func deposit_resource(resource_type:Constants.ResourceType, amount_needed:int):
 	var s = []
 
-	if not _stored_resources.get(resource_type):
+	if not _stored_resources.get(resource_type) or _stored_resources[resource_type].size() < amount_needed:
 		return s
 
 	while amount_needed > 0 and _stored_resources[resource_type].size() > 0:

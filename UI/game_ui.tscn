@@ -1,9 +1,29 @@
-[gd_scene load_steps=5 format=3 uid="uid://forl038y0toi"]
+[gd_scene load_steps=11 format=3 uid="uid://forl038y0toi"]
 
 [ext_resource type="Script" uid="uid://b238ektehrubw" path="res://UI/game_ui.gd" id="1_mp46i"]
 [ext_resource type="PackedScene" uid="uid://c88qy63b1dcl0" path="res://UI/heart_panel.tscn" id="2_kfjql"]
 [ext_resource type="Texture2D" uid="uid://das32m6crc6f0" path="res://UI/Scroll.png" id="3_h0rig"]
 [ext_resource type="FontFile" uid="uid://b4umd18bapdsr" path="res://UI/Fonts/Lobster/Lobster-Regular.ttf" id="4_2oifk"]
+[ext_resource type="Texture2D" uid="uid://cp2s0ydp17qdh" path="res://icon.svg" id="5_dbpsm"]
+[ext_resource type="Texture2D" uid="uid://rmx7xggaf6ah" path="res://UI/Flask.png" id="6_fy64h"]
+
+[sub_resource type="Gradient" id="Gradient_fy64h"]
+colors = PackedColorArray(0.19451, 0.126342, 0, 1, 0.472845, 0.284215, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_v6n52"]
+gradient = SubResource("Gradient_fy64h")
+width = 20
+height = 40
+fill_to = Vector2(0, 1)
+
+[sub_resource type="Gradient" id="Gradient_b6078"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_xrnd3"]
+gradient = SubResource("Gradient_b6078")
+width = 20
+height = 20
+fill_to = Vector2(0, 1)
 
 [node name="GameUI" type="CanvasLayer"]
 script = ExtResource("1_mp46i")
@@ -17,6 +37,7 @@ offset_right = 75.0
 offset_bottom = 75.0
 
 [node name="DeathScreen" type="NinePatchRect" parent="."]
+visible = false
 self_modulate = Color(0.80549, 0.80549, 0.80549, 1)
 anchors_preset = 8
 anchor_left = 0.5
@@ -71,5 +92,139 @@ theme_override_colors/font_pressed_color = Color(0.756863, 0.756863, 0.756863, 1
 theme_override_fonts/font = ExtResource("4_2oifk")
 theme_override_font_sizes/font_size = 31
 text = " Play  again "
+
+[node name="ResourceInventory" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -130.0
+offset_top = 16.0
+offset_right = -90.0
+offset_bottom = 56.0
+grow_horizontal = 0
+
+[node name="TextureRect2" type="TextureRect" parent="ResourceInventory"]
+custom_minimum_size = Vector2(60, 40)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = -20.0
+offset_right = -20.0
+offset_bottom = 100.0
+grow_vertical = 2
+scale = Vector2(3.87422, 0.500658)
+texture = SubResource("GradientTexture2D_v6n52")
+expand_mode = 4
+
+[node name="TextureRect3" type="TextureRect" parent="ResourceInventory/TextureRect2"]
+show_behind_parent = true
+custom_minimum_size = Vector2(60, 20)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -1.49296
+offset_top = -64.4047
+offset_right = 58.507
+offset_bottom = 55.5953
+grow_vertical = 2
+scale = Vector2(1.02581, 1.10939)
+texture = SubResource("GradientTexture2D_xrnd3")
+expand_mode = 4
+
+[node name="ResourceCount" type="Label" parent="ResourceInventory"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -103.0
+offset_top = 2.0
+offset_right = -1.0
+offset_bottom = 65.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_2oifk")
+theme_override_font_sizes/font_size = 44
+text = "10/10"
+horizontal_alignment = 2
+
+[node name="ResourceImg" type="TextureRect" parent="ResourceInventory"]
+layout_mode = 0
+offset_left = 46.0
+offset_top = 5.0
+offset_right = 119.0
+offset_bottom = 78.0
+texture = ExtResource("5_dbpsm")
+expand_mode = 2
+
+[node name="EssenceInventory" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -130.0
+offset_top = 106.0
+offset_right = -90.0
+offset_bottom = 146.0
+grow_horizontal = 0
+
+[node name="TextureRect2" type="TextureRect" parent="EssenceInventory"]
+custom_minimum_size = Vector2(60, 40)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -44.0
+offset_top = -20.0
+offset_right = 16.0
+offset_bottom = 100.0
+grow_vertical = 2
+scale = Vector2(3.87422, 0.500658)
+texture = SubResource("GradientTexture2D_v6n52")
+expand_mode = 4
+
+[node name="TextureRect3" type="TextureRect" parent="EssenceInventory/TextureRect2"]
+show_behind_parent = true
+custom_minimum_size = Vector2(60, 20)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -1.49296
+offset_top = -64.4047
+offset_right = 58.507
+offset_bottom = 55.5953
+grow_vertical = 2
+scale = Vector2(1.02581, 1.10939)
+texture = SubResource("GradientTexture2D_xrnd3")
+expand_mode = 4
+
+[node name="EssenceCount" type="Label" parent="EssenceInventory"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -103.0
+offset_top = 2.0
+offset_right = -1.0
+offset_bottom = 65.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_2oifk")
+theme_override_font_sizes/font_size = 44
+text = "100"
+horizontal_alignment = 2
+
+[node name="ResourceImg" type="TextureRect" parent="EssenceInventory"]
+layout_mode = 0
+offset_left = 46.0
+offset_top = 5.0
+offset_right = 119.0
+offset_bottom = 78.0
+texture = ExtResource("6_fy64h")
+expand_mode = 2
 
 [connection signal="pressed" from="DeathScreen/Button" to="." method="_on_restart_pressed"]

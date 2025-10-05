@@ -27,6 +27,7 @@ func _ready() -> void:
 	$UpgradeOption3.set_upgrade(null)
 
 	PlayerStats.CurrResource = ResourceTypes[_curr_resource]
+	PlayerStats.CurrResourceTarget = ResourceAmounts[_curr_resource]
 	_remaining_resource_amount = ResourceAmounts[_curr_resource]
 
 
@@ -42,6 +43,7 @@ func _collect_resource(xp_count=0):
 		choose_weapon_upgrades()
 		_curr_resource += 1
 		PlayerStats.CurrResource = ResourceTypes[_curr_resource]
+		PlayerStats.CurrResourceTarget = ResourceAmounts[_curr_resource]
 		_remaining_resource_amount = ResourceAmounts[_curr_resource]
 
 func _collect_xp():
