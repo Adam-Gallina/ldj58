@@ -15,10 +15,12 @@ func change_max_health(amount:int):
 
 var Damage = .5
 func calc_damage() -> float:
+	if Damage < 0: Damage = .1
 	return Damage
 
-var AttackSpeed = 2.
+var AttackSpeed = 1.
 func calc_attack_speed() -> float:
+	if AttackSpeed < 0: AttackSpeed = .1
 	return 1 / AttackSpeed
 
 var Speed = 10.
@@ -30,11 +32,11 @@ func calc_collect_radius() -> float:
 	return CollectRadius
 
 
-var CastAmount = 2
+var CastAmount = 1
 
 var CastRadius = .35
 
-var CastPierce = 1
+var CastPierce = 0
 
 
 var _stored_xp : Array[XpDrop] = []
@@ -49,5 +51,30 @@ func deposit_xp(amount_needed):
 	while amount_needed > 0 and _stored_xp.size() > 0:
 		amount_needed -= _stored_xp[0].XpValue
 		s.append(_stored_xp.pop_front())
+
+	return s
+
+
+## { Constants.ResourceType : Array[LootDrop] }
+var _stored_resources : Dictionary = {}
+var CurrResource : Constants.ResourceType
+
+func collect_resource(resource:ResourceDrop):
+	if not _stored_resources.get(resource.ResourceType):
+		_stored_resources[resource.ResourceType] = [resource]
+	else:
+		_stored_resources[resource.ResourceType].append(resource)
+
+	resource.get_parent().remove_child(resource)
+
+func deposit_resource(resource_type:Constants.ResourceType, amount_needed:int):
+	var s = []
+
+	if not _stored_resources.get(resource_type):
+		return s
+
+	while amount_needed > 0 and _stored_resources[resource_type].size() > 0:
+		amount_needed -= 1
+		s.append(_stored_resources[resource_type].pop_front())
 
 	return s

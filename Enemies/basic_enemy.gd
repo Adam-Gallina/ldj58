@@ -33,9 +33,11 @@ var _curr_state : EnemyState = EnemyState.None
 @export_category('Loot')
 @export var LootSpawnAng = 90
 @export var LootSpawnForce = 20
-@export var PossibleLoot : Array[PackedScene]
-## Chance out of 1.
-@export var LootChance : Array[float]
+@export var XpDropScene : PackedScene
+@export var MinXpDrop = 3
+@export var MaxXpDrop = 5
+@export var ResourceDropScene : PackedScene
+@export var ResourceDropType : Constants.ResourceType
 
 
 @onready var model = $Model
@@ -143,11 +145,18 @@ func damage(amount):
 func death():
 	_curr_state = EnemyState.Dying
 
-	for i in range(PossibleLoot.size()):
-		if LootChance[i] == 1. or randf() < LootChance[i]:
-			var l = PossibleLoot[i].instantiate()
-			get_parent().add_child(l)
-			l.global_position = global_position
-			l.launch(LootSpawnAng, LootSpawnForce)
+	var amount = randi_range(MinXpDrop, MaxXpDrop)
+
+	for i in range(amount):
+		var l = XpDropScene.instantiate()
+		get_parent().add_child(l)
+		l.global_position = global_position
+		l.launch(LootSpawnAng, LootSpawnForce)
+
+	if PlayerStats.CurrResource == ResourceDropType:
+		var l = ResourceDropScene.instantiate()
+		get_parent().add_child(l)
+		l.global_position = global_position
+		l.launch(LootSpawnAng, LootSpawnForce)
 
 	queue_free()

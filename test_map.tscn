@@ -88,9 +88,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.4849, -3.8133e-06, 32.260
 [node name="Tree9" parent="NavigationRegion3D" instance=ExtResource("4_t8dge")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.3301, -5.72065e-06, 37.95)
 
-[node name="Cauldron" parent="NavigationRegion3D" node_paths=PackedStringArray("UpgradePool") instance=ExtResource("3_qgarv")]
+[node name="Cauldron" parent="NavigationRegion3D" node_paths=PackedStringArray("UpgradePool", "WeaponUpgradePool") instance=ExtResource("3_qgarv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.15318, 0, -2.67568)
 UpgradePool = NodePath("TestUpgradePool")
+WeaponUpgradePool = NodePath("TestWeaponUpgradePool")
+ResourceTypes = Array[int]([1, 2, 0])
+ResourceAmounts = Array[int]([10, 10, 10])
 
 [node name="TestUpgradePool" type="Node" parent="NavigationRegion3D/Cauldron"]
 script = ExtResource("4_ssfg1")
@@ -155,6 +158,69 @@ script = ExtResource("5_gqtbx")
 UpgradeName = "Magic Power"
 UpgradeDescription = "Massively increased damage"
 DamageMod = 5.0
+
+[node name="TestWeaponUpgradePool" type="Node" parent="NavigationRegion3D/Cauldron"]
+script = ExtResource("4_ssfg1")
+
+[node name="Node" type="Node" parent="NavigationRegion3D/Cauldron/TestWeaponUpgradePool"]
+script = ExtResource("5_gqtbx")
+UpgradeName = "Mana Boost"
+UpgradeDescription = "Adds an extra shot at the cost of attack speed"
+AttackSpeedMod = -0.25
+CastAmountMod = 1
+
+[node name="Node3" type="Node" parent="NavigationRegion3D/Cauldron/TestWeaponUpgradePool"]
+script = ExtResource("5_gqtbx")
+UpgradeName = "Mana Boost"
+UpgradeDescription = "Adds an extra shot at the cost of attack speed"
+AttackSpeedMod = -0.25
+CastAmountMod = 1
+
+[node name="Node4" type="Node" parent="NavigationRegion3D/Cauldron/TestWeaponUpgradePool"]
+script = ExtResource("5_gqtbx")
+UpgradeName = "Mana Boost"
+UpgradeDescription = "Adds an extra shot at the cost of attack speed"
+AttackSpeedMod = -0.25
+CastAmountMod = 1
+
+[node name="Node2" type="Node" parent="NavigationRegion3D/Cauldron/TestWeaponUpgradePool"]
+script = ExtResource("5_gqtbx")
+UpgradeName = "Energized Wand"
+UpgradeDescription = "Increases attack AOE, but slightly lowers damage"
+DamageMod = -0.2
+CastRadiusMod = 0.15
+
+[node name="Node5" type="Node" parent="NavigationRegion3D/Cauldron/TestWeaponUpgradePool"]
+script = ExtResource("5_gqtbx")
+UpgradeName = "Energized Wand"
+UpgradeDescription = "Increases attack AOE, but slightly lowers damage"
+DamageMod = -0.2
+CastRadiusMod = 0.15
+
+[node name="Node6" type="Node" parent="NavigationRegion3D/Cauldron/TestWeaponUpgradePool"]
+script = ExtResource("5_gqtbx")
+UpgradeName = "Energized Wand"
+UpgradeDescription = "Increases attack AOE, but slightly lowers damage"
+DamageMod = -0.2
+CastRadiusMod = 0.15
+
+[node name="Node7" type="Node" parent="NavigationRegion3D/Cauldron/TestWeaponUpgradePool"]
+script = ExtResource("5_gqtbx")
+UpgradeName = "Stronger will"
+UpgradeDescription = "Magic bolts pierce an extra enemy"
+CastPierceMod = 1
+
+[node name="Node8" type="Node" parent="NavigationRegion3D/Cauldron/TestWeaponUpgradePool"]
+script = ExtResource("5_gqtbx")
+UpgradeName = "Stronger will"
+UpgradeDescription = "Magic bolts pierce an extra enemy"
+CastPierceMod = 1
+
+[node name="Node9" type="Node" parent="NavigationRegion3D/Cauldron/TestWeaponUpgradePool"]
+script = ExtResource("5_gqtbx")
+UpgradeName = "Stronger will"
+UpgradeDescription = "Magic bolts pierce an extra enemy"
+CastPierceMod = 1
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_t8dge")

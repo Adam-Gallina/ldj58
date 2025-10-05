@@ -3,12 +3,18 @@ extends StaticBody3D
 var _player_in_range = false
 
 @export var UpgradePool : Node
+@export var WeaponUpgradePool : Node
 var _curr_upgrades : Array[UpgradeBase] = []
 
 @export var UpgradeStartXp = 10
 @export var UpgradeStepXp = 10
 @onready var _curr_upgrade_xp = UpgradeStartXp
 @onready var _remaining_upgrade_xp = _curr_upgrade_xp
+
+@export var ResourceTypes : Array[Constants.ResourceType]
+@export var ResourceAmounts : Array[int] 
+var _curr_resource = 0
+var _remaining_resource_amount = 0
 
 @export_group('Anims')
 @export var XpAnimSpeed = 10
@@ -20,11 +26,29 @@ func _ready() -> void:
 	$UpgradeOption2.set_upgrade(null)
 	$UpgradeOption3.set_upgrade(null)
 
+	PlayerStats.CurrResource = ResourceTypes[_curr_resource]
+	_remaining_resource_amount = ResourceAmounts[_curr_resource]
+
+
+func _collect_resource(xp_count=0):
+	$CollectPath3D.curve.set_point_position(0, Constants.Player.global_position + Vector3.UP - global_position)
+
+	var xp = PlayerStats.deposit_resource(ResourceTypes[_curr_resource], _remaining_resource_amount)
+	for x in range(xp.size()):
+		_remaining_resource_amount -= 1
+		_collect_xp_anim(xp[x], x + xp_count)
+
+	if _remaining_resource_amount <= 0:
+		choose_weapon_upgrades()
+		_curr_resource += 1
+		PlayerStats.CurrResource = ResourceTypes[_curr_resource]
+		_remaining_resource_amount = ResourceAmounts[_curr_resource]
 
 func _collect_xp():
 	$CollectPath3D.curve.set_point_position(0, Constants.Player.global_position + Vector3.UP - global_position)
 
 	var xp = PlayerStats.deposit_xp(_remaining_upgrade_xp)
+	var xp_count = xp.size()
 	for x in range(xp.size()):
 		_remaining_upgrade_xp -= xp[x].XpValue
 		_collect_xp_anim(xp[x], x)
@@ -33,6 +57,8 @@ func _collect_xp():
 		choose_upgrades()
 		_curr_upgrade_xp += UpgradeStepXp
 		_remaining_upgrade_xp += _curr_upgrade_xp
+	else:
+		_collect_resource(xp_count)
 
 func _collect_xp_anim(xp, delay):
 	if delay != 0:
@@ -55,6 +81,11 @@ func choose_upgrades():
 	$UpgradeOption.set_upgrade(_curr_upgrades[0])
 	$UpgradeOption2.set_upgrade(_curr_upgrades[1])
 	$UpgradeOption3.set_upgrade(_curr_upgrades[2])
+
+func choose_weapon_upgrades():
+	_curr_upgrades = WeaponUpgradePool.select_upgrades(2)
+	$UpgradeOption.set_upgrade(_curr_upgrades[0])
+	$UpgradeOption2.set_upgrade(_curr_upgrades[1])
 
 
 func _on_area_3d_body_entered(body:Node3D) -> void:
@@ -79,4 +110,7 @@ func _option_selected(_option, num):
 
 	PlayerStats.Level += 1
 
-	if _player_in_range: _collect_xp()
+	if _player_in_range: 
+		_collect_xp()
+		if _curr_upgrades.size() == 0:
+			_collect_resource()

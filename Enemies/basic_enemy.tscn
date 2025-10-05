@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://cwfvqjmp56yhj"]
+[gd_scene load_steps=7 format=3 uid="uid://cwfvqjmp56yhj"]
 
 [ext_resource type="Script" uid="uid://crimeyfewjrif" path="res://Enemies/basic_enemy.gd" id="1_221se"]
 [ext_resource type="PackedScene" uid="uid://cauk0s0ladyms" path="res://Enemies/Models/RockElemental.glb" id="2_dvx36"]
 [ext_resource type="PackedScene" uid="uid://ll45adg5o07p" path="res://Magic/rock_projectile.tscn" id="2_gie15"]
 [ext_resource type="PackedScene" uid="uid://x4v3qexmwpf2" path="res://Loot/xp_loot_drop.tscn" id="3_iioo1"]
+[ext_resource type="PackedScene" uid="uid://dng5ro1tmawvb" path="res://Loot/Resources/rock_resource.tscn" id="4_4vdx4"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dvx36"]
 
@@ -15,8 +16,9 @@ AttackRange = 6
 AttackProjectile = ExtResource("2_gie15")
 LootSpawnAng = 60
 LootSpawnForce = 10
-PossibleLoot = Array[PackedScene]([ExtResource("3_iioo1"), ExtResource("3_iioo1"), ExtResource("3_iioo1"), ExtResource("3_iioo1"), ExtResource("3_iioo1")])
-LootChance = Array[float]([1.0, 1.0, 1.0, 0.5, 0.5])
+XpDropScene = ExtResource("3_iioo1")
+ResourceDropScene = ExtResource("4_4vdx4")
+ResourceDropType = 1
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 path_height_offset = 0.5
