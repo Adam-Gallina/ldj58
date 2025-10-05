@@ -1,0 +1,529 @@
+[gd_scene load_steps=6 format=3 uid="uid://c4b8lisjiofia"]
+
+[ext_resource type="Script" uid="uid://d2xtckki0lo3i" path="res://tutorial.gd" id="1_5mrt3"]
+[ext_resource type="Texture2D" uid="uid://das32m6crc6f0" path="res://UI/Scroll.png" id="2_rwowx"]
+[ext_resource type="FontFile" uid="uid://b4umd18bapdsr" path="res://UI/Fonts/Lobster/Lobster-Regular.ttf" id="3_hu44a"]
+[ext_resource type="Texture2D" uid="uid://delamcelfmghr" path="res://WitchFace.png" id="4_0cr88"]
+[ext_resource type="Texture2D" uid="uid://rmx7xggaf6ah" path="res://UI/Flask.png" id="5_rwowx"]
+
+[node name="Tutorial" type="CanvasLayer"]
+script = ExtResource("1_5mrt3")
+
+[node name="MovementTutorial" type="NinePatchRect" parent="."]
+visible = false
+self_modulate = Color(0.80549, 0.80549, 0.80549, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -599.0
+offset_top = 48.0
+offset_right = -149.0
+offset_bottom = 326.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_rwowx")
+patch_margin_left = 200
+patch_margin_top = 75
+patch_margin_right = 200
+patch_margin_bottom = 75
+
+[node name="Label" type="Label" parent="MovementTutorial"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 12.0
+offset_top = 80.0
+offset_right = -9.0
+offset_bottom = 209.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_hu44a")
+theme_override_font_sizes/font_size = 24
+text = "My you were asleep for quite some time little Tiko. Why don't you get some exercise to wake up.
+Use WASD to go on a jog"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Button" type="Button" parent="MovementTutorial"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 215.0
+offset_top = -241.0
+offset_right = 274.0
+offset_bottom = -194.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/font_hover_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/font_outline_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/font_color = Color(0.757969, 0.757969, 0.757969, 1)
+theme_override_colors/font_focus_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/font_pressed_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_fonts/font = ExtResource("3_hu44a")
+theme_override_font_sizes/font_size = 31
+text = "W"
+
+[node name="Button2" type="Button" parent="MovementTutorial"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 215.0
+offset_top = -188.0
+offset_right = 274.0
+offset_bottom = -141.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/font_hover_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/font_outline_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/font_color = Color(0.757969, 0.757969, 0.757969, 1)
+theme_override_colors/font_focus_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/font_pressed_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_fonts/font = ExtResource("3_hu44a")
+theme_override_font_sizes/font_size = 31
+text = "A"
+
+[node name="Button3" type="Button" parent="MovementTutorial"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 215.0
+offset_top = -136.0
+offset_right = 274.0
+offset_bottom = -89.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/font_hover_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/font_outline_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/font_color = Color(0.757969, 0.757969, 0.757969, 1)
+theme_override_colors/font_focus_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/font_pressed_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_fonts/font = ExtResource("3_hu44a")
+theme_override_font_sizes/font_size = 31
+text = "S"
+
+[node name="Button4" type="Button" parent="MovementTutorial"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 215.0
+offset_top = -83.0
+offset_right = 274.0
+offset_bottom = -36.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/font_hover_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/font_outline_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/font_color = Color(0.757969, 0.757969, 0.757969, 1)
+theme_override_colors/font_focus_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/font_pressed_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_fonts/font = ExtResource("3_hu44a")
+theme_override_font_sizes/font_size = 31
+text = "D"
+
+[node name="TextureRect" type="TextureRect" parent="MovementTutorial"]
+layout_mode = 0
+offset_left = -66.0
+offset_top = -188.0
+offset_right = 231.0
+offset_bottom = 109.0
+texture = ExtResource("4_0cr88")
+expand_mode = 1
+
+[node name="MovementTutorial2" type="NinePatchRect" parent="."]
+visible = false
+self_modulate = Color(0.80549, 0.80549, 0.80549, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -599.0
+offset_top = 48.0
+offset_right = -149.0
+offset_bottom = 326.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_rwowx")
+patch_margin_left = 200
+patch_margin_top = 75
+patch_margin_right = 200
+patch_margin_bottom = 75
+
+[node name="Label" type="Label" parent="MovementTutorial2"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 12.0
+offset_top = 80.0
+offset_right = -9.0
+offset_bottom = 209.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_hu44a")
+theme_override_font_sizes/font_size = 24
+text = "HOP TO IT NOW TIKO
+You weren't quite so sluggish a helper before you fell asleep
+Use SHIFT to run all over"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Button" type="Button" parent="MovementTutorial2"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 215.0
+offset_top = -241.0
+offset_right = 274.0
+offset_bottom = -194.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/font_hover_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/font_outline_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/font_color = Color(0.757969, 0.757969, 0.757969, 1)
+theme_override_colors/font_focus_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/font_pressed_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_fonts/font = ExtResource("3_hu44a")
+theme_override_font_sizes/font_size = 31
+text = "D"
+
+[node name="Button2" type="Button" parent="MovementTutorial2"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 215.0
+offset_top = -188.0
+offset_right = 274.0
+offset_bottom = -141.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/font_hover_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/font_outline_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/font_color = Color(0.757969, 0.757969, 0.757969, 1)
+theme_override_colors/font_focus_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/font_pressed_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_fonts/font = ExtResource("3_hu44a")
+theme_override_font_sizes/font_size = 31
+text = "A"
+
+[node name="Button3" type="Button" parent="MovementTutorial2"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 215.0
+offset_top = -136.0
+offset_right = 274.0
+offset_bottom = -89.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/font_hover_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/font_outline_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/font_color = Color(0.757969, 0.757969, 0.757969, 1)
+theme_override_colors/font_focus_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/font_pressed_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_fonts/font = ExtResource("3_hu44a")
+theme_override_font_sizes/font_size = 31
+text = "S"
+
+[node name="Button4" type="Button" parent="MovementTutorial2"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 215.0
+offset_top = -83.0
+offset_right = 274.0
+offset_bottom = -36.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/font_hover_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/font_outline_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/font_color = Color(0.757969, 0.757969, 0.757969, 1)
+theme_override_colors/font_focus_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/font_pressed_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_fonts/font = ExtResource("3_hu44a")
+theme_override_font_sizes/font_size = 31
+text = "H"
+
+[node name="TextureRect" type="TextureRect" parent="MovementTutorial2"]
+layout_mode = 0
+offset_left = -66.0
+offset_top = -188.0
+offset_right = 231.0
+offset_bottom = 109.0
+texture = ExtResource("4_0cr88")
+expand_mode = 1
+
+[node name="SpellTutorial" type="NinePatchRect" parent="."]
+visible = false
+self_modulate = Color(0.80549, 0.80549, 0.80549, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -599.0
+offset_top = 48.0
+offset_right = -149.0
+offset_bottom = 326.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_rwowx")
+patch_margin_left = 200
+patch_margin_top = 75
+patch_margin_right = 200
+patch_margin_bottom = 75
+
+[node name="Label" type="Label" parent="SpellTutorial"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 12.0
+offset_top = 80.0
+offset_right = -9.0
+offset_bottom = 209.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_hu44a")
+theme_override_font_sizes/font_size = 24
+text = "Hohoho I only tease, you're just as quick as before. How have you been getting along with your spells little one?
+Press L. Click to burn the world asunder!"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Button" type="Button" parent="SpellTutorial"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 215.0
+offset_top = -241.0
+offset_right = 274.0
+offset_bottom = -194.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/font_hover_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/font_outline_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/font_color = Color(0.757969, 0.757969, 0.757969, 1)
+theme_override_colors/font_focus_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/font_pressed_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_fonts/font = ExtResource("3_hu44a")
+theme_override_font_sizes/font_size = 31
+text = "B"
+
+[node name="Button2" type="Button" parent="SpellTutorial"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 215.0
+offset_top = -188.0
+offset_right = 274.0
+offset_bottom = -141.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/font_hover_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/font_outline_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/font_color = Color(0.757969, 0.757969, 0.757969, 1)
+theme_override_colors/font_focus_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/font_pressed_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_fonts/font = ExtResource("3_hu44a")
+theme_override_font_sizes/font_size = 31
+text = "A"
+
+[node name="Button3" type="Button" parent="SpellTutorial"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 215.0
+offset_top = -136.0
+offset_right = 274.0
+offset_bottom = -89.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/font_hover_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/font_outline_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/font_color = Color(0.757969, 0.757969, 0.757969, 1)
+theme_override_colors/font_focus_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/font_pressed_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_fonts/font = ExtResource("3_hu44a")
+theme_override_font_sizes/font_size = 31
+text = "N"
+
+[node name="Button4" type="Button" parent="SpellTutorial"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 215.0
+offset_top = -83.0
+offset_right = 274.0
+offset_bottom = -36.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/font_hover_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/font_outline_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/font_color = Color(0.757969, 0.757969, 0.757969, 1)
+theme_override_colors/font_focus_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/font_pressed_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_fonts/font = ExtResource("3_hu44a")
+theme_override_font_sizes/font_size = 31
+text = "G"
+
+[node name="TextureRect" type="TextureRect" parent="SpellTutorial"]
+layout_mode = 0
+offset_left = -66.0
+offset_top = -188.0
+offset_right = 231.0
+offset_bottom = 109.0
+texture = ExtResource("4_0cr88")
+expand_mode = 1
+
+[node name="EssenceTutorial" type="NinePatchRect" parent="."]
+self_modulate = Color(0.80549, 0.80549, 0.80549, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -599.0
+offset_top = 48.0
+offset_right = -149.0
+offset_bottom = 326.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_rwowx")
+patch_margin_left = 200
+patch_margin_top = 75
+patch_margin_right = 200
+patch_margin_bottom = 75
+
+[node name="Label" type="Label" parent="EssenceTutorial"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 12.0
+offset_top = 80.0
+offset_right = -9.0
+offset_bottom = 209.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_hu44a")
+theme_override_font_sizes/font_size = 24
+text = "It's fortunate you woke when you did, my bath is beginning to get cold and I daren't leave to get more essence (        )
+Fetch me some essence Tiko!"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Button" type="Button" parent="EssenceTutorial"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -55.0
+offset_top = -65.0
+offset_right = 61.0
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/font_hover_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/font_outline_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/font_color = Color(0.757969, 0.757969, 0.757969, 1)
+theme_override_colors/font_focus_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/font_pressed_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_fonts/font = ExtResource("3_hu44a")
+theme_override_font_sizes/font_size = 31
+text = " Let's go! "
+
+[node name="TextureRect" type="TextureRect" parent="EssenceTutorial"]
+layout_mode = 0
+offset_left = -66.0
+offset_top = -188.0
+offset_right = 231.0
+offset_bottom = 109.0
+texture = ExtResource("4_0cr88")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="EssenceTutorial"]
+layout_mode = 0
+offset_left = 283.0
+offset_top = 142.0
+offset_right = 324.0
+offset_bottom = 183.0
+texture = ExtResource("5_rwowx")
+expand_mode = 1
+
+[connection signal="pressed" from="EssenceTutorial/Button" to="." method="_on_essence_continue_pressed"]

@@ -17,6 +17,7 @@ extends Node
 
 func _process(delta: float) -> void:
 	if not spawning: return
+	if PlayerStats.Level == 0: return
 
 	_next_spawn -= delta
 	if _next_spawn <= 0:

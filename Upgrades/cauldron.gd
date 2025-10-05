@@ -1,5 +1,7 @@
 extends StaticBody3D
 
+signal upgrade_started()
+
 var _player_in_range = false
 
 @export var UpgradePool : Node
@@ -56,6 +58,7 @@ func _collect_xp():
 		_collect_xp_anim(xp[x], x)
 
 	if _remaining_upgrade_xp <= 0:
+		upgrade_started.emit()
 		choose_upgrades()
 		_curr_upgrade_xp += UpgradeStepXp
 		_remaining_upgrade_xp += _curr_upgrade_xp
