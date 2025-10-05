@@ -69,6 +69,7 @@ Dodge={
 3d_physics/layer_3="Enemies"
 3d_physics/layer_4="Environment"
 3d_physics/layer_5="Loot"
+3d_physics/layer_6="UI Option"
 
 [rendering]
 

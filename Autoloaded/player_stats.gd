@@ -1,5 +1,16 @@
 extends Node
 
+var Health = 3
+@onready var _curr_health = Health
+func change_max_health(amount:int):
+	if amount > 0:
+		_curr_health += amount
+		Health += amount
+	else:
+		Health += amount
+		if Health < _curr_health:
+			_curr_health = Health
+
 var Damage = .5
 func calc_damage() -> float:
 	return Damage

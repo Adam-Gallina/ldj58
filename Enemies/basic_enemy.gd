@@ -7,6 +7,10 @@ enum EnemyState { None, Following, Attacking, Dying }
 @export var MaxHealth = 2
 @onready var _curr_health : float = MaxHealth
 
+func set_health(max_health):
+	_curr_health += max_health - MaxHealth
+	MaxHealth = max_health
+
 @export_category('Combat')
 @export var Damge = 1
 @export var AttackRange = 3
@@ -111,7 +115,7 @@ func do_attack():
 	attack_timer.stop()
 
 func _on_attack_timer_timeout() -> void:
-	var dir = model.basis.z.rotated(Vector3.UP, deg_to_rad(-15 + randf() * 30))
+	var dir = model.basis.z.rotated(Vector3.UP, deg_to_rad(-10 + randf() * 20))
 
 	var p = AttackProjectile.instantiate()
 	get_parent().add_child(p)

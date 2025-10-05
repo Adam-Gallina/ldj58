@@ -134,6 +134,16 @@ func _keep_arm_anim(anim_name):
 		_arm_anims.play(anim_name)
 
 
+func damage(amount:int):
+	PlayerStats._curr_health -= amount
+
+	if PlayerStats._curr_health <= 0:
+		death()
+
+func death():
+	print('Player ded sad')
+
+
 func _attack_anim_complete():
 	if _attacking:
 		if _curr_attack_dir == AttackDir.Forward:

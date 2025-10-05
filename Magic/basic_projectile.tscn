@@ -91,7 +91,7 @@ shape = SubResource("SphereShape3D_ffnpu")
 enabled = false
 shape = SubResource("CylinderShape3D_ffnpu")
 target_position = Vector3(0, 0, 0)
-collision_mask = 4
+collision_mask = 36
 
 [connection signal="finished" from="TealSplosion" to="." method="_on_explosion_finished"]
 [connection signal="timeout" from="Timer" to="." method="explode"]
