@@ -789,7 +789,7 @@ bones/4/parent = 3
 bones/4/rest = Transform3D(0.930804, -0.365518, -5.52098e-08, 0.365518, 0.930804, 1.08882e-07, 1.15912e-08, -1.21528e-07, 1, 7.90673e-09, 0.70605, 6.01054e-09)
 bones/4/enabled = true
 bones/4/position = Vector3(7.90673e-09, 0.70605, 6.01054e-09)
-bones/4/rotation = Quaternion(0.649053, -0.0238023, -0.36628, 0.666335)
+bones/4/rotation = Quaternion(0.649053, -0.0238024, -0.36628, 0.666335)
 bones/4/scale = Vector3(1, 1, 1)
 bones/5/name = "Bone.004"
 bones/5/parent = 0
@@ -864,4 +864,5 @@ shape = SubResource("CylinderShape3D_apopc")
 [node name="LeafParticles" parent="." instance=ExtResource("12_5htga")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.21235, -17)
 
+[connection signal="animation_finished" from="Model/ArmAnimationPlayer" to="." method="_attack_anim_complete"]
 [connection signal="body_entered" from="CollectionArea3D" to="." method="_on_collection_area_3d_body_entered"]

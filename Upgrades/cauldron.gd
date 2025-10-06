@@ -15,7 +15,7 @@ var _curr_upgrades : Array[UpgradeBase] = []
 
 @export var ResourceTypes : Array[Constants.ResourceType]
 @export var ResourceAmounts : Array[int] 
-var _curr_resource = 0
+var _curr_resource = -1
 var _remaining_resource_amount = 0
 
 @export_group('Anims')
@@ -28,6 +28,7 @@ func _ready() -> void:
 	$UpgradeOption2.set_upgrade(null)
 	$UpgradeOption3.set_upgrade(null)
 
+	increment_resource()
 	if PlayerStats.Tutorial:
 		increment_resource()
 
@@ -47,6 +48,7 @@ func _collect_resource(xp_count=0):
 	$CollectPath3D.curve.set_point_position(0, Constants.Player.global_position + Vector3.UP - global_position)
 
 	var xp = PlayerStats.deposit_resource(ResourceTypes[_curr_resource], _remaining_resource_amount)
+	print(xp)
 	for x in range(xp.size()):
 		_remaining_resource_amount -= 1
 		_collect_xp_anim(xp[x], x + xp_count)

@@ -44,7 +44,7 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_ol06r")
 
-[node name="EssenceRock" type="StaticBody3D" node_paths=PackedStringArray("ResourceSprites")]
+[node name="BerryBush" type="StaticBody3D" node_paths=PackedStringArray("ResourceSprites")]
 collision_layer = 12
 collision_mask = 0
 script = ExtResource("1_w0dpb")

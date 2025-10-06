@@ -43,7 +43,9 @@ func launch_projectile(target_pos:Vector3, delay=0):
 	p.launch(target_pos - global_position, target_pos)
 
 	
-func _attack_anim_complete():
+func _attack_anim_complete(anim_name):
+	if anim_name != 'ForwardSlash' and anim_name != 'BackSlash': return
+	
 	if _attacking:
 		if _curr_attack_dir == AttackDir.Forward:
 			_arm_anims.play('BackSlash')
