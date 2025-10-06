@@ -74,7 +74,7 @@ script = ExtResource("1_4wuf8")
 
 [node name="EnemySpawner" type="Node3D" parent="."]
 script = ExtResource("2_gqtbx")
-EnemyScenes = Array[PackedScene]([ExtResource("3_s02eq")])
+EnemyScene = ExtResource("3_s02eq")
 SpawnGraceDist = 20
 SpawnMaxDist = 60
 

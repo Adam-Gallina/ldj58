@@ -1,15 +1,17 @@
 extends Node
 
-@export var EnemyScenes : Array[PackedScene]
+@export var EnemyScene : PackedScene
+@export var EnemyGroup = 'Enemy'
 
 @export var spawning = true
+@export var MinSpawnLevel = 1
 
 @export var StartSpawnRate = .25
 @export var LevelIncreaseRate = .125
 @onready var _next_spawn = StartSpawnRate
 
-@export var StartEnemyHealth = 5
-@export var LevelIncreaseHealth = 5
+@export var StartEnemyHealth = 10
+@export var LevelIncreaseHealth = 3
 
 @export var StartMaxEnemyCount = 5
 @export var LevelIncreaseMaxCount = 3
@@ -19,7 +21,7 @@ extends Node
 
 func _process(delta: float) -> void:
 	if not spawning: return
-	if PlayerStats.Level == 0: return
+	if PlayerStats.Level < MinSpawnLevel: return
 
 	_next_spawn -= delta
 	if _next_spawn <= 0:
@@ -28,10 +30,10 @@ func _process(delta: float) -> void:
 
 
 func _spawn_enemy():
-	if get_tree().get_nodes_in_group('Enemy').size() >= StartMaxEnemyCount + LevelIncreaseMaxCount * PlayerStats.Level:
+	if get_tree().get_nodes_in_group(EnemyGroup).size() >= StartMaxEnemyCount + LevelIncreaseMaxCount * PlayerStats.Level:
 		return
 
-	var e = EnemyScenes[0].instantiate()
+	var e = EnemyScene.instantiate()
 	add_child(e)
 	
 	var p = _get_spawn_pos()
