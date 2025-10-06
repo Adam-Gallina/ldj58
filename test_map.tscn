@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://ccs8sgiuwumgy"]
+[gd_scene load_steps=35 format=3 uid="uid://ccs8sgiuwumgy"]
 
 [ext_resource type="PackedScene" uid="uid://1rujcm3jwhyh" path="res://Player/player.tscn" id="1_4qc02"]
 [ext_resource type="Script" uid="uid://gb1uwpbc8f32" path="res://test_map.gd" id="1_4wuf8"]
@@ -21,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://c2wb75kwnag33" path="res://Environment/grass_spawner.tscn" id="14_7l7f8"]
 [ext_resource type="PackedScene" uid="uid://wpf4x5p5pymp" path="res://Enemies/essence_rock.tscn" id="14_olj81"]
 [ext_resource type="ArrayMesh" uid="uid://bklnosweyixi8" path="res://Environment/Grass_Plane.res" id="15_3qa0k"]
+[ext_resource type="PackedScene" uid="uid://dwsayw3ktxome" path="res://Enemies/Resources/flower.tscn" id="18_icpcy"]
 [ext_resource type="PackedScene" uid="uid://c512pe0652s0a" path="res://Enemies/Resources/berry_bush.tscn" id="22_r7dft"]
 
 [sub_resource type="Gradient" id="Gradient_4qc02"]
@@ -860,11 +861,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.15318, 0, -2.67568)
 UpgradePool = NodePath("TestUpgradePool")
 WeaponUpgradePool = NodePath("TestWeaponUpgradePool")
 UpgradeStartXp = 1
-ResourceTypes = Array[int]([3, 2, 0])
-ResourceAmounts = Array[int]([10, 10, 10])
-
-[node name="PathFollow3D" parent="NavigationRegion3D/Cauldron/CollectPath3D" index="0"]
-transform = Transform3D(-4.37114e-08, 0.999997, -4.37113e-08, 0, -4.37113e-08, -0.999997, -1, -4.37113e-08, 1.91068e-15, 4, 0, 0)
+ResourceTypes = Array[int]([0, 3, 2, 1, 0])
+ResourceAmounts = Array[int]([1, 10, 10, 10, 1])
 
 [node name="Cylinder" parent="NavigationRegion3D/Cauldron/Witch" index="0"]
 transform = Transform3D(0.89732, 0, -0.441381, 0, 1, 0, 0.441381, 0, 0.89732, 0, 0, 0)
@@ -976,21 +974,21 @@ CastAmountMod = 1
 script = ExtResource("5_gqtbx")
 UpgradeName = "Energized Wand"
 UpgradeDescription = "Increases attack AOE, but slightly lowers damage"
-DamageMod = -0.2
+DamageMod = -2.0
 CastRadiusMod = 0.15
 
 [node name="Node5" type="Node" parent="NavigationRegion3D/Cauldron/TestWeaponUpgradePool"]
 script = ExtResource("5_gqtbx")
 UpgradeName = "Energized Wand"
 UpgradeDescription = "Increases attack AOE, but slightly lowers damage"
-DamageMod = -0.2
+DamageMod = -2.0
 CastRadiusMod = 0.15
 
 [node name="Node6" type="Node" parent="NavigationRegion3D/Cauldron/TestWeaponUpgradePool"]
 script = ExtResource("5_gqtbx")
 UpgradeName = "Energized Wand"
 UpgradeDescription = "Increases attack AOE, but slightly lowers damage"
-DamageMod = -0.2
+DamageMod = -2.0
 CastRadiusMod = 0.15
 
 [node name="Node7" type="Node" parent="NavigationRegion3D/Cauldron/TestWeaponUpgradePool"]
@@ -1011,6 +1009,18 @@ UpgradeName = "Stronger will"
 UpgradeDescription = "Magic bolts pierce an extra enemy"
 CastPierceMod = 1
 
+[node name="EssenceRock" parent="NavigationRegion3D/Cauldron" instance=ExtResource("18_icpcy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.5072, 0, 11.0695)
+
+[node name="EssenceRock2" parent="NavigationRegion3D/Cauldron" instance=ExtResource("18_icpcy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.9069, 0, 13.6469)
+
+[node name="EssenceRock3" parent="NavigationRegion3D/Cauldron" instance=ExtResource("18_icpcy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.3766, -4.76837e-07, 8.25756)
+
+[node name="EssenceRock4" parent="NavigationRegion3D/Cauldron" instance=ExtResource("18_icpcy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.5463, -4.76837e-07, 5.14152)
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_t8dge")
 
@@ -1028,15 +1038,6 @@ shadow_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("1_4qc02")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.3116)
-
-[node name="Torso" parent="Player/Model" index="0"]
-transform = Transform3D(1, 0, 0, 0, 0.979607, -0.200924, 0, 0.200924, 0.979607, 0, 0, 0)
-
-[node name="LegR" parent="Player/Model/Torso" index="1"]
-transform = Transform3D(1, 0, 0, 0, 0.626483, 0.779438, 0, -0.779438, 0.626483, 0, 0.0614624, 0.324688)
-
-[node name="LegL" parent="Player/Model/Torso" index="2"]
-transform = Transform3D(1, 0, 0, 0, 0.396092, -0.918212, 0, 0.918212, 0.396092, 0, 0.615022, -1.1245)
 
 [node name="Armature" parent="Player/Model" index="1"]
 transform = Transform3D(1, 0, 0, 0, 0.979575, -0.201078, 0, 0.201078, 0.979575, 0, 0, 0)
@@ -1067,6 +1068,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.55331, 1.15273, 21.6168)
 [node name="EssenceRock4" parent="." instance=ExtResource("22_r7dft")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.95354, 1.15273, 26.8074)
 
+[connection signal="cheat_resource_increment" from="Tutorial" to="NavigationRegion3D/Cauldron" method="increment_resource"]
 [connection signal="upgrade_started" from="NavigationRegion3D/Cauldron" to="Tutorial" method="_on_cauldron_upgrade_started"]
 [connection signal="selected" from="NavigationRegion3D/Cauldron/UpgradeOption" to="Tutorial" method="_on_upgrade_continue_pressed" unbinds=1]
 [connection signal="selected" from="NavigationRegion3D/Cauldron/UpgradeOption2" to="Tutorial" method="_on_upgrade_continue_pressed" unbinds=1]

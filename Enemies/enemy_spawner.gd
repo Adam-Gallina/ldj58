@@ -8,9 +8,11 @@ extends Node
 @export var LevelIncreaseRate = .125
 @onready var _next_spawn = StartSpawnRate
 
-@export var StartEnemyHealth = 1
-@export var LevelIncreaseHealth = 1
+@export var StartEnemyHealth = 5
+@export var LevelIncreaseHealth = 5
 
+@export var StartMaxEnemyCount = 5
+@export var LevelIncreaseMaxCount = 3
 
 @export var SpawnGraceDist = 10
 @export var SpawnMaxDist = 40
@@ -26,6 +28,9 @@ func _process(delta: float) -> void:
 
 
 func _spawn_enemy():
+	if get_tree().get_nodes_in_group('Enemy').size() >= StartMaxEnemyCount + LevelIncreaseMaxCount * PlayerStats.Level:
+		return
+
 	var e = EnemyScenes[0].instantiate()
 	add_child(e)
 	

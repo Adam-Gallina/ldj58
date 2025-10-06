@@ -28,20 +28,20 @@ func _ready() -> void:
 	$UpgradeOption2.set_upgrade(null)
 	$UpgradeOption3.set_upgrade(null)
 
-	PlayerStats.CurrResource = ResourceTypes[_curr_resource]
-	PlayerStats.CurrResourceTarget = ResourceAmounts[_curr_resource]
-	_remaining_resource_amount = ResourceAmounts[_curr_resource]
+	if PlayerStats.Tutorial:
+		increment_resource()
 
 func _process(_delta: float) -> void:
-	if PlayerStats.CurrResource != Constants.ResourceType.None:
-		$Sprite3D.texture = Constants.ResourceImg.get(PlayerStats.CurrResource)
-		var t = Constants.ResourceName.get(PlayerStats.CurrResource)
+	if ResourceTypes[_curr_resource] == Constants.ResourceType.None:
+		$Sprite3D.hide()
+	else:
+		$Sprite3D.show()
+		$Sprite3D.texture = Constants.ResourceImg.get(ResourceTypes[_curr_resource])
+		var t = Constants.ResourceName.get(ResourceTypes[_curr_resource])
 		if t == null:
 			$Sprite3D/Label3D.text = ''
 		else:
 			$Sprite3D/Label3D.text = 'Fetch me {0} {1}!'.format([t, ResourceAmounts[_curr_resource]])
-
-
 
 func _collect_resource(xp_count=0):
 	$CollectPath3D.curve.set_point_position(0, Constants.Player.global_position + Vector3.UP - global_position)
@@ -53,10 +53,7 @@ func _collect_resource(xp_count=0):
 
 	if _remaining_resource_amount <= 0:
 		choose_weapon_upgrades()
-		_curr_resource += 1
-		PlayerStats.CurrResource = ResourceTypes[_curr_resource]
-		PlayerStats.CurrResourceTarget = ResourceAmounts[_curr_resource]
-		_remaining_resource_amount = ResourceAmounts[_curr_resource]
+		increment_resource()
 
 func _collect_xp():
 	$CollectPath3D.curve.set_point_position(0, Constants.Player.global_position + Vector3.UP - global_position)
@@ -101,6 +98,15 @@ func choose_weapon_upgrades():
 	_curr_upgrades = WeaponUpgradePool.select_upgrades(2)
 	$UpgradeOption.set_upgrade(_curr_upgrades[0])
 	$UpgradeOption2.set_upgrade(_curr_upgrades[1])
+
+
+func increment_resource():
+	_curr_resource += 1
+	PlayerStats.CurrResource = ResourceTypes[_curr_resource]
+	PlayerStats.CurrResourceTarget = ResourceAmounts[_curr_resource]
+	_remaining_resource_amount = ResourceAmounts[_curr_resource]
+
+
 
 
 func _on_area_3d_body_entered(body:Node3D) -> void:

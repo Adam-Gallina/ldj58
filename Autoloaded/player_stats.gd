@@ -14,6 +14,8 @@ func reset():
 
 var Level = 0
 
+var Tutorial = false
+
 var Health = 3
 @onready var _curr_health = Health
 func change_max_health(amount:int):
@@ -29,7 +31,7 @@ var Invincibility = .5
 func calc_iframes() -> float: return Invincibility
 
 
-var Damage = .5
+var Damage = 5
 func calc_damage() -> float:
 	if Damage < 0: Damage = .1
 	return Damage

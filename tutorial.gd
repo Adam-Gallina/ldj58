@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+signal cheat_resource_increment()
+
 @export var KeyPressedCol = Color.GREEN
 
 func _ready() -> void:
@@ -11,8 +13,6 @@ func _ready() -> void:
 	$ResourceTutorial.hide()
 	
 	_movement_tutorial()
-
-	PlayerStats.set_deferred('CurrResource', Constants.ResourceType.None)
 
 func _movement_tutorial():
 	$MovementTutorial.show()
@@ -94,10 +94,12 @@ func _on_upgrade_continue_pressed() -> void:
 func _resource_tutorial():
 	$UpgradeTutorial.hide()
 	$ResourceTutorial.show()
-	PlayerStats.set_deferred('CurrResource', Constants.ResourceType.Berry)
+	cheat_resource_increment.emit()
 
 func _on_resource_continue_pressed() -> void:
 	$ResourceTutorial.hide()
+
+	PlayerStats.Tutorial = true
 
 
 func _on_cauldron_upgrade_started() -> void:
