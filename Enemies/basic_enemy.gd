@@ -35,6 +35,7 @@ var _curr_state : EnemyState = EnemyState.None
 @export_category('Loot')
 @export var LootSpawnAng = 90
 @export var LootSpawnForce = 20
+@export var LaunchTowardsPlayer = false
 @export var XpDropScene : PackedScene
 @export var MinXpDrop = 3
 @export var MaxXpDrop = 5
@@ -122,24 +123,21 @@ func get_random_pos():
 func do_attack():
 	_keep_anim('Attack')
 	_curr_state = EnemyState.Attacking
-	attack_timer.start()
-
-	await _anim.animation_finished
-
-	_keep_anim('Walk')
-	_curr_state = EnemyState.Following
-	attack_timer.stop()
+	if attack_timer.is_stopped():
+		attack_timer.start()
 
 func _on_attack_timer_timeout() -> void:
 	var dir = model.basis.z.rotated(Vector3.UP, deg_to_rad(-10 + randf() * 20))
 
 	var p = AttackProjectile.instantiate()
 	get_parent().add_child(p)
-	p.global_position = global_position + Vector3.UP
+	p.global_position = get_node('%AttackSpawn').global_position
 
 	p.launch(dir, dir * 10)
 
 	_attack_cooldown = AttackCooldown
+	_keep_anim('Walk')
+	_curr_state = EnemyState.Following
 
 
 func _keep_anim(anim_name):
@@ -174,12 +172,12 @@ func death():
 		var l = XpDropScene.instantiate()
 		get_parent().add_child(l)
 		l.global_position = global_position
-		l.launch(LootSpawnAng, LootSpawnForce)
+		l.launch(LootSpawnAng, LootSpawnForce, LaunchTowardsPlayer)
 
 	if PlayerStats.CurrResource == ResourceDropType and ResourceDropScene != null:
 		var l = ResourceDropScene.instantiate()
 		get_parent().add_child(l)
 		l.global_position = global_position
-		l.launch(LootSpawnAng, LootSpawnForce)
+		l.launch(LootSpawnAng, LootSpawnForce, LaunchTowardsPlayer)
 
 	queue_free()

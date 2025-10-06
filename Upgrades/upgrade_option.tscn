@@ -22,8 +22,8 @@ point_count = 2
 [sub_resource type="Gradient" id="Gradient_f7tge"]
 colors = PackedColorArray(0.384593, 0.384593, 0.384593, 1, 1, 1, 1, 1)
 
-[node name="UpgradeOption" type="CharacterBody3D" node_paths=PackedStringArray("CommonParticles", "UncommonParticles", "RareParticles")]
-collision_layer = 40
+[node name="UpgradeOption" type="CharacterBody3D" node_paths=PackedStringArray("CommonParticles", "UncommonParticles", "RareParticles") groups=["Environment"]]
+collision_layer = 4
 collision_mask = 0
 script = ExtResource("1_m3xfy")
 CommonParticles = NodePath("CommonParticles")

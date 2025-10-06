@@ -1,6 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://d4bge30cwyl4p"]
+[gd_scene load_steps=11 format=3 uid="uid://d4bge30cwyl4p"]
 
 [ext_resource type="ArrayMesh" uid="uid://fclpeddggiku" path="res://Environment/Rocks/Meteors_ML_1.res" id="1_48mny"]
+[ext_resource type="Script" uid="uid://iwbcogk0tch7" path="res://Enemies/resource_point.gd" id="1_atugl"]
+[ext_resource type="PackedScene" uid="uid://dng5ro1tmawvb" path="res://Loot/Resources/rock_resource.tscn" id="2_jne5r"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_3e3wt"]
 radius = 1.50869
@@ -18,9 +20,23 @@ noise = SubResource("FastNoiseLite_jne5r")
 albedo_color = Color(0.588253, 0.588253, 0.588253, 1)
 albedo_texture = SubResource("NoiseTexture2D_xfwr7")
 
-[node name="Stone1" type="StaticBody3D"]
-collision_layer = 8
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xfwr7"]
+albedo_color = Color(0.873376, 0.350532, 0.77785, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_22xcu"]
+left_to_right = 0.7
+size = Vector3(1, 1, 0.545)
+
+[node name="Stone1" type="StaticBody3D" node_paths=PackedStringArray("ResourceSprites") groups=["Environment"]]
+collision_layer = 4
 collision_mask = 0
+script = ExtResource("1_atugl")
+LootSpawnAng = 30
+LaunchTowardsPlayer = true
+ResourceDropScene = ExtResource("2_jne5r")
+ResourceDropType = 1
+LootSpawnHeight = 3
+ResourceSprites = [NodePath("MeshInstance3D"), NodePath("MeshInstance3D2"), NodePath("MeshInstance3D3")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.0451014, -0.998982, 0, 0.998982, -0.0451014, -0.0332615, 0.782826, 0.38254)
@@ -30,3 +46,18 @@ shape = SubResource("SphereShape3D_3e3wt")
 transform = Transform3D(1, 0, 0, 0, -0.0451014, -0.998982, 0, 0.998982, -0.0451014, -0.353933, 0.7765, 0.522664)
 mesh = ExtResource("1_48mny")
 surface_material_override/0 = SubResource("StandardMaterial3D_22xcu")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.85821, 0.480674, 0.180077, -0.50093, 0.860848, 0.0894956, -0.112, -0.167012, 0.979573, 0.414005, 2.05064, 0.125456)
+material_override = SubResource("StandardMaterial3D_xfwr7")
+mesh = SubResource("PrismMesh_22xcu")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.611667, -0.270336, -0.743494, -0.665714, 0.683639, 0.299105, 0.427422, 0.677906, -0.598125, -0.264404, 1.87012, 1.40301)
+material_override = SubResource("StandardMaterial3D_xfwr7")
+mesh = SubResource("PrismMesh_22xcu")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.488235, -0.616661, 0.617541, -0.812989, 0.578647, -0.0649364, -0.317295, -0.533759, -0.783854, -1.03194, 1.78465, -0.6896)
+material_override = SubResource("StandardMaterial3D_xfwr7")
+mesh = SubResource("PrismMesh_22xcu")

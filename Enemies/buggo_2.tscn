@@ -1,16 +1,22 @@
-[gd_scene load_steps=4 format=3 uid="uid://csoac6af36fcs"]
+[gd_scene load_steps=5 format=3 uid="uid://csoac6af36fcs"]
 
 [ext_resource type="PackedScene" uid="uid://cla6xogqxtqj4" path="res://Enemies/buggo1.tscn" id="1_u6tjr"]
+[ext_resource type="PackedScene" uid="uid://bw4no40lelpn3" path="res://Loot/Resources/mandible_resource.tscn" id="2_ln8xg"]
 [ext_resource type="Material" uid="uid://cyq4q8vu7i5f0" path="res://Enemies/Models/BugMat.tres" id="2_vfmqp"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ln8xg"]
 size = Vector3(1.80542, 1.40785, 0.592516)
 
 [node name="Buggo2" instance=ExtResource("1_u6tjr")]
+AttackRange = 12
+AttackCooldown = 3
 MinXpDrop = 6
 MaxXpDrop = 10
+ResourceDropScene = ExtResource("2_ln8xg")
+ResourceDropType = 6
 
 [node name="Body" parent="Model" index="0"]
+transform = Transform3D(0.999822, -0.0188659, 0, 0.0188659, 0.999821, 0, 0, 0, 0.999999, 0, 0, 0)
 material_override = ExtResource("2_vfmqp")
 
 [node name="LegL1" parent="Model/Body" index="0"]
@@ -38,12 +44,14 @@ transform = Transform3D(-0.298979, 0.502086, -0.811493, 0.859204, 0.511632, 2.32
 material_override = ExtResource("2_vfmqp")
 
 [node name="MandibleL" parent="Model/Body" index="6"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.376087, 1.05664, 2.15122)
 visible = true
 
 [node name="MandibleR" parent="Model/Body" index="7"]
 transform = Transform3D(-1, 0, 0, 0, 1, 2.53518e-06, 0, -2.53518e-06, 1, -0.376087, 1.05664, 2.15122)
 visible = true
+
+[node name="AttackTimer" parent="." index="3"]
+wait_time = 4.0
 
 [node name="CollisionShape3D" parent="Area3D" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.012018, 1.06013, 1.4742)

@@ -6,9 +6,18 @@ var _target : Node3D
 var _curr_speed = 0
 
 
-func launch(ang=90, launch_speed=20):
-	var dir = Vector3.UP.rotated(Vector3.RIGHT, randf() * deg_to_rad(ang/2.))
-	dir = dir.rotated(Vector3.UP, randf() * 2 * PI)
+func launch(ang=90, launch_speed=20, LaunchTowardsPlayer=false):
+	var dir
+
+	if LaunchTowardsPlayer:
+		dir = global_position.direction_to(Constants.Player.global_position)
+		dir.y = 0
+		dir = dir.normalized()
+		dir = dir.rotated(dir.cross(Vector3.UP).normalized(), PI/8 - deg_to_rad(ang/2.) + randf() * deg_to_rad(ang))
+		dir = dir.rotated(Vector3.UP, -deg_to_rad(ang/2.) +  randf() * deg_to_rad(ang))
+	else:
+		dir = Vector3.UP.rotated(Vector3.RIGHT, randf() * deg_to_rad(ang/2.))
+		dir = dir.rotated(Vector3.UP, randf() * 2 * PI)
 
 	linear_velocity = dir * launch_speed
 

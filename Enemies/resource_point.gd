@@ -3,8 +3,10 @@ extends StaticBody3D
 @export_category('Loot')
 @export var LootSpawnAng = 90
 @export var LootSpawnForce = 20
+@export var LaunchTowardsPlayer = false
 @export var ResourceDropScene : PackedScene
 @export var ResourceDropType : Constants.ResourceType
+@export var LootSpawnHeight = 2
 
 @export var ResourceSprites : Array[Node3D]
 @onready var _remaining_resource = ResourceSprites.size()
@@ -18,5 +20,5 @@ func damage(_amount):
 
 	var l = ResourceDropScene.instantiate()
 	get_parent().add_child(l)
-	l.global_position = global_position + Vector3.UP
-	l.launch(LootSpawnAng, LootSpawnForce)
+	l.global_position = global_position + Vector3.UP * LootSpawnHeight
+	l.launch(LootSpawnAng, LootSpawnForce, LaunchTowardsPlayer)

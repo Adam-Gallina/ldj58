@@ -1,7 +1,9 @@
-[gd_scene load_steps=10 format=4 uid="uid://biavgvl34a6jr"]
+[gd_scene load_steps=12 format=4 uid="uid://biavgvl34a6jr"]
 
+[ext_resource type="Script" uid="uid://iwbcogk0tch7" path="res://Enemies/resource_point.gd" id="1_1fmff"]
 [ext_resource type="Script" uid="uid://b7oaimp037d00" path="res://Environment/fading_obstacle.gd" id="1_84l85"]
 [ext_resource type="PackedScene" uid="uid://brjo8kvjgy0ko" path="res://Environment/Tree.glb" id="1_qd2mi"]
+[ext_resource type="PackedScene" uid="uid://cwme3q2gk5sbt" path="res://Loot/Resources/bark_resource.tscn" id="2_x7gwr"]
 [ext_resource type="Texture2D" uid="uid://e07gtuoq8vuj" path="res://Environment/Tree_Grid.png" id="3_chaac"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1fmff"]
@@ -58,16 +60,23 @@ shadow_mesh = SubResource("ArrayMesh_ejogh")
 height = 5.29688
 radius = 3.22656
 
-[node name="Tree" type="StaticBody3D" node_paths=PackedStringArray("TargetFade") groups=["Environment"]]
-collision_layer = 8
+[node name="Tree" type="StaticBody3D" node_paths=PackedStringArray("ResourceSprites") groups=["Enemy", "Environment"]]
+collision_layer = 4
 collision_mask = 0
+script = ExtResource("1_1fmff")
+LootSpawnAng = 20
+LootSpawnForce = 10
+LaunchTowardsPlayer = true
+ResourceDropScene = ExtResource("2_x7gwr")
+ResourceDropType = 4
+ResourceSprites = [NodePath("Node3D")]
+
+[node name="Tree" parent="." node_paths=PackedStringArray("TargetFade") instance=ExtResource("1_qd2mi")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, -3.28516, 0)
 script = ExtResource("1_84l85")
-TargetFade = NodePath("Tree/Cylinder_001")
+TargetFade = NodePath("Cylinder_001")
 FadeStartDist = 5.0
 MaxFadeDist = 2.0
-
-[node name="Tree" parent="." instance=ExtResource("1_qd2mi")]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, -3.28516, 0)
 
 [node name="Cylinder" parent="Tree" index="0"]
 material_override = SubResource("StandardMaterial3D_1fmff")
@@ -83,6 +92,9 @@ transform = Transform3D(1, -2.42758e-05, 0.000207114, 2.42758e-05, 1, 1.94734e-0
 cast_shadow = 3
 mesh = SubResource("ArrayMesh_dcd4x")
 skeleton = NodePath("")
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, -3.28516, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.64844, 0)

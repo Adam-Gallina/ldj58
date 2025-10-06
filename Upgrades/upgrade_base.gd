@@ -6,6 +6,7 @@ enum Rarity { Common, Uncommon, Rare }
 @export var UpgradeName = "Unnamed Upgrade"
 @export var UpgradeDescription = "does something"
 @export var UpgradeRarity : Rarity
+@export_range(0, 1.) var UpgradeChance : float = 0
 
 @export var HealthMod = 0
 @export var DamageMod = 0.

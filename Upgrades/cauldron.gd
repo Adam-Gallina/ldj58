@@ -33,7 +33,10 @@ func _ready() -> void:
 		increment_resource()
 		PlayerStats.Level += 1
 
+var _disabled = false
 func _process(_delta: float) -> void:
+	$Label3D2.text =  'Next upgrade: {0}'.format([_remaining_upgrade_xp])
+
 	if ResourceTypes[_curr_resource] == Constants.ResourceType.None:
 		$Sprite3D.hide()
 	else:
@@ -43,7 +46,14 @@ func _process(_delta: float) -> void:
 		if t == null:
 			$Sprite3D/Label3D.text = ''
 		else:
-			$Sprite3D/Label3D.text = 'Fetch me {0} {1}!'.format([t, ResourceAmounts[_curr_resource]])
+			$Sprite3D/Label3D.text = 'Fetch me {1} {0}!'.format([t, ResourceAmounts[_curr_resource]])
+
+	var pdist = $StaticBody3D.global_position.distance_to(Constants.Player.global_position)
+	var d = pdist > 8
+	if _disabled != d:
+		_disabled = d
+		for i in $StaticBody3D.get_children():
+			i.set_deferred('disabled', d)
 
 func _collect_resource(xp_count=0):
 	$CollectPath3D.curve.set_point_position(0, Constants.Player.global_position + Vector3.UP - global_position)
@@ -89,6 +99,7 @@ func _collect_xp_anim(xp, delay):
 		await get_tree().process_frame
 
 	xp.queue_free()
+	$PopPlayer.play()
 	
 
 func choose_upgrades():

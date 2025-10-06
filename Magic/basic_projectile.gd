@@ -17,6 +17,8 @@ var _target_pos : Vector3
 var _moving = false
 var _sploded = false
 
+@onready var _hit_audio : AudioStreamPlayer3D = get_node_or_null('AudioStreamPlayer3D')
+
 func set_radius(amount):
 	$ShapeCast3D.shape.radius = amount
 
@@ -48,7 +50,8 @@ func explode():
 	EndEffect.emitting = true
 	TrackingEffect.emitting = false
 	$MeshInstance3D.hide()
-	$AudioStreamPlayer3D.play()
+	if _hit_audio != null:
+		_hit_audio.play()
 
 	var s : ShapeCast3D = $ShapeCast3D
 

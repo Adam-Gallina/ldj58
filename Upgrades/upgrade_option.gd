@@ -11,7 +11,7 @@ func _process(_delta: float) -> void:
 
 	var p = Constants.Player.get_mouse_ray()
 	if p != Vector3.ZERO:
-		$Label3D.visible = global_position.distance_to(p) < 2
+		$Label3D.visible = global_position.distance_to(p) < 3
 
 func set_upgrade(upgrade:UpgradeBase):
 	$Label3D.hide()
@@ -20,6 +20,14 @@ func set_upgrade(upgrade:UpgradeBase):
 		$CollisionShape3D.set_deferred('disabled', true)
 	else:
 		show()
+
+		while upgrade.UpgradeChance > 0:
+			if randf() < upgrade.UpgradeChance:
+				upgrade = upgrade.get_child(0)
+			else:
+				break
+
+
 		$CollisionShape3D.set_deferred('disabled', false)
 		$Label3D.text = upgrade.UpgradeName + '\n' + upgrade.UpgradeDescription
 

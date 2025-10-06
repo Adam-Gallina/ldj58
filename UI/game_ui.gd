@@ -67,4 +67,10 @@ func _on_restart_pressed() -> void:
 	get_tree().reload_current_scene()
 
 func _on_player_death():
+
+	$DeathScreen/Label2.text = '''Upgrades claimed: {0}
+Bugs slain: {1}
+Spells cast: {2}
+Resources collected: {3}'''.format([GameStats.Upgrades, GameStats.EnemiesDefeated, GameStats.SpellsCast, GameStats.ResourcesCollected])
+
 	$DeathScreen.show()

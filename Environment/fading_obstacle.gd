@@ -1,6 +1,8 @@
-extends StaticBody3D
+extends Node3D
 
 @export var TargetFade : MeshInstance3D
+@export var Target2Fade : MeshInstance3D
+@export var Target3Fade : MeshInstance3D
 @export var MaxFade : float = 0.
 @export var FadeStartDist : float = 3.5
 @export var MaxFadeDist : float = 1.
@@ -20,3 +22,7 @@ func _process(_delta: float) -> void:
 		xt = (xstop - MaxFadeDist) / (FadeStartDist - MaxFadeDist)
 
 	TargetFade.material_override.albedo_color.a = MaxFade + (1 - MaxFade) * xt
+	if Target2Fade != null:
+		Target2Fade.material_override.albedo_color.a = MaxFade + (1 - MaxFade) * xt
+	if Target3Fade != null:
+		Target3Fade.material_override.albedo_color.a = MaxFade + (1 - MaxFade) * xt

@@ -4,17 +4,24 @@ func reset():
 	Level = 0
 	Health = 3
 	_curr_health = Health
+	PlayerSafe = false
 
 	CastAmount = 1
 	CastPierce = 0
-	
+	CastRadius = .35
+
+	Damage = 5
+	AttackSpeed = 1.
+	Speed = 10.
+	CollectRadius = 4.0
+
 	_stored_xp = []
 	_stored_resources = {}
 
 
 var Level = 0
 
-var Tutorial = true
+var Tutorial = false
 var PlayerSafe = false
 
 var Health = 3
@@ -39,7 +46,7 @@ func calc_damage() -> float:
 
 var AttackSpeed = 1.
 func calc_attack_speed() -> float:
-	if AttackSpeed < 0: AttackSpeed = .1
+	if AttackSpeed < 0: AttackSpeed = .3
 	return 1 / AttackSpeed
 
 var Speed = 10.
@@ -65,6 +72,8 @@ func collect_xp(xp:XpDrop):
 	_stored_xp.append(xp)
 	xp.get_parent().remove_child(xp)
 
+	BackgroundMusic.get_node('PopPlayer').play()
+
 func deposit_xp(amount_needed):
 	var s = []
 
@@ -88,6 +97,7 @@ func collect_resource(resource:ResourceDrop):
 		_stored_resources[resource.ResourceType].append(resource)
 
 	resource.get_parent().remove_child(resource)
+	BackgroundMusic.get_node('PopPlayer').play()
 
 func deposit_resource(resource_type:Constants.ResourceType, amount_needed:int):
 	var s = []
@@ -107,3 +117,5 @@ var LegsVisible = true
 func _process(_delta: float) -> void:	
 	if Input.is_action_just_pressed('Legs'):
 		LegsVisible = not LegsVisible
+	if BackgroundMusic.get_node('AudioStreamPlayer').playing == false:
+		BackgroundMusic.get_node('AudioStreamPlayer').play()

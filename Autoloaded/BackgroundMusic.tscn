@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bmknqnvge317p"]
+[gd_scene load_steps=3 format=3 uid="uid://bmknqnvge317p"]
 
 [ext_resource type="AudioStream" uid="uid://byqvaghtwcbl4" path="res://Audio/dandelions-scatter-bernie-rosa-main-version-28489-02-52.mp3" id="1_0asb1"]
+[ext_resource type="AudioStream" uid="uid://ddtbyhd0rnjar" path="res://Audio/zapsplat_cartoon_pop_short_simple_91196.mp3" id="2_antw5"]
 
 [node name="BackgroundMusic" type="Node3D"]
 
@@ -8,3 +9,8 @@
 stream = ExtResource("1_0asb1")
 volume_db = -10.0
 autoplay = true
+
+[node name="PopPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_antw5")
+volume_db = -15.0
+max_polyphony = 10

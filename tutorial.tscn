@@ -449,7 +449,6 @@ texture = ExtResource("4_0cr88")
 expand_mode = 1
 
 [node name="EssenceTutorial" type="NinePatchRect" parent="."]
-visible = false
 self_modulate = Color(0.80549, 0.80549, 0.80549, 1)
 anchors_preset = 8
 anchor_left = 0.5
@@ -472,20 +471,20 @@ patch_margin_bottom = 75
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_left = 12.0
+offset_left = 24.0
 offset_top = 80.0
-offset_right = -9.0
-offset_bottom = 209.0
+offset_right = -2.0
+offset_bottom = 242.0
 grow_horizontal = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_hu44a")
 theme_override_font_sizes/font_size = 24
-text = "It's fortunate you woke when you did, my bath is beginning to get cold and I daren't leave to get more essence (        )
-Fetch me some essence Tiko!"
+text = "Now that you're more alert, my bath is beginning to get cold and I daren't leave to get more essence (        ) Those nearby rocks have essence, smash one and bring it to me!"
 horizontal_alignment = 1
 autowrap_mode = 2
 
 [node name="Button" type="Button" parent="EssenceTutorial"]
+visible = false
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -520,15 +519,14 @@ expand_mode = 1
 
 [node name="TextureRect2" type="TextureRect" parent="EssenceTutorial"]
 layout_mode = 0
-offset_left = 283.0
+offset_left = 204.0
 offset_top = 142.0
-offset_right = 324.0
+offset_right = 245.0
 offset_bottom = 183.0
 texture = ExtResource("5_rwowx")
 expand_mode = 1
 
 [node name="UpgradeTutorial" type="NinePatchRect" parent="."]
-visible = false
 self_modulate = Color(0.80549, 0.80549, 0.80549, 1)
 anchors_preset = 8
 anchor_left = 0.5
@@ -589,6 +587,73 @@ theme_override_font_sizes/font_size = 31
 text = " Let's go! "
 
 [node name="TextureRect" type="TextureRect" parent="UpgradeTutorial"]
+layout_mode = 0
+offset_left = -66.0
+offset_top = -188.0
+offset_right = 231.0
+offset_bottom = 109.0
+texture = ExtResource("4_0cr88")
+expand_mode = 1
+
+[node name="UpgradeTutorial2" type="NinePatchRect" parent="."]
+self_modulate = Color(0.80549, 0.80549, 0.80549, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -599.0
+offset_top = 48.0
+offset_right = -149.0
+offset_bottom = 326.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_rwowx")
+patch_margin_left = 200
+patch_margin_top = 75
+patch_margin_right = 200
+patch_margin_bottom = 75
+
+[node name="Label" type="Label" parent="UpgradeTutorial2"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 27.0
+offset_top = 80.0
+offset_bottom = 242.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_hu44a")
+theme_override_font_sizes/font_size = 24
+text = "The bugs that inhabit this realm also greedily horde essence, and don't understand I'm getting cold! Bring me their essence, and I'll grant power beyond your  wildest dreams!"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Button" type="Button" parent="UpgradeTutorial2"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -55.0
+offset_top = -65.0
+offset_right = 61.0
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/font_hover_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/font_outline_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/font_color = Color(0.757969, 0.757969, 0.757969, 1)
+theme_override_colors/font_focus_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/font_pressed_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_fonts/font = ExtResource("3_hu44a")
+theme_override_font_sizes/font_size = 31
+text = " Let's go! "
+
+[node name="TextureRect" type="TextureRect" parent="UpgradeTutorial2"]
 layout_mode = 0
 offset_left = -66.0
 offset_top = -188.0
@@ -668,4 +733,5 @@ expand_mode = 1
 
 [connection signal="pressed" from="EssenceTutorial/Button" to="." method="_on_essence_continue_pressed"]
 [connection signal="pressed" from="UpgradeTutorial/Button" to="." method="_on_upgrade_continue_pressed"]
+[connection signal="pressed" from="UpgradeTutorial2/Button" to="." method="_on_upgrade2_continue_pressed"]
 [connection signal="pressed" from="ResourceTutorial/Button" to="." method="_on_resource_continue_pressed"]

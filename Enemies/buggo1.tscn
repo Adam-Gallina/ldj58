@@ -1,7 +1,8 @@
-[gd_scene load_steps=21 format=4 uid="uid://cla6xogqxtqj4"]
+[gd_scene load_steps=22 format=4 uid="uid://cla6xogqxtqj4"]
 
 [ext_resource type="Script" uid="uid://cxk123xtiiirj" path="res://Enemies/charge_enemy.gd" id="1_xj6nl"]
 [ext_resource type="PackedScene" uid="uid://x4v3qexmwpf2" path="res://Loot/xp_loot_drop.tscn" id="3_ce3om"]
+[ext_resource type="PackedScene" uid="uid://byml2f62c3lnf" path="res://Loot/Resources/wing_resource.tscn" id="3_upmpe"]
 [ext_resource type="Texture2D" uid="uid://bgnk4hjwqyh5f" path="res://Enemies/Models/Buggo1_Bug2.png" id="6_1ji1w"]
 [ext_resource type="Material" uid="uid://llba65e711pm" path="res://Enemies/Models/Bug2Mat.tres" id="6_ce3om"]
 
@@ -766,7 +767,7 @@ size = Vector3(0.830606, 1.38539, 0.490343)
 
 [node name="Buggo1" type="CharacterBody3D" groups=["Enemy"]]
 collision_layer = 4
-collision_mask = 75
+collision_mask = 73
 script = ExtResource("1_xj6nl")
 AttackRange = 8
 AttackCooldown = 4
@@ -776,7 +777,8 @@ WanderRange = 30
 LootSpawnAng = 60
 LootSpawnForce = 10
 XpDropScene = ExtResource("3_ce3om")
-ResourceDropType = 1
+ResourceDropScene = ExtResource("3_upmpe")
+ResourceDropType = 7
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 path_height_offset = 0.5
@@ -814,7 +816,7 @@ mesh = SubResource("ArrayMesh_swxax")
 skeleton = NodePath("")
 
 [node name="LegR1" type="MeshInstance3D" parent="Model/Body"]
-transform = Transform3D(-0.497651, 0.835724, -0.232184, 0.859204, 0.511633, 1.01535e-07, -0.118793, 0.199494, 0.972672, -0.714605, 0.689658, 0.727817)
+transform = Transform3D(-0.49765, 0.835724, -0.232184, 0.859204, 0.511633, 1.01535e-07, -0.118793, 0.199494, 0.972672, -0.714605, 0.689658, 0.727817)
 material_override = ExtResource("6_ce3om")
 mesh = SubResource("ArrayMesh_swxax")
 skeleton = NodePath("")
@@ -826,7 +828,7 @@ mesh = SubResource("ArrayMesh_swxax")
 skeleton = NodePath("")
 
 [node name="LegR3" type="MeshInstance3D" parent="Model/Body"]
-transform = Transform3D(-0.298979, 0.502086, -0.811493, 0.859204, 0.511633, 2.32579e-09, -0.415186, 0.697238, 0.584362, -0.696832, 0.681056, -1.01784)
+transform = Transform3D(-0.298979, 0.502086, -0.811493, 0.859204, 0.511632, 2.32579e-09, -0.415186, 0.697238, 0.584362, -0.696832, 0.681056, -1.01784)
 material_override = ExtResource("6_ce3om")
 mesh = SubResource("ArrayMesh_swxax")
 skeleton = NodePath("")

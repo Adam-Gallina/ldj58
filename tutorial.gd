@@ -10,6 +10,7 @@ func _ready() -> void:
 	$SpellTutorial.hide()
 	$EssenceTutorial.hide()
 	$UpgradeTutorial.hide()
+	$UpgradeTutorial2.hide()
 	$ResourceTutorial.hide()
 	
 	if not PlayerStats.Tutorial:
@@ -90,7 +91,15 @@ func _upgrade_tutorial():
 	$UpgradeTutorial.show()
 
 func _on_upgrade_continue_pressed() -> void:
+	if PlayerStats.Tutorial: return
 	$UpgradeTutorial.hide()
+	_upgrade2_tutorial()
+
+func _upgrade2_tutorial():
+	$UpgradeTutorial2.show()
+
+func _on_upgrade2_continue_pressed() -> void:
+	$UpgradeTutorial2.hide()
 
 func _resource_tutorial():
 	$UpgradeTutorial.hide()
