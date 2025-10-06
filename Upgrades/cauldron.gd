@@ -32,6 +32,16 @@ func _ready() -> void:
 	PlayerStats.CurrResourceTarget = ResourceAmounts[_curr_resource]
 	_remaining_resource_amount = ResourceAmounts[_curr_resource]
 
+func _process(_delta: float) -> void:
+	if PlayerStats.CurrResource != Constants.ResourceType.None:
+		$Sprite3D.texture = Constants.ResourceImg.get(PlayerStats.CurrResource)
+		var t = Constants.ResourceName.get(PlayerStats.CurrResource)
+		if t == null:
+			$Sprite3D/Label3D.text = ''
+		else:
+			$Sprite3D/Label3D.text = 'Fetch me {0} {1}!'.format([t, ResourceAmounts[_curr_resource]])
+
+
 
 func _collect_resource(xp_count=0):
 	$CollectPath3D.curve.set_point_position(0, Constants.Player.global_position + Vector3.UP - global_position)

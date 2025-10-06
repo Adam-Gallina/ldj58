@@ -2,17 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cp2s0ydp17qdh"
-path.s3tc="res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.s3tc.ctex"
+uid="uid://bff56abco4i6u"
+path.s3tc="res://.godot/imported/BadBush_Grid.png-d591d6538313657c100ac19c1f62356b.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={
+"md5": "3463ed13bc50b95b2f05692d7de95522"
+}
 
 [deps]
 
-source_file="res://icon.svg"
-dest_files=["res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.s3tc.ctex"]
+source_file="res://Enemies/Resources/BadBush_Grid.png"
+dest_files=["res://.godot/imported/BadBush_Grid.png-d591d6538313657c100ac19c1f62356b.s3tc.ctex"]
 
 [params]
 
@@ -33,6 +36,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=0
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

@@ -1,23 +1,16 @@
 [gd_scene load_steps=6 format=3 uid="uid://dng5ro1tmawvb"]
 
 [ext_resource type="Script" uid="uid://b3ofomwk8sesf" path="res://Loot/resource_loot_drop.gd" id="1_bx2ff"]
+[ext_resource type="Texture2D" uid="uid://dx6vpw4yk6j6i" path="res://Loot/Resources/Crystal.png" id="2_sjbf6"]
+[ext_resource type="Script" uid="uid://dyxw2t1fov72y" path="res://billboard.gd" id="3_oymji"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_yc5h1"]
 bounce = 0.5
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_yc5h1"]
-radius = 0.2
+[sub_resource type="SphereShape3D" id="SphereShape3D_3ptyo"]
+radius = 0.384396
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8cyyl"]
-albedo_color = Color(0.208088, 0.208088, 0.208088, 1)
-
-[sub_resource type="SphereMesh" id="SphereMesh_hmnju"]
-radius = 0.2
-height = 0.4
-radial_segments = 5
-rings = 3
-
-[node name="BasicLootDrop" type="RigidBody3D"]
+[node name="RockResource" type="RigidBody3D"]
 collision_layer = 16
 collision_mask = 25
 physics_material_override = SubResource("PhysicsMaterial_yc5h1")
@@ -27,8 +20,9 @@ ResourceType = 1
 CollectAccel = 20
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("SphereShape3D_yc5h1")
+shape = SubResource("SphereShape3D_3ptyo")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-material_override = SubResource("StandardMaterial3D_8cyyl")
-mesh = SubResource("SphereMesh_hmnju")
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(-0.0931596, 0, 0.693775, 0, 0.7, 0, -0.693775, 0, -0.0931596, 0, 0, 0)
+texture = ExtResource("2_sjbf6")
+script = ExtResource("3_oymji")

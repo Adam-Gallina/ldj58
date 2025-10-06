@@ -449,6 +449,7 @@ texture = ExtResource("4_0cr88")
 expand_mode = 1
 
 [node name="EssenceTutorial" type="NinePatchRect" parent="."]
+visible = false
 self_modulate = Color(0.80549, 0.80549, 0.80549, 1)
 anchors_preset = 8
 anchor_left = 0.5
@@ -526,4 +527,145 @@ offset_bottom = 183.0
 texture = ExtResource("5_rwowx")
 expand_mode = 1
 
+[node name="UpgradeTutorial" type="NinePatchRect" parent="."]
+visible = false
+self_modulate = Color(0.80549, 0.80549, 0.80549, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -599.0
+offset_top = 48.0
+offset_right = -149.0
+offset_bottom = 326.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_rwowx")
+patch_margin_left = 200
+patch_margin_top = 75
+patch_margin_right = 200
+patch_margin_bottom = 75
+
+[node name="Label" type="Label" parent="UpgradeTutorial"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 12.0
+offset_top = 80.0
+offset_right = -9.0
+offset_bottom = 209.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_hu44a")
+theme_override_font_sizes/font_size = 24
+text = "Ahhhh, that's the stuff. Well done Tiko. You may have a morsel of magic as a reward. Destroy one of these statues to claim its magic, and bring me more essence!"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Button" type="Button" parent="UpgradeTutorial"]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -55.0
+offset_top = -65.0
+offset_right = 61.0
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/font_hover_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/font_outline_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/font_color = Color(0.757969, 0.757969, 0.757969, 1)
+theme_override_colors/font_focus_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/font_pressed_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_fonts/font = ExtResource("3_hu44a")
+theme_override_font_sizes/font_size = 31
+text = " Let's go! "
+
+[node name="TextureRect" type="TextureRect" parent="UpgradeTutorial"]
+layout_mode = 0
+offset_left = -66.0
+offset_top = -188.0
+offset_right = 231.0
+offset_bottom = 109.0
+texture = ExtResource("4_0cr88")
+expand_mode = 1
+
+[node name="ResourceTutorial" type="NinePatchRect" parent="."]
+visible = false
+self_modulate = Color(0.80549, 0.80549, 0.80549, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -586.0
+offset_top = 20.0
+offset_right = -136.0
+offset_bottom = 326.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_rwowx")
+patch_margin_left = 200
+patch_margin_top = 75
+patch_margin_right = 200
+patch_margin_bottom = 75
+
+[node name="Label" type="Label" parent="ResourceTutorial"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 12.0
+offset_top = 80.0
+offset_right = -9.0
+offset_bottom = 209.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_hu44a")
+theme_override_font_sizes/font_size = 24
+text = "You have potential little bird. I do think you could one day truly be a mage to contend with, Merely collect some resources for me and I'll trade you abilities strong enough to reclaim your kingdom!"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Button" type="Button" parent="ResourceTutorial"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -55.0
+offset_top = -65.0
+offset_right = 61.0
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/font_hover_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/font_outline_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/font_color = Color(0.757969, 0.757969, 0.757969, 1)
+theme_override_colors/font_focus_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/font_pressed_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_fonts/font = ExtResource("3_hu44a")
+theme_override_font_sizes/font_size = 31
+text = " Let's go! "
+
+[node name="TextureRect" type="TextureRect" parent="ResourceTutorial"]
+layout_mode = 0
+offset_left = -66.0
+offset_top = -188.0
+offset_right = 231.0
+offset_bottom = 109.0
+texture = ExtResource("4_0cr88")
+expand_mode = 1
+
 [connection signal="pressed" from="EssenceTutorial/Button" to="." method="_on_essence_continue_pressed"]
+[connection signal="pressed" from="UpgradeTutorial/Button" to="." method="_on_upgrade_continue_pressed"]
+[connection signal="pressed" from="ResourceTutorial/Button" to="." method="_on_resource_continue_pressed"]

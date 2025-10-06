@@ -26,7 +26,7 @@ func set_health(max_health):
 @export var DetectionRange = 10
 @export var FollowingDetectionRange = 20
 @export var WanderRange = 5
-@onready var _nav_agent : NavigationAgent3D = $NavigationAgent3D
+@onready var _nav_agent : NavigationAgent3D = get_node_or_null('NavigationAgent3D')
 
 var _curr_state : EnemyState = EnemyState.None
 
@@ -40,10 +40,11 @@ var _curr_state : EnemyState = EnemyState.None
 @export var ResourceDropType : Constants.ResourceType
 
 
-@onready var model = $Model
-@onready var _anim = $Model/AnimationPlayer
+@onready var model = get_node_or_null('Model')
+@onready var _anim = get_node_or_null('Model/AnimationPlayer')
 
 func _ready():
+	if _nav_agent == null: return
 	_nav_agent.velocity_computed.connect(_on_velocity_calculated)
 	_nav_agent.navigation_finished.connect(_on_navigation_finished)
 	_nav_agent.set_target_position(get_random_pos())
@@ -51,6 +52,7 @@ func _ready():
 	_keep_anim('Walk')
 
 func _process(_delta: float) -> void:
+	if _nav_agent == null: return
 	if _curr_state == EnemyState.Dying: return
 
 	if velocity != Vector3.ZERO:
@@ -77,6 +79,8 @@ func _process(_delta: float) -> void:
 			_nav_agent.max_speed = WanderSpeed
 
 func _physics_process(_delta: float) -> void:
+	if _nav_agent == null: return
+
 	if _curr_state == EnemyState.Dying: 
 		return
 	elif _curr_state == EnemyState.Following:
@@ -127,6 +131,7 @@ func _on_attack_timer_timeout() -> void:
 
 
 func _keep_anim(anim_name):
+	if _anim == null: return
 	if _anim.current_animation == anim_name: return
 	_anim.play(anim_name)
 
@@ -144,7 +149,7 @@ func damage(amount):
 
 func death():
 	_curr_state = EnemyState.Dying
-	GameStats.EnemiesDefeated += 10
+	GameStats.EnemiesDefeated += 1
 
 	var amount = randi_range(MinXpDrop, MaxXpDrop)
 
@@ -154,7 +159,7 @@ func death():
 		l.global_position = global_position
 		l.launch(LootSpawnAng, LootSpawnForce)
 
-	if PlayerStats.CurrResource == ResourceDropType:
+	if PlayerStats.CurrResource == ResourceDropType and ResourceDropScene != null:
 		var l = ResourceDropScene.instantiate()
 		get_parent().add_child(l)
 		l.global_position = global_position

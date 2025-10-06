@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://caysx0iwp2y4p"]
+
+[ext_resource type="Script" uid="uid://b3ofomwk8sesf" path="res://Loot/resource_loot_drop.gd" id="1_mfdlj"]
+[ext_resource type="Texture2D" uid="uid://7kf00j5svfmq" path="res://Loot/Resources/Petal.png" id="2_mfdlj"]
+[ext_resource type="Script" uid="uid://dyxw2t1fov72y" path="res://billboard.gd" id="3_shs8d"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_yc5h1"]
+bounce = 0.5
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_yc5h1"]
+radius = 0.384396
+
+[node name="PetalResource" type="RigidBody3D"]
+collision_layer = 16
+collision_mask = 25
+physics_material_override = SubResource("PhysicsMaterial_yc5h1")
+linear_damp = 1.0
+script = ExtResource("1_mfdlj")
+ResourceType = 2
+CollectAccel = 20
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_yc5h1")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.67647, 0, 0.179968, 0, 0.7, 0, -0.179968, 0, 0.67647, 0, 0, 0)
+texture = ExtResource("2_mfdlj")
+script = ExtResource("3_shs8d")

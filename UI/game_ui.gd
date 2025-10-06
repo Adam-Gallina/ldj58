@@ -7,6 +7,7 @@ var _last_health = -1
 var _curr_pumping = null
 
 @onready var ResourceLabel = $ResourceInventory/ResourceCount
+@onready var ResourceImg = $ResourceInventory/ResourceImg
 
 @onready var EssenceLabel = $EssenceInventory/EssenceCount
 
@@ -21,10 +22,13 @@ func _process(_delta: float) -> void:
 		xp += x.XpValue
 	EssenceLabel.text = str(xp) 
 
+	ResourceLabel.get_parent().visible = PlayerStats.CurrResource != Constants.ResourceType.None
 	var c = 0
 	if PlayerStats._stored_resources.get(PlayerStats.CurrResource):
 		c = PlayerStats._stored_resources[PlayerStats.CurrResource].size()
 	ResourceLabel.text = '{0}/{1}'.format([c, PlayerStats.CurrResourceTarget])
+	ResourceImg.texture = Constants.ResourceImg.get(PlayerStats.CurrResource)
+	
 
 
 func _update_health():

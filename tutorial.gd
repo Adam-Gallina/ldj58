@@ -7,8 +7,12 @@ func _ready() -> void:
 	$MovementTutorial2.hide()
 	$SpellTutorial.hide()
 	$EssenceTutorial.hide()
+	$UpgradeTutorial.hide()
+	$ResourceTutorial.hide()
 	
 	_movement_tutorial()
+
+	PlayerStats.set_deferred('CurrResource', Constants.ResourceType.None)
 
 func _movement_tutorial():
 	$MovementTutorial.show()
@@ -79,3 +83,25 @@ func _essence_tutorial():
 
 func _on_essence_continue_pressed() -> void:
 	$EssenceTutorial.hide()
+
+func _upgrade_tutorial():
+	$EssenceTutorial.hide()
+	$UpgradeTutorial.show()
+
+func _on_upgrade_continue_pressed() -> void:
+	$UpgradeTutorial.hide()
+
+func _resource_tutorial():
+	$UpgradeTutorial.hide()
+	$ResourceTutorial.show()
+	PlayerStats.set_deferred('CurrResource', Constants.ResourceType.Berry)
+
+func _on_resource_continue_pressed() -> void:
+	$ResourceTutorial.hide()
+
+
+func _on_cauldron_upgrade_started() -> void:
+	if PlayerStats.Level == 0:
+		_upgrade_tutorial()
+	elif PlayerStats.Level == 1:
+		_resource_tutorial()

@@ -1,0 +1,112 @@
+[gd_scene load_steps=11 format=3 uid="uid://wpf4x5p5pymp"]
+
+[ext_resource type="Script" uid="uid://crimeyfewjrif" path="res://Enemies/basic_enemy.gd" id="1_p2v6y"]
+[ext_resource type="PackedScene" uid="uid://x4v3qexmwpf2" path="res://Loot/xp_loot_drop.tscn" id="3_0emsk"]
+[ext_resource type="ArrayMesh" uid="uid://dtn7p4hukpo3v" path="res://Environment/Rocks/Meteors_MM_1.res" id="3_5yybi"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dvx36"]
+radius = 0.70761
+height = 1.47249
+
+[sub_resource type="Gradient" id="Gradient_maw7n"]
+offsets = PackedFloat32Array(0.237705, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.78279, 1, 0.78659, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_p2v6y"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_6ao11"]
+color_ramp = SubResource("Gradient_maw7n")
+noise = SubResource("FastNoiseLite_p2v6y")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0emsk"]
+albedo_color = Color(0.588253, 0.588253, 0.588253, 1)
+albedo_texture = SubResource("NoiseTexture2D_6ao11")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1kekm"]
+transparency = 1
+albedo_color = Color(0.0666667, 1, 0, 0.6)
+
+[sub_resource type="SphereMesh" id="SphereMesh_hmnju"]
+radius = 0.1
+height = 0.2
+
+[node name="EssenceRock" type="CharacterBody3D" groups=["Enemy"]]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("1_p2v6y")
+MaxHealth = 1
+Damge = 0
+AttackRange = 0
+WanderSpeed = 0
+Speed = 0
+TurnSpeed = 0
+DetectionRange = 0
+FollowingDetectionRange = 0
+WanderRange = 0
+LootSpawnAng = 60
+LootSpawnForce = 10
+XpDropScene = ExtResource("3_0emsk")
+MinXpDrop = 2
+MaxXpDrop = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.712506, 0)
+shape = SubResource("CapsuleShape3D_dvx36")
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="MeteorsMm1" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.131478, -0.991319, 0, -0.176722, 0.0234385, -0.983982, 0.97544, -0.129372, -0.17827, -0.0760431, 0.0769619, -0.00489627)
+material_override = SubResource("StandardMaterial3D_0emsk")
+mesh = ExtResource("3_5yybi")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeteorsMm1"]
+transform = Transform3D(-0.131478, -0.176722, 0.97544, -0.991319, 0.0234385, -0.129372, 1.92232e-09, -0.983982, -0.17827, -0.271251, -0.698908, -0.63664)
+material_override = SubResource("StandardMaterial3D_1kekm")
+mesh = SubResource("SphereMesh_hmnju")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MeteorsMm1"]
+transform = Transform3D(-0.131478, -0.176722, 0.97544, -0.991319, 0.0234386, -0.129372, 1.98199e-09, -0.983982, -0.17827, 0.264344, -0.160296, -0.891565)
+material_override = SubResource("StandardMaterial3D_1kekm")
+mesh = SubResource("SphereMesh_hmnju")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="MeteorsMm1"]
+transform = Transform3D(-0.131478, -0.176722, 0.975441, -0.991319, 0.0234386, -0.129372, 2.04167e-09, -0.983982, -0.17827, -0.384776, 0.512557, -0.758956)
+material_override = SubResource("StandardMaterial3D_1kekm")
+mesh = SubResource("SphereMesh_hmnju")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="MeteorsMm1"]
+transform = Transform3D(-0.131478, -0.176722, 0.975441, -0.991319, 0.0234386, -0.129372, 2.10134e-09, -0.983983, -0.17827, 0.397553, 0.854712, -0.234937)
+material_override = SubResource("StandardMaterial3D_1kekm")
+mesh = SubResource("SphereMesh_hmnju")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="MeteorsMm1"]
+transform = Transform3D(-0.131478, -0.176722, 0.975441, -0.991319, 0.0234386, -0.129372, 2.13118e-09, -0.983983, -0.17827, 0.796571, 0.255329, -0.320877)
+material_override = SubResource("StandardMaterial3D_1kekm")
+mesh = SubResource("SphereMesh_hmnju")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="MeteorsMm1"]
+transform = Transform3D(-0.131478, -0.176722, 0.975441, -0.991319, 0.0234386, -0.129372, 2.22069e-09, -0.983983, -0.17827, 0.46169, -0.731343, -0.0373023)
+material_override = SubResource("StandardMaterial3D_1kekm")
+mesh = SubResource("SphereMesh_hmnju")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="MeteorsMm1"]
+transform = Transform3D(-0.131478, -0.176722, 0.975441, -0.991319, 0.0234386, -0.129372, 2.28036e-09, -0.983983, -0.17827, -0.699013, -0.586146, 0.174618)
+material_override = SubResource("StandardMaterial3D_1kekm")
+mesh = SubResource("SphereMesh_hmnju")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="MeteorsMm1"]
+transform = Transform3D(-0.131478, -0.176722, 0.975441, -0.991319, 0.0234386, -0.129372, 2.3102e-09, -0.983983, -0.17827, -0.489705, 0.363961, 0.159658)
+material_override = SubResource("StandardMaterial3D_1kekm")
+mesh = SubResource("SphereMesh_hmnju")
+skeleton = NodePath("")
+
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
