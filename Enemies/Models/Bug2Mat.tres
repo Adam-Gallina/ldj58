@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://llba65e711pm"]
+
+[ext_resource type="Texture2D" uid="uid://bpu8c8oqx78hu" path="res://Enemies/Models/Buggo1_Bug1.png" id="1_s3kvy"]
+
+[resource]
+resource_name = "Material"
+cull_mode = 2
+albedo_texture = ExtResource("1_s3kvy")
+roughness = 0.5

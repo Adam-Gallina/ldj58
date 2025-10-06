@@ -1,14 +1,33 @@
-[gd_scene load_steps=6 format=3 uid="uid://caysx0iwp2y4p"]
+[gd_scene load_steps=11 format=3 uid="uid://caysx0iwp2y4p"]
 
 [ext_resource type="Script" uid="uid://b3ofomwk8sesf" path="res://Loot/resource_loot_drop.gd" id="1_mfdlj"]
 [ext_resource type="Texture2D" uid="uid://7kf00j5svfmq" path="res://Loot/Resources/Petal.png" id="2_mfdlj"]
 [ext_resource type="Script" uid="uid://dyxw2t1fov72y" path="res://billboard.gd" id="3_shs8d"]
+[ext_resource type="Texture2D" uid="uid://b8q1wp7pik4cb" path="res://Magic/Sparkle.png" id="4_iw2pl"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_yc5h1"]
 bounce = 0.5
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_yc5h1"]
 radius = 0.384396
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fy8pr"]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("4_iw2pl")
+billboard_mode = 1
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_shs8d"]
+material = SubResource("StandardMaterial3D_fy8pr")
+size = Vector2(0.25, 0.25)
+
+[sub_resource type="Curve" id="Curve_0svvh"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.153409, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.78652, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_33y88"]
+colors = PackedColorArray(0.662928, 0.662928, 0.662928, 1, 1, 1, 1, 1)
 
 [node name="PetalResource" type="RigidBody3D"]
 collision_layer = 16
@@ -23,6 +42,23 @@ CollectAccel = 20
 shape = SubResource("SphereShape3D_yc5h1")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(0.67647, 0, 0.179968, 0, 0.7, 0, -0.179968, 0, 0.67647, 0, 0, 0)
+transform = Transform3D(0.67647, 0, 0.179969, 0, 0.7, 0, -0.179969, 0, 0.67647, 0, 0, 0)
 texture = ExtResource("2_mfdlj")
 script = ExtResource("3_shs8d")
+
+[node name="Particles" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00293565, 0)
+amount = 10
+lifetime = 2.0
+explosiveness = 0.5
+mesh = SubResource("QuadMesh_shs8d")
+emission_shape = 2
+emission_sphere_radius = 0.25
+direction = Vector3(0, 1, 0)
+gravity = Vector3(0, 0.25, 0)
+radial_accel_min = 0.1
+radial_accel_max = 0.25
+scale_amount_min = 0.5
+scale_amount_max = 1.5
+scale_amount_curve = SubResource("Curve_0svvh")
+color_initial_ramp = SubResource("Gradient_33y88")

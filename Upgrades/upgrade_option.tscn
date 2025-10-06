@@ -1,28 +1,107 @@
-[gd_scene load_steps=4 format=3 uid="uid://cvdpqtamgjvqd"]
+[gd_scene load_steps=8 format=3 uid="uid://cvdpqtamgjvqd"]
 
 [ext_resource type="Script" uid="uid://cniqvgkkyd0xm" path="res://Upgrades/upgrade_option.gd" id="1_m3xfy"]
+[ext_resource type="PackedScene" uid="uid://b4q6iih4fcl5s" path="res://Upgrades/BasicStatue.glb" id="2_swdcc"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_4tygq"]
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_m3xfy"]
-top_radius = 0.4
-height = 0.1
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_swdcc"]
+vertex_color_use_as_albedo = true
 
-[node name="UpgradeOption" type="CharacterBody3D"]
+[sub_resource type="SphereMesh" id="SphereMesh_cijmw"]
+material = SubResource("StandardMaterial3D_swdcc")
+radius = 0.1
+height = 0.2
+radial_segments = 6
+rings = 3
+
+[sub_resource type="Curve" id="Curve_8bd3e"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.78652, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_f7tge"]
+colors = PackedColorArray(0.384593, 0.384593, 0.384593, 1, 1, 1, 1, 1)
+
+[node name="UpgradeOption" type="CharacterBody3D" node_paths=PackedStringArray("CommonParticles", "UncommonParticles", "RareParticles")]
 collision_layer = 40
 collision_mask = 0
 script = ExtResource("1_m3xfy")
+CommonParticles = NodePath("CommonParticles")
+UncommonParticles = NodePath("UncommonParticles")
+RareParticles = NodePath("RareParticles")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CylinderShape3D_4tygq")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
-mesh = SubResource("CylinderMesh_m3xfy")
-
 [node name="Label3D" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.82574, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.33794, -0.0411484)
 text = "Test upgrade
 +1 damage"
 font_size = 128
+
+[node name="BasicStatue" parent="." instance=ExtResource("2_swdcc")]
+transform = Transform3D(0.55, 0, 0, 0, 0.55, 0, 0, 0, 0.55, 0, 0, 0)
+
+[node name="CommonParticles" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.24968, 0)
+visible = false
+amount = 50
+mesh = SubResource("SphereMesh_cijmw")
+emission_shape = 6
+emission_ring_axis = Vector3(0, 1, 0)
+emission_ring_height = 0.5
+emission_ring_radius = 0.6
+emission_ring_inner_radius = 0.5
+emission_ring_cone_angle = 72.73
+direction = Vector3(0, 1, 0)
+gravity = Vector3(0, 1, 0)
+radial_accel_max = 1.0
+scale_amount_min = 0.5
+scale_amount_max = 1.5
+scale_amount_curve = SubResource("Curve_8bd3e")
+color = Color(0, 1, 0.295985, 1)
+color_initial_ramp = SubResource("Gradient_f7tge")
+
+[node name="UncommonParticles" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.24968, 0)
+visible = false
+amount = 50
+mesh = SubResource("SphereMesh_cijmw")
+emission_shape = 6
+emission_ring_axis = Vector3(0, 1, 0)
+emission_ring_height = 0.5
+emission_ring_radius = 0.6
+emission_ring_inner_radius = 0.5
+emission_ring_cone_angle = 72.73
+direction = Vector3(0, 1, 0)
+gravity = Vector3(0, 1, 0)
+radial_accel_max = 1.0
+scale_amount_min = 0.5
+scale_amount_max = 1.5
+scale_amount_curve = SubResource("Curve_8bd3e")
+color = Color(0, 0.742964, 1, 1)
+color_initial_ramp = SubResource("Gradient_f7tge")
+
+[node name="RareParticles" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.24968, 0)
+visible = false
+amount = 50
+mesh = SubResource("SphereMesh_cijmw")
+emission_shape = 6
+emission_ring_axis = Vector3(0, 1, 0)
+emission_ring_height = 0.5
+emission_ring_radius = 0.6
+emission_ring_inner_radius = 0.5
+emission_ring_cone_angle = 72.73
+direction = Vector3(0, 1, 0)
+gravity = Vector3(0, 1, 0)
+radial_accel_max = 1.0
+scale_amount_min = 0.5
+scale_amount_max = 1.5
+scale_amount_curve = SubResource("Curve_8bd3e")
+color = Color(1, 0, 0.854392, 1)
+color_initial_ramp = SubResource("Gradient_f7tge")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

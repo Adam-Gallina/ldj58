@@ -1,6 +1,8 @@
 extends CharacterBody3D
 class_name PlayerController
 
+signal player_dead()
+
 enum PlayerState { None, Dash, Attack, AttackReturn }
 enum AttackDir { Forward, Backward }
 
@@ -11,6 +13,8 @@ enum AttackDir { Forward, Backward }
 var _curr_state : PlayerState = PlayerState.None
 
 var _iframe_timer = 0
+
+var _dead = false
 
 @export_category('Movement')
 @export var TurnSpeed = 720
@@ -23,7 +27,8 @@ var _dash_dir : Vector3 = Vector3.ZERO
 @export_category('Anims')
 @onready var _leg_anims : AnimationPlayer = $LegAnimationPlayer
 @onready var _arm_anims : AnimationPlayer = $Model/ArmAnimationPlayer
-
+@export var DashEffect : PackedScene
+@export var DeathEffect : PackedScene
 
 var _last_coll_radius = -1
 
@@ -32,6 +37,12 @@ func _ready() -> void:
 	Constants.set_cam(cam)
 
 func _process(delta):
+	if PlayerStats.LegsVisible != $Model/Torso/LegR.visible:
+		$Model/Torso/LegR.visible = PlayerStats.LegsVisible
+		$Model/Torso/LegL.visible = PlayerStats.LegsVisible
+
+	if _dead: return
+
 	if _iframe_timer > 0: _iframe_timer -= delta
 
 	if _last_coll_radius != PlayerStats.calc_collect_radius():
@@ -69,6 +80,11 @@ func _handle_movement(_delta):
 			_dash_dir = dir
 			_leg_anims.play('dash')
 			_arm_anims.play('dash')
+
+			var p = DashEffect.instantiate()
+			add_child(p)
+			p.global_position = global_position
+			p.emitting = true
 
 	return dir
 
@@ -123,7 +139,20 @@ func damage(amount:int):
 		_iframe_timer = PlayerStats.calc_iframes()
 
 func death():
-	print('Player ded sad')
+	_dead = true
+	
+	_arm_anims.play('dash')
+	_leg_anims.play('death')
+
+	var p = DashEffect.instantiate()
+	add_child(p)
+	p.global_position = global_position
+	p.emitting = true
+
+	await _leg_anims.animation_finished
+
+	player_dead.emit()
+
 
 
 func _dash_anim_complete():

@@ -1,7 +1,7 @@
 extends CharacterBody3D
 class_name EnemyBase
 
-enum EnemyState { None, Following, Attacking, Dying }
+enum EnemyState { None, Following, Attacking, Charging, Dying }
 
 @export_category('Health')
 @export var MaxHealth = 2
@@ -17,6 +17,8 @@ func set_health(max_health):
 @export var AttackProjectile : PackedScene
 
 @onready var attack_timer : Timer = $AttackTimer
+var _attack_cooldown = 0
+@export var AttackCooldown = 0
 
 @export_category('Movement')
 @export var WanderSpeed = 3
@@ -51,7 +53,8 @@ func _ready():
 	_nav_agent.max_speed = WanderSpeed
 	_keep_anim('Walk')
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
+	_attack_cooldown -= delta
 	if _nav_agent == null: return
 	if _curr_state == EnemyState.Dying: return
 
@@ -76,7 +79,7 @@ func _process(_delta: float) -> void:
 			_curr_state = EnemyState.None
 			_nav_agent.max_speed = WanderSpeed
 			_nav_agent.target_position = global_position - basis.z * (WanderRange/2. + randf() * WanderRange/2.)
-		if dist <= AttackRange:
+		if dist <= AttackRange and _attack_cooldown <= 0:
 			do_attack()
 		elif dist > FollowingDetectionRange:
 			_curr_state = EnemyState.None
@@ -89,6 +92,9 @@ func _physics_process(_delta: float) -> void:
 		return
 	elif _curr_state == EnemyState.Following:
 		_nav_agent.set_target_position(Constants.Player.global_position)
+	elif _curr_state == EnemyState.Charging:
+		move_and_slide()
+		return
 
 	var next_pos : Vector3 = _nav_agent.get_next_path_position()
 	var next_v : Vector3 = global_position.direction_to(next_pos) * _nav_agent.max_speed
@@ -99,7 +105,7 @@ func _physics_process(_delta: float) -> void:
 
 func _on_velocity_calculated(safe_v : Vector3):
 	if _curr_state == EnemyState.Dying: return
-	elif _curr_state == EnemyState.Attacking: return
+	elif _curr_state == EnemyState.Attacking or _curr_state == EnemyState.Charging: return
 	velocity = safe_v
 	move_and_slide()
 
@@ -133,6 +139,8 @@ func _on_attack_timer_timeout() -> void:
 
 	p.launch(dir, dir * 10)
 
+	_attack_cooldown = AttackCooldown
+
 
 func _keep_anim(anim_name):
 	if _anim == null: return
@@ -154,6 +162,11 @@ func damage(amount):
 func death():
 	_curr_state = EnemyState.Dying
 	GameStats.EnemiesDefeated += 1
+	velocity = Vector3.ZERO
+
+	if _anim != null:
+		_anim.play('Death')
+		await _anim.animation_finished
 
 	var amount = randi_range(MinXpDrop, MaxXpDrop)
 

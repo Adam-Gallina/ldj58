@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=4 uid="uid://1rujcm3jwhyh"]
+[gd_scene load_steps=43 format=4 uid="uid://1rujcm3jwhyh"]
 
 [ext_resource type="Script" uid="uid://0703l7qi6lrk" path="res://Player/player_combat.gd" id="1_apopc"]
 [ext_resource type="PackedScene" uid="uid://nrdiloo1crmq" path="res://Magic/basic_projectile.tscn" id="2_od3ui"]
@@ -12,6 +12,7 @@
 [ext_resource type="Animation" uid="uid://q8r11ssrfbqp" path="res://Player/Model/Idle.res" id="5_x3vf3"]
 [ext_resource type="Animation" uid="uid://cms5dc7mx30nv" path="res://Player/Model/dash.res" id="6_5htga"]
 [ext_resource type="Animation" uid="uid://bnxmpoltd8yv6" path="res://Player/Model/Run.res" id="6_apopc"]
+[ext_resource type="PackedScene" uid="uid://u85jsate1aof" path="res://Player/feather_particles.tscn" id="6_pisgm"]
 [ext_resource type="Animation" uid="uid://sg384s2jndg" path="res://Player/Model/TPose.res" id="7_5htga"]
 [ext_resource type="Animation" uid="uid://obrtqg6yi331" path="res://Player/Model/UnForwardSlash.res" id="7_p5o4e"]
 [ext_resource type="PackedScene" uid="uid://bmryfw45n7sbd" path="res://Environment/leaf_particles.tscn" id="12_5htga"]
@@ -396,6 +397,30 @@ tracks/7/keys = {
 "update": 0,
 "values": [Vector3(0, 0, 0)]
 }
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Model/Torso:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 1.08503, -0.947685)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Model/Armature:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 1.08503, -0.947685)]
+}
 
 [sub_resource type="Animation" id="Animation_00tjw"]
 resource_name = "dash"
@@ -712,10 +737,135 @@ tracks/7/keys = {
 "values": [Vector3(0, 0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_lfmf2"]
+resource_name = "death"
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Model/Torso/LegR:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.45),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0.603708, 1.04097), Vector3(0.740338, 0.119776, -0.0255293)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Model/Torso/LegL:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.45),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0.607741, -1.1202), Vector3(0, 0.12987, -0.18542)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Model/Torso/LegL:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.45),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1.17442, 0, 0), Vector3(0.276183, -0.420115, -0.0289657)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Model/Torso/LegR:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.45),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-1.16366, 0, 0), Vector3(-0.427109, 1.70615, 0.222252)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Model/Torso:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.202301, 0, 0), Vector3(-0.281696, 0, 0), Vector3(-1.45201, 0, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Model/Armature:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.202458, 0, 0), Vector3(-0.281539, 0, 0), Vector3(-1.45185, 0, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Model/Torso/Head:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.45),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(1.40647, 0.244234, -0.029149)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Model/Torso/Head:rotation")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.45),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-0.473864, 1.84551, -0.257094)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Model/Torso:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 1.08503, -0.947685), Vector3(0, 0.549384, -1.31852)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Model/Armature:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 1.08503, -0.947685), Vector3(0, 0.549384, -1.31852)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_00tjw"]
 _data = {
 &"RESET": SubResource("Animation_od3ui"),
 &"dash": SubResource("Animation_00tjw"),
+&"death": SubResource("Animation_lfmf2"),
 &"idle": SubResource("Animation_fhl08"),
 &"run": SubResource("Animation_vtle1")
 }
@@ -730,6 +880,8 @@ ProjectileScene = ExtResource("2_od3ui")
 AttackSounds = Array[AudioStream]([ExtResource("3_lfmf2"), ExtResource("4_pisgm"), ExtResource("5_b1ygp")])
 TurnSpeed = 1080
 DashModifier = 1.75
+DashEffect = ExtResource("6_pisgm")
+DeathEffect = ExtResource("6_pisgm")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -739,16 +891,17 @@ shape = SubResource("CapsuleShape3D_sh265")
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 
 [node name="Torso" type="MeshInstance3D" parent="Model"]
-transform = Transform3D(1, 0, 0, 0, 0.979607, -0.200924, 0, 0.200924, 0.979607, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.979607, -0.200924, 0, 0.200924, 0.979607, 0, 1.08503, -0.947685)
 mesh = SubResource("ArrayMesh_p5o4e")
 skeleton = NodePath("")
 
 [node name="Head" type="MeshInstance3D" parent="Model/Torso"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("ArrayMesh_gu6f8")
 skeleton = NodePath("")
 
 [node name="LegR" type="MeshInstance3D" parent="Model/Torso"]
-transform = Transform3D(1, 0, 0, 0, 0.626483, 0.779438, 0, -0.779438, 0.626483, 0, 0.0614624, 0.324688)
+transform = Transform3D(1, 0, 0, 0, 0.626483, 0.779439, 0, -0.779439, 0.626483, 0, 0.0614624, 0.324688)
 mesh = SubResource("ArrayMesh_dkpta")
 skeleton = NodePath("")
 
@@ -758,7 +911,7 @@ mesh = SubResource("ArrayMesh_lfmf2")
 skeleton = NodePath("")
 
 [node name="Armature" type="Node3D" parent="Model"]
-transform = Transform3D(1, 0, 0, 0, 0.979575, -0.201078, 0, 0.201078, 0.979575, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.979575, -0.201078, 0, 0.201078, 0.979575, 0, 1.08503, -0.947685)
 
 [node name="Skeleton3D" type="Skeleton3D" parent="Model/Armature"]
 bones/0/name = "Bone.009"
@@ -773,14 +926,14 @@ bones/1/parent = 0
 bones/1/rest = Transform3D(0.0429345, 0.999078, 2.31116e-07, -0.999078, 0.0429345, -4.54479e-07, -4.63983e-07, -2.1139e-07, 1, 0.780251, 0.777801, 0.00471672)
 bones/1/enabled = true
 bones/1/position = Vector3(0.780251, 0.777801, 0.00471672)
-bones/1/rotation = Quaternion(0.525782, -0.101232, -0.776357, 0.332528)
+bones/1/rotation = Quaternion(-0.158914, 0.125472, -0.555918, 0.8062)
 bones/1/scale = Vector3(1, 1, 1)
 bones/2/name = "Bone.001"
 bones/2/parent = 1
 bones/2/rest = Transform3D(0.998805, -0.0488788, -1.50702e-07, 0.0488788, 0.998805, -1.96059e-07, 1.60105e-07, 1.88459e-07, 1, -1.26212e-07, 0.56393, 9.54546e-09)
 bones/2/enabled = true
 bones/2/position = Vector3(-1.26212e-07, 0.56393, 9.54546e-09)
-bones/2/rotation = Quaternion(0.0985819, 0.031485, 0.0532774, 0.993203)
+bones/2/rotation = Quaternion(0.038396, -0.113132, 0.284557, 0.951186)
 bones/2/scale = Vector3(1, 1, 1)
 bones/3/name = "Bone.002"
 bones/3/parent = 2
@@ -794,21 +947,21 @@ bones/4/parent = 3
 bones/4/rest = Transform3D(0.930804, -0.365518, -5.52098e-08, 0.365518, 0.930804, 1.08882e-07, 1.15912e-08, -1.21528e-07, 1, 7.90673e-09, 0.70605, 6.01054e-09)
 bones/4/enabled = true
 bones/4/position = Vector3(7.90673e-09, 0.70605, 6.01054e-09)
-bones/4/rotation = Quaternion(0.649053, -0.0238024, -0.36628, 0.666335)
+bones/4/rotation = Quaternion(0.649053, -0.0238023, -0.36628, 0.666335)
 bones/4/scale = Vector3(1, 1, 1)
 bones/5/name = "Bone.004"
 bones/5/parent = 0
 bones/5/rest = Transform3D(0.0429345, -0.999078, -3.5679e-07, 0.999078, 0.0429345, -3.37887e-06, 3.39108e-06, -2.1139e-07, 1, -0.780251, 0.777801, 0.00471672)
 bones/5/enabled = true
 bones/5/position = Vector3(-0.780251, 0.777801, 0.00471672)
-bones/5/rotation = Quaternion(0.412419, -0.237762, 0.751113, 0.457394)
+bones/5/rotation = Quaternion(-0.135546, -0.206702, 0.556873, 0.792965)
 bones/5/scale = Vector3(1, 1, 1)
 bones/6/name = "Bone.005"
 bones/6/parent = 5
 bones/6/rest = Transform3D(0.998805, 0.0488788, 4.01969e-06, -0.0488788, 0.998805, -2.42153e-07, -4.02672e-06, 4.53857e-08, 1, 1.87412e-07, 0.56393, -3.82829e-09)
 bones/6/enabled = true
 bones/6/position = Vector3(1.87412e-07, 0.56393, -3.82829e-09)
-bones/6/rotation = Quaternion(0.133865, 0.0810006, 0.0262185, 0.987336)
+bones/6/rotation = Quaternion(-0.0832453, -0.299575, -0.360361, 0.879469)
 bones/6/scale = Vector3(1, 1, 1)
 bones/7/name = "Bone.006"
 bones/7/parent = 6
@@ -829,7 +982,7 @@ bones/9/parent = 7
 bones/9/rest = Transform3D(0.0586166, 0.99828, -0.000516702, -0.998281, 0.0586165, -0.000108634, -7.81594e-05, 0.000522181, 1, -0.312562, 0.378011, 0.200608)
 bones/9/enabled = true
 bones/9/position = Vector3(-0.312562, 0.378011, 0.200608)
-bones/9/rotation = Quaternion(0.000216761, -0.000150699, -0.68607, 0.727536)
+bones/9/rotation = Quaternion(0.0280088, 0.160902, -0.605167, 0.779166)
 bones/9/scale = Vector3(1, 1, 1)
 
 [node name="Wand" type="MeshInstance3D" parent="Model/Armature/Skeleton3D"]
@@ -872,6 +1025,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.21235, -12.0335)
 [node name="AttackAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("13_p5o4e")
 volume_db = -10.0
+max_polyphony = 5
 
 [connection signal="animation_finished" from="Model/ArmAnimationPlayer" to="." method="_attack_anim_complete"]
 [connection signal="body_entered" from="CollectionArea3D" to="." method="_on_collection_area_3d_body_entered"]

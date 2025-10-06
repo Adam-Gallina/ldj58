@@ -14,6 +14,11 @@ var _curr_pumping = null
 func _ready() -> void:
 	$DeathScreen.hide()
 
+	find_tiko.call_deferred()
+
+func find_tiko():
+	Constants.Player.player_dead.connect(_on_player_death)
+
 func _process(_delta: float) -> void:
 	_update_health()
 
@@ -52,11 +57,14 @@ func _update_health():
 		
 		_last_health = PlayerStats._curr_health
 
-		if PlayerStats._curr_health == 0:
-			$DeathScreen.show()
+		#if PlayerStats._curr_health == 0:
+		#	$DeathScreen.show()
 
 
 func _on_restart_pressed() -> void:
 	GameStats.reset()
 	PlayerStats.reset()
 	get_tree().reload_current_scene()
+
+func _on_player_death():
+	$DeathScreen.show()

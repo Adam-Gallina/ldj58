@@ -5,3 +5,4 @@ class_name ResourceDrop
 
 func _on_gather():
     PlayerStats.collect_resource(self)
+    $Particles.emitting = false

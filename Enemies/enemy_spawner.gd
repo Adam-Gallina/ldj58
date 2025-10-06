@@ -1,7 +1,7 @@
 extends Node
 
 @export var EnemyScene : PackedScene
-@export var EnemyGroup = 'Enemy'
+var _spawned_enemies = []
 
 @export var spawning = true
 @export var MinSpawnLevel = 1
@@ -30,11 +30,16 @@ func _process(delta: float) -> void:
 
 
 func _spawn_enemy():
-	if get_tree().get_nodes_in_group(EnemyGroup).size() >= StartMaxEnemyCount + LevelIncreaseMaxCount * PlayerStats.Level:
+	for e in _spawned_enemies:
+		if not is_instance_valid(e):
+			_spawned_enemies.erase(e)
+
+	if _spawned_enemies.size() >= StartMaxEnemyCount + LevelIncreaseMaxCount * PlayerStats.Level:
 		return
 
 	var e = EnemyScene.instantiate()
 	add_child(e)
+	_spawned_enemies.append(e)
 	
 	var p = _get_spawn_pos()
 	p = NavigationServer3D.map_get_closest_point(e._nav_agent.get_navigation_map(), p) - Vector3.UP * e._nav_agent.path_height_offset

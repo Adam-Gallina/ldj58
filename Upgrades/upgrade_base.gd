@@ -1,8 +1,11 @@
 extends Node
 class_name UpgradeBase
 
+enum Rarity { Common, Uncommon, Rare }
+
 @export var UpgradeName = "Unnamed Upgrade"
 @export var UpgradeDescription = "does something"
+@export var UpgradeRarity : Rarity
 
 @export var HealthMod = 0
 @export var DamageMod = 0.

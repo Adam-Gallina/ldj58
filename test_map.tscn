@@ -1,11 +1,12 @@
-[gd_scene load_steps=35 format=3 uid="uid://ccs8sgiuwumgy"]
+[gd_scene load_steps=36 format=3 uid="uid://ccs8sgiuwumgy"]
 
 [ext_resource type="PackedScene" uid="uid://1rujcm3jwhyh" path="res://Player/player.tscn" id="1_4qc02"]
 [ext_resource type="Script" uid="uid://gb1uwpbc8f32" path="res://test_map.gd" id="1_4wuf8"]
 [ext_resource type="Script" uid="uid://ddf70ps066hih" path="res://Enemies/enemy_spawner.gd" id="2_gqtbx"]
+[ext_resource type="PackedScene" uid="uid://cla6xogqxtqj4" path="res://Enemies/buggo1.tscn" id="3_icpcy"]
 [ext_resource type="PackedScene" uid="uid://bs3u5x6oth4af" path="res://Upgrades/cauldron.tscn" id="3_qgarv"]
-[ext_resource type="PackedScene" uid="uid://cwfvqjmp56yhj" path="res://Enemies/basic_enemy.tscn" id="3_s02eq"]
 [ext_resource type="PackedScene" uid="uid://forl038y0toi" path="res://UI/game_ui.tscn" id="4_bu3ac"]
+[ext_resource type="PackedScene" uid="uid://csoac6af36fcs" path="res://Enemies/buggo_2.tscn" id="4_e7grg"]
 [ext_resource type="Script" uid="uid://cefu7k1la5jw2" path="res://Upgrades/upgrade_pool.gd" id="4_ssfg1"]
 [ext_resource type="PackedScene" uid="uid://biavgvl34a6jr" path="res://Environment/tree.tscn" id="4_t8dge"]
 [ext_resource type="PackedScene" uid="uid://c4b8lisjiofia" path="res://tutorial.tscn" id="5_7ckqa"]
@@ -76,7 +77,20 @@ script = ExtResource("1_4wuf8")
 
 [node name="EnemySpawner" type="Node3D" parent="."]
 script = ExtResource("2_gqtbx")
-EnemyScene = ExtResource("3_s02eq")
+EnemyScene = ExtResource("3_icpcy")
+SpawnGraceDist = 20
+SpawnMaxDist = 60
+
+[node name="EnemySpawner2" type="Node3D" parent="."]
+script = ExtResource("2_gqtbx")
+EnemyScene = ExtResource("4_e7grg")
+MinSpawnLevel = 4
+StartSpawnRate = 0.1
+LevelIncreaseRate = 0.05
+StartEnemyHealth = 30
+LevelIncreaseHealth = 5
+StartMaxEnemyCount = 2
+LevelIncreaseMaxCount = 2
 SpawnGraceDist = 20
 SpawnMaxDist = 60
 
@@ -897,19 +911,16 @@ transform = Transform3D(0.897319, 0, -0.441381, 0, 1, 0, 0.441381, 0, 0.897319, 
 surface_material_override/0 = null
 
 [node name="LArm" parent="NavigationRegion3D/Cauldron/Witch/Cylinder" index="1"]
-transform = Transform3D(0.755928, 0.00879361, -0.654595, -0.00652602, 0.999961, 0.00589688, 0.654621, -0.000185722, 0.755956, 0.817798, 1.33768, -0.00461102)
+transform = Transform3D(0.755928, 0.00879361, -0.654595, -0.00652601, 0.999961, 0.00589688, 0.654621, -0.000185722, 0.755956, 0.817798, 1.33768, -0.00461102)
 
 [node name="LElbow" parent="NavigationRegion3D/Cauldron/Witch/Cylinder/LArm" index="1"]
 transform = Transform3D(0.453585, 0.46141, -0.76247, -0.202243, 0.886514, 0.416162, 0.867963, -0.0345611, 0.495426, 0.834618, 0.0684891, 1.26877)
 
 [node name="RArm" parent="NavigationRegion3D/Cauldron/Witch/Cylinder" index="2"]
-transform = Transform3D(0.493186, 0.0196623, -0.869701, -0.00406848, 0.999784, 0.0202961, 0.869913, -0.0064714, 0.493161, -0.83371, 1.35222, 0.0651884)
+transform = Transform3D(0.493186, 0.0196622, -0.869701, -0.00406848, 0.999784, 0.0202961, 0.869913, -0.00647139, 0.493161, -0.83371, 1.35222, 0.0651884)
 
 [node name="RElbow" parent="NavigationRegion3D/Cauldron/Witch/Cylinder/RArm" index="1"]
-transform = Transform3D(0.700492, -0.515034, 0.494015, 0.0867183, 0.748526, 0.657411, -0.708371, -0.417671, 0.569, 0.834617, 0.0684881, 1.26877)
-
-[node name="Sprite3D" parent="NavigationRegion3D/Cauldron" index="8"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.68938, 2.75847)
+transform = Transform3D(0.700492, -0.515033, 0.494015, 0.0867183, 0.748526, 0.657411, -0.708371, -0.417671, 0.569, 0.834617, 0.0684881, 1.26877)
 
 [node name="TestUpgradePool" type="Node" parent="NavigationRegion3D/Cauldron"]
 script = ExtResource("4_ssfg1")
@@ -939,6 +950,7 @@ Chance = 30
 script = ExtResource("5_gqtbx")
 UpgradeName = "Greased Elbows"
 UpgradeDescription = "Moderately increased cast speed"
+UpgradeRarity = 1
 AttackSpeedMod = 0.3
 Chance = 20
 
@@ -946,6 +958,7 @@ Chance = 20
 script = ExtResource("5_gqtbx")
 UpgradeName = "Greased Elbows"
 UpgradeDescription = "Greatly increased cast speed"
+UpgradeRarity = 2
 AttackSpeedMod = 0.5
 
 [node name="TestRadiusUpgrade6" type="Node" parent="NavigationRegion3D/Cauldron/TestUpgradePool"]
@@ -959,6 +972,7 @@ Chance = 20
 script = ExtResource("5_gqtbx")
 UpgradeName = "Magic Power"
 UpgradeDescription = "Moderatlely increased damage"
+UpgradeRarity = 1
 DamageMod = 2.0
 Chance = 30
 
@@ -966,6 +980,7 @@ Chance = 30
 script = ExtResource("5_gqtbx")
 UpgradeName = "Magic Power"
 UpgradeDescription = "Greatly increased damage"
+UpgradeRarity = 2
 DamageMod = 3.0
 Chance = 20
 
@@ -973,6 +988,7 @@ Chance = 20
 script = ExtResource("5_gqtbx")
 UpgradeName = "Magic Power"
 UpgradeDescription = "Massively increased damage"
+UpgradeRarity = 2
 DamageMod = 5.0
 
 [node name="TestWeaponUpgradePool" type="Node" parent="NavigationRegion3D/Cauldron"]
@@ -1057,7 +1073,7 @@ shadow_enabled = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.3116)
 
 [node name="Armature" parent="Player/Model" index="1"]
-transform = Transform3D(1, 0, 0, 0, 0.979575, -0.201078, 0, 0.201078, 0.979575, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.979575, -0.201078, 0, 0.201078, 0.979575, 0, 1.08503, -0.947685)
 
 [node name="LeafParticles" parent="Player" index="5"]
 amount = 80

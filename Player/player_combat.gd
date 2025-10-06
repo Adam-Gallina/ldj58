@@ -63,16 +63,12 @@ func _attack_anim_complete(anim_name):
 		_curr_state = PlayerState.None
 
 func _do_attack():
-	var m = get_viewport().get_mouse_position()
-	
-	raycast.global_position = cam.project_ray_origin(m)
-	raycast.target_position = cam.project_local_ray_normal(m) * 100
-	raycast.force_raycast_update()
+	var pos = get_mouse_ray()
 
-	if raycast.is_colliding():
+	if pos != Vector3.ZERO:
 		GameStats.SpellsCast += PlayerStats.CastAmount
 		for i in range(PlayerStats.CastAmount):
-			launch_projectile(raycast.get_collision_point(), i)
+			launch_projectile(pos, i)
 
 
 func _dash_anim_complete():
@@ -81,3 +77,16 @@ func _dash_anim_complete():
 		_curr_state = PlayerState.Attack
 	else:
 		super()
+
+
+func get_mouse_ray() -> Vector3:
+	var m = get_viewport().get_mouse_position()
+	
+	raycast.global_position = cam.project_ray_origin(m)
+	raycast.target_position = cam.project_local_ray_normal(m) * 100
+	raycast.force_raycast_update()
+
+	if raycast.is_colliding():
+		return raycast.get_collision_point()
+	else:
+		return Vector3.ZERO

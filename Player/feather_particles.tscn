@@ -1,0 +1,49 @@
+[gd_scene load_steps=6 format=3 uid="uid://u85jsate1aof"]
+
+[ext_resource type="Texture2D" uid="uid://b7rfatnu5gcjp" path="res://Player/Feather.png" id="1_yoy6w"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b1ygp"]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_yoy6w")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_o28un"]
+material = SubResource("StandardMaterial3D_b1ygp")
+size = Vector2(0.5, 0.5)
+
+[sub_resource type="Curve" id="Curve_n471f"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.488636, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_7emwf"]
+colors = PackedColorArray(0.119835, 0.119835, 0.119835, 1, 1, 1, 1, 1)
+
+[node name="FeatherParticles" type="CPUParticles3D"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+emitting = false
+amount = 30
+one_shot = true
+explosiveness = 1.0
+lifetime_randomness = 1.0
+mesh = SubResource("QuadMesh_o28un")
+emission_shape = 1
+emission_sphere_radius = 0.5
+direction = Vector3(0, 1, -2)
+spread = 30.0
+gravity = Vector3(0, -2, 0)
+initial_velocity_min = 2.0
+initial_velocity_max = 4.0
+angle_min = -180.0
+angle_max = 180.0
+scale_amount_min = 0.5
+scale_amount_max = 1.25
+scale_amount_curve = SubResource("Curve_n471f")
+color = Color(0.201299, 0.201299, 0.201299, 1)
+color_initial_ramp = SubResource("Gradient_7emwf")
+
+[connection signal="finished" from="." to="." method="queue_free"]

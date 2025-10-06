@@ -51,7 +51,7 @@ func calc_collect_radius() -> float:
 	return CollectRadius
 
 
-var CastAmount = 2
+var CastAmount = 1
 
 var CastRadius = .35
 
@@ -100,3 +100,10 @@ func deposit_resource(resource_type:Constants.ResourceType, amount_needed:int):
 		s.append(_stored_resources[resource_type].pop_front())
 
 	return s
+
+
+
+var LegsVisible = true
+func _process(_delta: float) -> void:	
+	if Input.is_action_just_pressed('Legs'):
+		LegsVisible = not LegsVisible
