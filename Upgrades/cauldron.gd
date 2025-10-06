@@ -31,6 +31,7 @@ func _ready() -> void:
 	increment_resource()
 	if PlayerStats.Tutorial:
 		increment_resource()
+		PlayerStats.Level += 1
 
 func _process(_delta: float) -> void:
 	if ResourceTypes[_curr_resource] == Constants.ResourceType.None:

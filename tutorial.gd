@@ -12,7 +12,8 @@ func _ready() -> void:
 	$UpgradeTutorial.hide()
 	$ResourceTutorial.hide()
 	
-	_movement_tutorial()
+	if not PlayerStats.Tutorial:
+		_movement_tutorial()
 
 func _movement_tutorial():
 	$MovementTutorial.show()
@@ -103,6 +104,8 @@ func _on_resource_continue_pressed() -> void:
 
 
 func _on_cauldron_upgrade_started() -> void:
+	if PlayerStats.Tutorial: return
+	
 	if PlayerStats.Level == 0:
 		_upgrade_tutorial()
 	elif PlayerStats.Level == 1:

@@ -14,7 +14,8 @@ func reset():
 
 var Level = 0
 
-var Tutorial = false
+var Tutorial = true
+var PlayerSafe = false
 
 var Health = 3
 @onready var _curr_health = Health
@@ -50,7 +51,7 @@ func calc_collect_radius() -> float:
 	return CollectRadius
 
 
-var CastAmount = 1
+var CastAmount = 2
 
 var CastRadius = .35
 

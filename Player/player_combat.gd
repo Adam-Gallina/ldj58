@@ -7,6 +7,8 @@ var _curr_attack_dir = AttackDir.Forward
 var _attacking = false
 var _next_attack : float
 
+@export var AttackSounds : Array[AudioStream]
+
 func _handle_input(delta):
 	super(delta)
 
@@ -38,6 +40,8 @@ func launch_projectile(target_pos:Vector3, delay=0):
 	p.set_radius(PlayerStats.CastRadius)
 	p.global_position = global_position + Vector3.UP
 
+	$AttackAudio.stream = AttackSounds.pick_random()
+	$AttackAudio.play()
 
 	#p.launch(model.basis.z, target_pos)
 	p.launch(target_pos - global_position, target_pos)
@@ -45,7 +49,7 @@ func launch_projectile(target_pos:Vector3, delay=0):
 	
 func _attack_anim_complete(anim_name):
 	if anim_name != 'ForwardSlash' and anim_name != 'BackSlash': return
-	
+
 	if _attacking:
 		if _curr_attack_dir == AttackDir.Forward:
 			_arm_anims.play('BackSlash')

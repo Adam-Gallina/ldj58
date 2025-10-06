@@ -1,0 +1,172 @@
+[gd_scene load_steps=3 format=3 uid="uid://6if74b1e740k"]
+
+[ext_resource type="Script" uid="uid://dx0ssuh73ocor" path="res://Environment/vine_wall.gd" id="1_5oel7"]
+[ext_resource type="PackedScene" uid="uid://c4y7vojjgckku" path="res://Environment/Vine.glb" id="1_v32yb"]
+
+[node name="VineWall" type="Node3D" node_paths=PackedStringArray("Segments")]
+script = ExtResource("1_5oel7")
+MinPlayerDist = 5
+MaxPlayerDist = 9
+Segments = [NodePath("VineWall"), NodePath("VineWall2"), NodePath("VineWall3"), NodePath("VineWall4"), NodePath("VineWall5"), NodePath("VineWall6"), NodePath("VineWall7"), NodePath("VineWall8"), NodePath("VineWall9")]
+
+[node name="VineWall" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -7.23192, 0)
+
+[node name="Vine2" parent="VineWall" instance=ExtResource("1_v32yb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10.7601)
+
+[node name="Vine3" parent="VineWall" instance=ExtResource("1_v32yb")]
+transform = Transform3D(0.887534, 0, -0.460742, 0, 1, 0, 0.460742, 0, 0.887534, 1.37749, 0, 10.7601)
+
+[node name="Vine4" parent="VineWall" instance=ExtResource("1_v32yb")]
+transform = Transform3D(0.386695, 0, 0.922208, 0, 1, 0, -0.922208, 0, 0.386695, 2.96866, 0, 10.7601)
+
+[node name="Vine5" parent="VineWall" instance=ExtResource("1_v32yb")]
+transform = Transform3D(0.386695, 0, 0.922208, 0, 1, 0, -0.922208, 0, 0.386695, -1.75861, 0, 10.7601)
+
+[node name="Vine6" parent="VineWall" instance=ExtResource("1_v32yb")]
+transform = Transform3D(-0.940431, 0, 0.339986, 0, 1, 0, -0.339986, 0, -0.940431, -3.5466, 0, 10.7601)
+
+[node name="VineWall2" type="Node3D" parent="."]
+transform = Transform3D(0.741835, 0, 0.670582, 0, 1, 0, -0.670582, 0, 0.741835, 0, -7.23192, 0)
+
+[node name="Vine2" parent="VineWall2" instance=ExtResource("1_v32yb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10.7601)
+
+[node name="Vine3" parent="VineWall2" instance=ExtResource("1_v32yb")]
+transform = Transform3D(0.887534, 0, -0.460742, 0, 1, 0, 0.460742, 0, 0.887534, 1.37749, 0, 10.7601)
+
+[node name="Vine4" parent="VineWall2" instance=ExtResource("1_v32yb")]
+transform = Transform3D(0.386695, 0, 0.922208, 0, 1, 0, -0.922208, 0, 0.386695, 2.96866, 0, 10.7601)
+
+[node name="Vine5" parent="VineWall2" instance=ExtResource("1_v32yb")]
+transform = Transform3D(0.386695, 0, 0.922208, 0, 1, 0, -0.922208, 0, 0.386695, -1.75861, 0, 10.7601)
+
+[node name="Vine6" parent="VineWall2" instance=ExtResource("1_v32yb")]
+transform = Transform3D(-0.940431, 0, 0.339986, 0, 1, 0, -0.339986, 0, -0.940431, -3.5466, 0, 10.7601)
+
+[node name="VineWall3" type="Node3D" parent="."]
+transform = Transform3D(0.134505, 0, 0.990913, 0, 1, 0, -0.990913, 0, 0.134505, 0, -7.23192, 0)
+
+[node name="Vine2" parent="VineWall3" instance=ExtResource("1_v32yb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10.7601)
+
+[node name="Vine3" parent="VineWall3" instance=ExtResource("1_v32yb")]
+transform = Transform3D(0.887534, 0, -0.460742, 0, 1, 0, 0.460742, 0, 0.887534, 1.37749, 0, 10.7601)
+
+[node name="Vine4" parent="VineWall3" instance=ExtResource("1_v32yb")]
+transform = Transform3D(0.386695, 0, 0.922208, 0, 1, 0, -0.922208, 0, 0.386695, 2.96866, 0, 10.7601)
+
+[node name="Vine5" parent="VineWall3" instance=ExtResource("1_v32yb")]
+transform = Transform3D(0.386695, 0, 0.922208, 0, 1, 0, -0.922208, 0, 0.386695, -1.75861, 0, 10.7601)
+
+[node name="Vine6" parent="VineWall3" instance=ExtResource("1_v32yb")]
+transform = Transform3D(-0.940431, 0, 0.339986, 0, 1, 0, -0.339986, 0, -0.940431, -3.5466, 0, 10.7601)
+
+[node name="VineWall4" type="Node3D" parent="."]
+transform = Transform3D(-0.539844, 0, 0.841765, 0, 1, 0, -0.841765, 0, -0.539844, 0, -7.23192, 0)
+
+[node name="Vine2" parent="VineWall4" instance=ExtResource("1_v32yb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10.7601)
+
+[node name="Vine3" parent="VineWall4" instance=ExtResource("1_v32yb")]
+transform = Transform3D(0.887534, 0, -0.460742, 0, 1, 0, 0.460742, 0, 0.887534, 1.37749, 0, 10.7601)
+
+[node name="Vine4" parent="VineWall4" instance=ExtResource("1_v32yb")]
+transform = Transform3D(0.386695, 0, 0.922208, 0, 1, 0, -0.922208, 0, 0.386695, 2.96866, 0, 10.7601)
+
+[node name="Vine5" parent="VineWall4" instance=ExtResource("1_v32yb")]
+transform = Transform3D(0.386695, 0, 0.922208, 0, 1, 0, -0.922208, 0, 0.386695, -1.75861, 0, 10.7601)
+
+[node name="Vine6" parent="VineWall4" instance=ExtResource("1_v32yb")]
+transform = Transform3D(-0.940431, 0, 0.339986, 0, 1, 0, -0.339986, 0, -0.940431, -3.5466, 0, 10.7601)
+
+[node name="VineWall5" type="Node3D" parent="."]
+transform = Transform3D(-0.959565, 0, 0.281488, 0, 1, 0, -0.281488, 0, -0.959565, 0, -7.23192, 0)
+
+[node name="Vine2" parent="VineWall5" instance=ExtResource("1_v32yb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10.7601)
+
+[node name="Vine3" parent="VineWall5" instance=ExtResource("1_v32yb")]
+transform = Transform3D(0.887534, 0, -0.460742, 0, 1, 0, 0.460742, 0, 0.887534, 1.37749, 0, 10.7601)
+
+[node name="Vine4" parent="VineWall5" instance=ExtResource("1_v32yb")]
+transform = Transform3D(0.386695, 0, 0.922208, 0, 1, 0, -0.922208, 0, 0.386695, 2.96866, 0, 10.7601)
+
+[node name="Vine5" parent="VineWall5" instance=ExtResource("1_v32yb")]
+transform = Transform3D(0.386695, 0, 0.922208, 0, 1, 0, -0.922208, 0, 0.386695, -1.75861, 0, 10.7601)
+
+[node name="Vine6" parent="VineWall5" instance=ExtResource("1_v32yb")]
+transform = Transform3D(-0.940431, 0, 0.339986, 0, 1, 0, -0.339986, 0, -0.940431, -3.5466, 0, 10.7601)
+
+[node name="VineWall6" type="Node3D" parent="."]
+transform = Transform3D(-0.910612, 0, -0.413263, 0, 1, 0, 0.413263, 0, -0.910612, 0, -7.23192, 0)
+
+[node name="Vine2" parent="VineWall6" instance=ExtResource("1_v32yb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10.7601)
+
+[node name="Vine3" parent="VineWall6" instance=ExtResource("1_v32yb")]
+transform = Transform3D(0.887534, 0, -0.460742, 0, 1, 0, 0.460742, 0, 0.887534, 1.37749, 0, 10.7601)
+
+[node name="Vine4" parent="VineWall6" instance=ExtResource("1_v32yb")]
+transform = Transform3D(0.386695, 0, 0.922208, 0, 1, 0, -0.922208, 0, 0.386695, 2.96866, 0, 10.7601)
+
+[node name="Vine5" parent="VineWall6" instance=ExtResource("1_v32yb")]
+transform = Transform3D(0.386695, 0, 0.922208, 0, 1, 0, -0.922208, 0, 0.386695, -1.75861, 0, 10.7601)
+
+[node name="Vine6" parent="VineWall6" instance=ExtResource("1_v32yb")]
+transform = Transform3D(-0.940431, 0, 0.339986, 0, 1, 0, -0.339986, 0, -0.940431, -3.5466, 0, 10.7601)
+
+[node name="VineWall7" type="Node3D" parent="."]
+transform = Transform3D(-0.406418, 0, -0.913687, 0, 1, 0, 0.913687, 0, -0.406418, 0, -7.23192, 0)
+
+[node name="Vine2" parent="VineWall7" instance=ExtResource("1_v32yb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10.7601)
+
+[node name="Vine3" parent="VineWall7" instance=ExtResource("1_v32yb")]
+transform = Transform3D(0.887534, 0, -0.460742, 0, 1, 0, 0.460742, 0, 0.887534, 1.37749, 0, 10.7601)
+
+[node name="Vine4" parent="VineWall7" instance=ExtResource("1_v32yb")]
+transform = Transform3D(0.386695, 0, 0.922208, 0, 1, 0, -0.922208, 0, 0.386695, 2.96866, 0, 10.7601)
+
+[node name="Vine5" parent="VineWall7" instance=ExtResource("1_v32yb")]
+transform = Transform3D(0.386695, 0, 0.922208, 0, 1, 0, -0.922208, 0, 0.386695, -1.75861, 0, 10.7601)
+
+[node name="Vine6" parent="VineWall7" instance=ExtResource("1_v32yb")]
+transform = Transform3D(-0.940431, 0, 0.339986, 0, 1, 0, -0.339986, 0, -0.940431, -3.5466, 0, 10.7601)
+
+[node name="VineWall8" type="Node3D" parent="."]
+transform = Transform3D(0.292655, 0, -0.956218, 0, 1, 0, 0.956218, 0, 0.292655, 0, -7.23192, 0)
+
+[node name="Vine2" parent="VineWall8" instance=ExtResource("1_v32yb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10.7601)
+
+[node name="Vine3" parent="VineWall8" instance=ExtResource("1_v32yb")]
+transform = Transform3D(0.887534, 0, -0.460742, 0, 1, 0, 0.460742, 0, 0.887534, 1.37749, 0, 10.7601)
+
+[node name="Vine4" parent="VineWall8" instance=ExtResource("1_v32yb")]
+transform = Transform3D(0.386695, 0, 0.922208, 0, 1, 0, -0.922208, 0, 0.386695, 2.96866, 0, 10.7601)
+
+[node name="Vine5" parent="VineWall8" instance=ExtResource("1_v32yb")]
+transform = Transform3D(0.386695, 0, 0.922208, 0, 1, 0, -0.922208, 0, 0.386695, -1.75861, 0, 10.7601)
+
+[node name="Vine6" parent="VineWall8" instance=ExtResource("1_v32yb")]
+transform = Transform3D(-0.940431, 0, 0.339986, 0, 1, 0, -0.339986, 0, -0.940431, -3.5466, 0, 10.7601)
+
+[node name="VineWall9" type="Node3D" parent="."]
+transform = Transform3D(0.765573, 0, -0.643349, 0, 1, 0, 0.643349, 0, 0.765573, 0, -7.23192, 0)
+
+[node name="Vine2" parent="VineWall9" instance=ExtResource("1_v32yb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10.7601)
+
+[node name="Vine3" parent="VineWall9" instance=ExtResource("1_v32yb")]
+transform = Transform3D(0.887534, 0, -0.460742, 0, 1, 0, 0.460742, 0, 0.887534, 1.37749, 0, 10.7601)
+
+[node name="Vine4" parent="VineWall9" instance=ExtResource("1_v32yb")]
+transform = Transform3D(0.386695, 0, 0.922208, 0, 1, 0, -0.922208, 0, 0.386695, 2.96866, 0, 10.7601)
+
+[node name="Vine5" parent="VineWall9" instance=ExtResource("1_v32yb")]
+transform = Transform3D(0.386695, 0, 0.922208, 0, 1, 0, -0.922208, 0, 0.386695, -1.75861, 0, 10.7601)
+
+[node name="Vine6" parent="VineWall9" instance=ExtResource("1_v32yb")]
+transform = Transform3D(-0.940431, 0, 0.339986, 0, 1, 0, -0.339986, 0, -0.940431, -3.5466, 0, 10.7601)

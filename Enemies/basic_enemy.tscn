@@ -10,10 +10,11 @@
 
 [node name="BasicEnemy" type="CharacterBody3D" groups=["Enemy"]]
 collision_layer = 4
-collision_mask = 3
+collision_mask = 75
 script = ExtResource("1_221se")
 AttackRange = 6
 AttackProjectile = ExtResource("2_gie15")
+WanderRange = 30
 LootSpawnAng = 60
 LootSpawnForce = 10
 XpDropScene = ExtResource("3_iioo1")
@@ -32,15 +33,19 @@ shape = SubResource("CapsuleShape3D_dvx36")
 transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
 
 [node name="Skeleton3D" parent="Model/Armature" index="0"]
-bones/0/position = Vector3(0, 0.729683, -0.0404523)
-bones/0/rotation = Quaternion(0.0368652, -0.0500256, -0.0115429, 0.998001)
-bones/1/position = Vector3(0.557191, 0.684268, -0.0822343)
-bones/1/rotation = Quaternion(0.035014, 0.0706992, 0.994681, -0.0662165)
-bones/2/position = Vector3(-0.367233, 0.747983, 0.139585)
-bones/2/rotation = Quaternion(0.130935, 0.162611, 0.974489, 0.0823742)
+bones/0/rotation = Quaternion(0.124161, 0.0521647, 0.0211181, 0.990665)
+bones/1/position = Vector3(0.348206, 0.751741, 0.197379)
+bones/1/rotation = Quaternion(-0.13918, 0.16543, 0.972716, -0.0841706)
+bones/2/position = Vector3(-0.543488, 0.67936, -6.76117e-09)
+bones/2/rotation = Quaternion(3.00276e-06, -3.81958e-07, 0.998477, 0.0551773)
 
 [node name="AttackTimer" type="Timer" parent="."]
 wait_time = 0.5
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+target_position = Vector3(0, 0, 3)
+collision_mask = 64
 
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
 

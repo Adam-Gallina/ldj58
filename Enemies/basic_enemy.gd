@@ -67,11 +67,15 @@ func _process(_delta: float) -> void:
 	var dist = global_position.distance_to(Constants.Player.global_position)
 
 	if _curr_state == EnemyState.None:
-		if dist <= DetectionRange:
+		if dist <= DetectionRange and not PlayerStats.PlayerSafe:
 			_curr_state = EnemyState.Following
 			_nav_agent.max_speed = Speed
 
 	elif _curr_state == EnemyState.Following:
+		if PlayerStats.PlayerSafe:
+			_curr_state = EnemyState.None
+			_nav_agent.max_speed = WanderSpeed
+			_nav_agent.target_position = global_position - basis.z * (WanderRange/2. + randf() * WanderRange/2.)
 		if dist <= AttackRange:
 			do_attack()
 		elif dist > FollowingDetectionRange:

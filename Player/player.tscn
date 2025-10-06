@@ -1,17 +1,21 @@
-[gd_scene load_steps=37 format=4 uid="uid://1rujcm3jwhyh"]
+[gd_scene load_steps=41 format=4 uid="uid://1rujcm3jwhyh"]
 
 [ext_resource type="Script" uid="uid://0703l7qi6lrk" path="res://Player/player_combat.gd" id="1_apopc"]
 [ext_resource type="PackedScene" uid="uid://nrdiloo1crmq" path="res://Magic/basic_projectile.tscn" id="2_od3ui"]
 [ext_resource type="Texture2D" uid="uid://d4edaxs4bdpk8" path="res://Player/Model/Crow_Crow.png" id="2_vtle1"]
+[ext_resource type="AudioStream" uid="uid://bwawwal8t7b6d" path="res://Audio/flute1.wav" id="3_lfmf2"]
 [ext_resource type="Texture2D" uid="uid://dtqylcl2vdxwd" path="res://Player/Model/Crow_Crow_Crow.png" id="3_od3ui"]
 [ext_resource type="Animation" uid="uid://nahp153sit1n" path="res://Player/Model/ForwardSlash.res" id="4_00tjw"]
+[ext_resource type="AudioStream" uid="uid://dxu5hlhict3dx" path="res://Audio/flute2.wav" id="4_pisgm"]
 [ext_resource type="Animation" uid="uid://cq10vr3tnjguo" path="res://Player/Model/BackSlash.res" id="5_apopc"]
+[ext_resource type="AudioStream" uid="uid://bq3damhabsfri" path="res://Audio/flute3.wav" id="5_b1ygp"]
 [ext_resource type="Animation" uid="uid://q8r11ssrfbqp" path="res://Player/Model/Idle.res" id="5_x3vf3"]
 [ext_resource type="Animation" uid="uid://cms5dc7mx30nv" path="res://Player/Model/dash.res" id="6_5htga"]
 [ext_resource type="Animation" uid="uid://bnxmpoltd8yv6" path="res://Player/Model/Run.res" id="6_apopc"]
 [ext_resource type="Animation" uid="uid://sg384s2jndg" path="res://Player/Model/TPose.res" id="7_5htga"]
 [ext_resource type="Animation" uid="uid://obrtqg6yi331" path="res://Player/Model/UnForwardSlash.res" id="7_p5o4e"]
 [ext_resource type="PackedScene" uid="uid://bmryfw45n7sbd" path="res://Environment/leaf_particles.tscn" id="12_5htga"]
+[ext_resource type="AudioStream" uid="uid://cfl3kt3f7igb" path="res://Audio/flute-C-octave2.wav" id="13_p5o4e"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sh265"]
 
@@ -723,6 +727,7 @@ radius = 4.0
 collision_mask = 13
 script = ExtResource("1_apopc")
 ProjectileScene = ExtResource("2_od3ui")
+AttackSounds = Array[AudioStream]([ExtResource("3_lfmf2"), ExtResource("4_pisgm"), ExtResource("5_b1ygp")])
 TurnSpeed = 1080
 DashModifier = 1.75
 
@@ -862,7 +867,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CylinderShape3D_apopc")
 
 [node name="LeafParticles" parent="." instance=ExtResource("12_5htga")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.21235, -17)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.21235, -12.0335)
+
+[node name="AttackAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_p5o4e")
+volume_db = -10.0
 
 [connection signal="animation_finished" from="Model/ArmAnimationPlayer" to="." method="_attack_anim_complete"]
 [connection signal="body_entered" from="CollectionArea3D" to="." method="_on_collection_area_3d_body_entered"]

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bmknqnvge317p"]
+
+[ext_resource type="AudioStream" uid="uid://byqvaghtwcbl4" path="res://Audio/dandelions-scatter-bernie-rosa-main-version-28489-02-52.mp3" id="1_0asb1"]
+
+[node name="BackgroundMusic" type="Node3D"]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_0asb1")
+volume_db = -10.0
+autoplay = true

@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://nrdiloo1crmq"]
+[gd_scene load_steps=14 format=3 uid="uid://nrdiloo1crmq"]
 
 [ext_resource type="Script" uid="uid://bovngm7dmxbfw" path="res://Magic/basic_projectile.gd" id="1_et3tk"]
 [ext_resource type="Texture2D" uid="uid://u02k306ghlpg" path="res://Magic/Bolt.png" id="2_ffnpu"]
 [ext_resource type="PackedScene" uid="uid://bxej2bc2doxmq" path="res://Magic/teal_splosion.tscn" id="3_5ba0i"]
+[ext_resource type="AudioStream" uid="uid://bd1abt3l2rdrv" path="res://Audio/bass.wav" id="4_22tdr"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_sdb44"]
 radius = 0.25
@@ -91,6 +92,9 @@ shape = SubResource("SphereShape3D_ffnpu")
 shape = SubResource("CylinderShape3D_ffnpu")
 target_position = Vector3(0, 0, 0)
 collision_mask = 36
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_22tdr")
 
 [connection signal="finished" from="TealSplosion" to="." method="_on_explosion_finished"]
 [connection signal="timeout" from="Timer" to="." method="explode"]

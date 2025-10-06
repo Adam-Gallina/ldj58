@@ -15,6 +15,7 @@ func set_pierce(amount):
 
 var _target_pos : Vector3
 var _moving = false
+var _sploded = false
 
 func set_radius(amount):
 	$ShapeCast3D.shape.radius = amount
@@ -38,12 +39,16 @@ func _process(delta: float) -> void:
 
 
 func explode():
+	if _sploded: return
+
+	_sploded = true
 	_moving = false
 	linear_velocity = Vector3.ZERO
 	
 	EndEffect.emitting = true
 	TrackingEffect.emitting = false
 	$MeshInstance3D.hide()
+	$AudioStreamPlayer3D.play()
 
 	var s : ShapeCast3D = $ShapeCast3D
 

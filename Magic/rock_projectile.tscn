@@ -38,7 +38,7 @@ height = 1.0
 
 [node name="Node3D" type="RigidBody3D" node_paths=PackedStringArray("TrackingEffect", "EndEffect")]
 collision_layer = 2
-collision_mask = 9
+collision_mask = 73
 gravity_scale = 0.0
 script = ExtResource("1_7om8r")
 Speed = 10
@@ -80,7 +80,7 @@ autostart = true
 
 [node name="Area3D" type="Area3D" parent="."]
 collision_layer = 2
-collision_mask = 9
+collision_mask = 73
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("SphereShape3D_ffnpu")

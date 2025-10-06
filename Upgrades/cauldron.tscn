@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=4 uid="uid://bs3u5x6oth4af"]
+[gd_scene load_steps=35 format=4 uid="uid://bs3u5x6oth4af"]
 
 [ext_resource type="Script" uid="uid://d0gi6g3v45hv4" path="res://Upgrades/cauldron.gd" id="1_5qdwy"]
 [ext_resource type="PackedScene" uid="uid://cvdpqtamgjvqd" path="res://Upgrades/upgrade_option.tscn" id="2_0t22i"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://d3c38ep0fatuf" path="res://Witch_Witch.png" id="4_nnldw"]
 [ext_resource type="Texture2D" uid="uid://cp2s0ydp17qdh" path="res://icon.svg" id="5_5vwxg"]
 [ext_resource type="FontFile" uid="uid://b4umd18bapdsr" path="res://UI/Fonts/Lobster/Lobster-Regular.ttf" id="6_0r82n"]
+[ext_resource type="PackedScene" uid="uid://6if74b1e740k" path="res://Environment/vine_wall.tscn" id="7_0r82n"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_7dadi"]
 height = 1.0
@@ -292,6 +293,10 @@ _data = {
 &"stir": SubResource("Animation_15osl")
 }
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_5vwxg"]
+height = 0.645433
+radius = 11.8096
+
 [node name="Cauldron" type="StaticBody3D" groups=["Environment"]]
 collision_layer = 8
 collision_mask = 0
@@ -462,6 +467,29 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.953916, 0)
 text = "Bring me 10 rock!"
 font = ExtResource("6_0r82n")
 font_size = 60
+
+[node name="EnemyBlock" type="StaticBody3D" parent="."]
+collision_layer = 64
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EnemyBlock"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.111875, 4.06804)
+shape = SubResource("CylinderShape3D_5vwxg")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="EnemyBlock"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.14716, 4.06804)
+shape = SubResource("CylinderShape3D_5vwxg")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="EnemyBlock"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.11285, 4.06804)
+shape = SubResource("CylinderShape3D_5vwxg")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="EnemyBlock"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.0435, 4.06804)
+shape = SubResource("CylinderShape3D_5vwxg")
+
+[node name="VineWall" parent="EnemyBlock" instance=ExtResource("7_0r82n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.28397)
 
 [connection signal="ready" from="Cauldron/MeshInstance3D/CPUParticles3D" to="Cauldron/MeshInstance3D/CPUParticles3D" method="set_emitting" binds= [true]]
 [connection signal="ready" from="Cauldron/MeshInstance3D/CPUParticles3D2" to="Cauldron/MeshInstance3D/CPUParticles3D2" method="set_emitting" binds= [true]]
